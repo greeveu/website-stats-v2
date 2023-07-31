@@ -1,7 +1,7 @@
 import {Input, InputRef, Typography} from 'antd';
 import React, {useContext, useRef} from 'react';
 import style from './header.module.sass';
-import logo from './logo.png';
+import logo from '../../media/logo.png';
 import {Link, useLocation} from 'react-router-dom';
 import {globalContext} from 'components/context/ContextProvider';
 import {Searchbar} from 'components/searchbar/Searchbar';

@@ -92,6 +92,10 @@ export const PlayerSearch: React.FunctionComponent = observer(() =>
 					return ((await result.json()) as PlayerUuid).uuid;
 				})()
 
+				if(!uuid){
+					return;
+				}
+
 				// Network Request Stats
 				const res2 = await fetch(`${config.endpoint}/player/stats/${uuid}`);
 

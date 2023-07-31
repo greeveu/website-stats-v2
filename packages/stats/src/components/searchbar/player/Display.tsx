@@ -93,7 +93,7 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 				className={toggleLink}
 			>
 				<div
-					style={{backgroundImage: `url(https://minotar.net/bust/${state.skin})`}}
+					style={{backgroundImage: `url("https://minotar.net/bust/${state.skin}")`}}
 					className={style.img}
 				/>
 			</Link>

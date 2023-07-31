@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {ConfigProvider, theme } from 'antd';
 import './index.sass';
-import {Layout} from 'components/layout/Layout';
 import {BrowserRouter} from 'react-router-dom';
 import {ContextProvider} from 'components/context/ContextProvider';
 import { configure } from "mobx"
+import {Layout} from 'layout/Layout';
+import {Router} from 'layout/router/Router';
 
 configure({
 	enforceActions: "never",
@@ -27,7 +28,9 @@ root.render(
 		    }}
 	    >
 		    <ContextProvider>
-			    <Layout/>
+			    <Layout>
+				    <Router/>
+			    </Layout>
 		    </ContextProvider>
 	    </ConfigProvider>
     </BrowserRouter>

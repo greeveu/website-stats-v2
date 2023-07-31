@@ -1,8 +1,10 @@
 import React, {ChangeEvent, useContext, useEffect, useRef} from 'react';
-import {Input, InputRef, Modal} from 'antd';
+import {Divider, Input, InputRef, Modal} from 'antd';
 import {observer} from 'mobx-react-lite';
 import {globalContext} from 'components/context/ContextProvider';
 import {PlayerSearch} from 'components/searchbar/player/PlayerSearch';
+import {ClanSearch} from 'components/searchbar/clan/ClanSearch';
+import style from "./searchbar.module.sass"
 
 /**
  *
@@ -81,7 +83,15 @@ export const Searchbar: React.FunctionComponent = observer(() =>
 				ref={ref}
 				autoFocus={true}
 			/>
-			<PlayerSearch/>
+			<div className={style.container}>
+				<div className={style.item}>
+					<PlayerSearch/>
+				</div>
+				<div className={style.divider}/>
+				<div className={style.item}>
+					<ClanSearch/>
+				</div>
+			</div>
 		</Modal>
 	);
 });
