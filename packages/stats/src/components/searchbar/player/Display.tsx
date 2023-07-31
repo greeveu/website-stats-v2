@@ -1,11 +1,12 @@
 import {Typography} from 'antd';
-import React from 'react';
+import React, {useMemo} from 'react';
 import style from './display.module.sass';
 import {PlayerSearchStatus, PlayerSearchState} from 'components/searchbar/player/PlayerSearch';
+import {Link} from 'react-router-dom';
 
 interface PlayerDisplayProps
 {
-	state:  PlayerSearchState
+	state: PlayerSearchState;
 }
 
 /**
@@ -21,14 +22,16 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 		{
 			case PlayerSearchStatus.Success:
 
-				const joined = (() => {
-					if(props.state.data.firstOnline === 0){
-						return "Never joined"
+				const joined = (() =>
+				{
+					if (props.state.data.firstOnline === 0)
+					{
+						return 'Never joined';
 					}
-					const date = new Date()
-					date.setTime(props.state.data.firstOnline * 1000)
-					return `Joined ${date.toLocaleDateString("uk-Uk")}`
-				})()
+					const date = new Date();
+					date.setTime(props.state.data.firstOnline * 1000);
+					return `Joined ${date.toLocaleDateString('uk-Uk')}`;
+				})();
 
 				return {
 					skin: props.state.data.uuid,
@@ -39,7 +42,7 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 				};
 			case PlayerSearchStatus.Invalid:
 				return {
-					skin: "MHF_Enderman",
+					skin: 'MHF_Enderman',
 					name: props.state.data.name.substring(0, 16),
 					nameDisabled: true,
 					joined: 'Does not exist',
@@ -47,7 +50,7 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 				};
 			case PlayerSearchStatus.Loading:
 				return {
-					skin: "MHF_Enderman",
+					skin: 'MHF_Enderman',
 					name: 'Loading...'.substring(0, 16),
 					nameDisabled: true,
 					joined: 'Loading...',
@@ -55,7 +58,7 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 				};
 			case PlayerSearchStatus.Error:
 				return {
-					skin: "404",
+					skin: '404',
 					name: 'Error',
 					nameDisabled: true,
 					joined: 'A network error occurred',
@@ -63,7 +66,7 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 				};
 			default:
 				return {
-					skin: "MrKavatch",
+					skin: 'MrKavatch',
 					name: 'MrKavatch'.substring(0, 16),
 					nameDisabled: true,
 					joined: 'Awaiting input...',
@@ -72,19 +75,61 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 		}
 	})();
 
+	const toggleLink = props.state.status === PlayerSearchStatus.Success ? style.enabled : style.disabled;
+	const linkTo = useMemo(() =>
+	{
+		if (props.state.status === PlayerSearchStatus.Success)
+		{
+			return `/player/${props.state.data.uuid}`;
+		}
+		return "/";
+	}, [props.state]);
+
 	return (
 		<div className={style.root}>
 
-			<div style={{backgroundImage: `url(https://minotar.net/bust/${state.skin})`}} className={style.img}/>
+			<Link
+				to={linkTo}
+				className={toggleLink}
+			>
+				<div
+					style={{backgroundImage: `url(https://minotar.net/bust/${state.skin})`}}
+					className={style.img}
+				/>
+			</Link>
+
+			<Link
+				to={linkTo}
+				className={toggleLink}
+			>
+				<Typography.Title
+					level={4}
+					disabled={state.nameDisabled}
+					className={style.title}
+				>{state.name}</Typography.Title>
+			</Link>
+
+			<Link
+				to={linkTo}
+				className={toggleLink}
+			>
+				<Typography.Text
+					disabled={state.joinedDisabled}
+					className={style.fixCursor}
+				>{state.joined}</Typography.Text>
+			</Link>
 
 			<div>
-				<Typography.Title level={4} disabled={state.nameDisabled}>{state.name}</Typography.Title>
-			</div>
-
-			<div>
-				<Typography.Text disabled={state.joinedDisabled}>{state.joined}</Typography.Text>
-				<img className={style.preload} src={"https://minotar.net/bust/MHF_Enderman"} alt={"Preloaded image"}/>
-				<img className={style.preload} src={"https://minotar.net/bust/MrKavatch"} alt={"Preloaded image"}/>
+				<img
+					className={style.preload}
+					src={'https://minotar.net/bust/MHF_Enderman'}
+					alt={'Preloaded image'}
+				/>
+				<img
+					className={style.preload}
+					src={'https://minotar.net/bust/MrKavatch'}
+					alt={'Preloaded image'}
+				/>
 			</div>
 		</div>
 	);

@@ -14,3 +14,21 @@
   opacity: 0
   width: 0px
   height: 0px
+
+.title
+  margin: 8px 0px 0px 0px !important
+  @extend .fixCursor
+
+.disabled
+  pointer-events: none
+  cursor: default
+
+  .fixCursor
+    pointer-events: none
+    cursor: default
+
+.enabled
+  cursor: pointer
+
+  .fixCursor
+    cursor: pointer
