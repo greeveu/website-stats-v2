@@ -51,9 +51,9 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 			case PlayerSearchStatus.Loading:
 				return {
 					skin: 'MHF_Enderman',
-					name: 'NetworkingLoading...'.substring(0, 16),
+					name: 'Loading...',
 					nameDisabled: true,
-					joined: 'NetworkingLoading...',
+					joined: 'Loading...',
 					joinedDisabled: true,
 				};
 			case PlayerSearchStatus.Error:
