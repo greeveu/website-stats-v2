@@ -108,12 +108,8 @@ export const ClanSearch: React.FunctionComponent = observer(() =>
 
 	return (
 		<div className={style.root}>
-			<Link to={linkTo} className={ `${style.sameSize} ${toggleLink}`}>
-				<img
-					alt={'Logo'}
-					src={logo}
-					className={style.img}
-				/>
+			<Link to={linkTo} className={toggleLink}>
+				<div className={style.img} style={{backgroundImage: `url("${logo}")`}}/>
 			</Link>
 			<Link to={linkTo} className={toggleLink}>
 				<Typography.Title
