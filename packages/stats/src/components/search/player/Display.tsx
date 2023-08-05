@@ -1,8 +1,8 @@
 import {Typography} from 'antd';
 import React, {useMemo} from 'react';
 import style from './display.module.sass';
-import {PlayerSearchStatus, PlayerSearchState} from 'components/searchbar/player/PlayerSearch';
 import {Link} from 'react-router-dom';
+import {PlayerSearchState, PlayerSearchStatus} from 'components/search/player/PlayerSearch';
 
 interface PlayerDisplayProps
 {
@@ -51,9 +51,9 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 			case PlayerSearchStatus.Loading:
 				return {
 					skin: 'MHF_Enderman',
-					name: 'Loading...'.substring(0, 16),
+					name: 'NetworkingLoading...'.substring(0, 16),
 					nameDisabled: true,
-					joined: 'Loading...',
+					joined: 'NetworkingLoading...',
 					joinedDisabled: true,
 				};
 			case PlayerSearchStatus.Error:
@@ -61,7 +61,7 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 					skin: '404',
 					name: 'Error',
 					nameDisabled: true,
-					joined: 'A network error occurred',
+					joined: 'A networking error occurred',
 					joinedDisabled: true,
 				};
 			default:

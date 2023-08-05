@@ -6,6 +6,7 @@ import {config} from 'config';
 import {Typography} from 'antd';
 import style from './clanSearch.module.sass';
 import logo from '../../../media/logo.png';
+import {Link} from 'react-router-dom';
 
 interface Clan
 {
@@ -16,7 +17,8 @@ interface Clan
 	id: number
 }
 
-interface State {
+interface State
+{
 	title: string,
 	text: string,
 	disabled: boolean,
@@ -29,7 +31,7 @@ export const ClanSearch: React.FunctionComponent = observer(() =>
 	const context = useContext(globalContext);
 	const [request, setRequest] = useState<NetworkRequest<Clan> | null>(null);
 	// Clan has a max length of 16 chars
-	const clanName = context.search.searchFor?.substring(0,16)
+	const clanName = context.search.searchFor ? context.search.searchFor.substring(0, 16) : null;
 
 	useEffect(() =>
 	{
@@ -41,74 +43,95 @@ export const ClanSearch: React.FunctionComponent = observer(() =>
 		setRequest(new NetworkRequest(config.endpoint + `/clan/${clanName}`));
 	}, [clanName]);
 
-	const state: State = useMemo(() => {
+	const state: State = useMemo(() =>
+	{
 
 		const doesNotExists = {
 			title: `${clanName} Clan`,
-			text: "Does not exist",
-			link: "",
+			text: 'Does not exist',
+			link: '',
 			disabled: true,
-		}
+		};
 
-		if(request === null){
+		if (request === null)
+		{
 			return {
-				title: "Clan search",
-				text: "Awaiting input...",
-				link: "",
+				title: 'Clan search',
+				text: 'Awaiting input...',
+				link: '',
 				disabled: true,
-			}
+			};
 		}
 
-		switch (request.network){
+		switch (request.network)
+		{
 			case NetworkStatus.Pending:
 				return {
-					title: "Clan search",
-					text: "Loading...",
-					link: "",
+					title: 'Clan search',
+					text: 'NetworkingLoading...',
+					link: '',
 					disabled: true,
-				}
+				};
 			case NetworkStatus.Error:
 				return {
-					title: "Clan search",
-					text: "A network error occurred",
-					link: "",
+					title: 'Clan search',
+					text: 'A networking error occurred',
+					link: '',
 					disabled: true,
-				}
+				};
 			case NetworkStatus.NotFound:
-				return doesNotExists
+				return doesNotExists;
 		}
 
 		const clan = request.result;
 		const exists = clan.id + clan.size > 0;
 
-		if(!exists){
-			return doesNotExists
+		if (!exists)
+		{
+			return doesNotExists;
 		}
 
 		return {
 			title: `${clan.name} Clan`,
 			text: clan.size === 1 ? `1 Member` : `${clan.size} Members`,
-			link: "",
+			link: clan.name,
 			disabled: false,
-		}
+		};
 
-	}, [clanName, request?.network])
+	}, [clanName, request?.network]);
+
+	const toggleLink = state.disabled ? style.disabled : style.enabled;
+	const linkTo = useMemo(() =>
+	{
+		return `/clan/${state.link}`;
+	}, [state.link]);
 
 	return (
 		<div className={style.root}>
-			<img alt={"Logo"} src={logo} className={style.img}/>
-			<Typography.Title
-				level={4}
-				className={style.title}
-				disabled={state.disabled}
-			>
-				{state.title}
-			</Typography.Title>
-			<Typography.Text
-				disabled={state.disabled}
-			>
-				{state.text}
-			</Typography.Text>
+			<Link to={linkTo} className={toggleLink}>
+				<img
+					alt={'Logo'}
+					src={logo}
+					className={style.img}
+				/>
+			</Link>
+			<Link to={linkTo} className={toggleLink}>
+				<Typography.Title
+					level={4}
+					className={style.title}
+					disabled={state.disabled}
+				>
+					{state.title}
+				</Typography.Title>
+			</Link>
+			<Link to={linkTo} className={toggleLink}>
+				<Typography.Text
+					disabled={state.disabled}
+				>
+					{state.text}
+				</Typography.Text>
+			</Link>
+
 		</div>
 	);
 });

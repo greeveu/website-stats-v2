@@ -5,8 +5,9 @@ import './index.sass';
 import {BrowserRouter} from 'react-router-dom';
 import {ContextProvider} from 'components/context/ContextProvider';
 import { configure } from "mobx"
-import {Layout} from 'layout/Layout';
-import {Router} from 'layout/router/Router';
+import {RootPage} from 'pages/RootPage';
+import {Layout} from 'components/layout/Layout';
+import {SearchOverlay} from 'components/search/overlay/SearchOverlay';
 
 configure({
 	enforceActions: "never",
@@ -29,7 +30,8 @@ root.render(
 	    >
 		    <ContextProvider>
 			    <Layout>
-				    <Router/>
+				    <SearchOverlay/>
+				    <RootPage/>
 			    </Layout>
 		    </ContextProvider>
 	    </ConfigProvider>

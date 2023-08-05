@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
-import {Breadcrumb, Layout as AntdLayout} from 'antd';
-import {Header} from 'layout/header/Header';
-import {Router} from 'layout/router/Router';
+import {Layout as AntdLayout} from 'antd';
+import style from "./layout.module.sass"
+import {Header} from 'components/layout/header/Header';
 
 const {Content, Footer} = AntdLayout;
 
@@ -16,8 +16,7 @@ export const Layout: React.FunctionComponent<LayoutProps> = (props) =>
 		<AntdLayout>
 			<Header />
 			<Content
-				className='site-layout'
-				style={{padding: '0 50px'}}
+				className={style.content}
 			>
 				{props.children}
 			</Content>

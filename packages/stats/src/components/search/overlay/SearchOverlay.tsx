@@ -1,25 +1,18 @@
 import React, {ChangeEvent, useContext, useEffect, useRef} from 'react';
-import {Divider, Input, InputRef, Modal} from 'antd';
+import {Input, InputRef, Modal} from 'antd';
 import {observer} from 'mobx-react-lite';
 import {globalContext} from 'components/context/ContextProvider';
-import {PlayerSearch} from 'components/searchbar/player/PlayerSearch';
-import {ClanSearch} from 'components/searchbar/clan/ClanSearch';
-import style from "./searchbar.module.sass"
-
-/**
- *
- * Network abstaction object! Caching?
- *
- * CLAN // Query, player size
- * MINIGAME // LOCAL LIST
- */
+import style from "./searchOverlay.module.sass"
+import {PlayerSearch} from 'components/search/player/PlayerSearch';
+import {ClanSearch} from 'components/search/clan/ClanSearch';
+import {useLocation} from 'react-router-dom';
 
 /**
  * Portal to middle for the opening animation!
  */
-export const Searchbar: React.FunctionComponent = observer(() =>
+export const SearchOverlay: React.FunctionComponent = observer(() =>
 {
-
+	const location = useLocation()
 	const ref = useRef<null | InputRef>(null);
 	const context = useContext(globalContext);
 
@@ -34,6 +27,9 @@ export const Searchbar: React.FunctionComponent = observer(() =>
 		context.search.text = event.target.value;
 	};
 
+	/**
+	 * Properly focus search on open
+	 */
 	useEffect(() =>
 	{
 		if (!context.search.open)
@@ -54,6 +50,9 @@ export const Searchbar: React.FunctionComponent = observer(() =>
 		}, 0);
 	}, [context.search.open]);
 
+	/**
+	 * Debounce user input and search for it
+	 */
 	useEffect(() =>
 	{
 		const debounce = setTimeout(() =>
@@ -69,6 +68,13 @@ export const Searchbar: React.FunctionComponent = observer(() =>
 
 		return () => clearTimeout(debounce);
 	}, [context.search.text]);
+
+	/**
+	 * Close the search overlay after navigation
+	 */
+	useEffect(() => {
+		context.search.open=false;
+	}, [location.pathname])
 
 	return (
 		<Modal

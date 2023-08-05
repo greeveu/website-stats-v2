@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {observer} from 'mobx-react-lite';
 import {globalContext} from 'components/context/ContextProvider';
 import {config} from 'config';
-import {Display} from 'components/searchbar/player/Display';
+import {Display} from 'components/search/player/Display';
 
 interface PlayerUuid
 {

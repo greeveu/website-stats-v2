@@ -18,7 +18,7 @@ export interface Context
 		 */
 		text: string,
 		/**
-		 * Current text to search, debounced and usable for network requesting
+		 * Current text to search, debounced and usable for networking requesting
 		 */
 		searchFor: null | string,
 	};
