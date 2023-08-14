@@ -1,0 +1,44 @@
+.root
+  width: 100%
+  height: 150px
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+  border-radius: 8px
+
+.content
+  width: 100%
+  height: 100%
+  border-radius: 8px
+  display: flex
+  align-items: center
+  justify-content: center
+  position: relative
+
+.content::before
+  content: ""
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  position: absolute
+  backdrop-filter: blur(1px)
+  border-radius: 8px
+
+.blur
+  width: 200px
+  height: 80px
+  position: absolute
+  filter: blur(32px)
+  background-color: rgba(0, 0, 0, 0.4)
+  border-radius: 32px
+
+.title
+  position: relative
+  padding: 32px
+  border-radius: 8px
+
+
+
+
+
