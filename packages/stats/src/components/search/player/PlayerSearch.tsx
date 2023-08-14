@@ -10,12 +10,13 @@ interface PlayerUuid
 	'name': string
 }
 
-interface PlayerStats
+interface PlayerMeta
 {
 	uuid: string,
 	name: string
 	lastOnline: number,
 	firstOnline: number,
+	// Some more info we currently don't need
 }
 
 const isUUid = new RegExp('^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$', 'gm');
@@ -32,7 +33,7 @@ export enum PlayerSearchStatus
 interface StateSuccess
 {
 	status: PlayerSearchStatus.Success;
-	data: PlayerStats;
+	data: PlayerMeta;
 }
 
 interface StateInvalid
@@ -97,14 +98,14 @@ export const PlayerSearch: React.FunctionComponent = observer(() =>
 				}
 
 				// Network Request Stats
-				const res2 = await fetch(`${config.endpoint}/player/stats/${uuid}`);
+				const res2 = await fetch(`${config.endpoint}/player/meta/${uuid}`);
 
 				// Player does not exists
 				if(!res2.ok){
 					setState({status: PlayerSearchStatus.Invalid, data: {name: searchFor}});
 					return;
 				}
-				const playerData = (await res2.json()) as PlayerStats;
+				const playerData = (await res2.json()) as PlayerMeta;
 
 				// Get name / keep search value for casing
 				const name = (() => {

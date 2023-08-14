@@ -6,6 +6,7 @@ import style from "./searchOverlay.module.sass"
 import {PlayerSearch} from 'components/search/player/PlayerSearch';
 import {ClanSearch} from 'components/search/clan/ClanSearch';
 import {useLocation} from 'react-router-dom';
+import {GameCard} from 'components/search/gamemode/GameCard';
 
 /**
  * Portal to middle for the opening animation!
@@ -82,20 +83,25 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 			open={context.search.open}
 			onCancel={closeSearchBar}
 		>
-			<Input
-				placeholder={'Player / Clan / Minigame'}
-				value={context.search.text}
-				onChange={onChange}
-				ref={ref}
-				autoFocus={true}
-			/>
-			<div className={style.container}>
-				<div className={style.item}>
-					<PlayerSearch/>
+			<div className={style.content}>
+				<Input
+					placeholder={'Player / Clan / Minigame'}
+					value={context.search.text}
+					onChange={onChange}
+					ref={ref}
+					autoFocus={true}
+				/>
+				<div className={style.container}>
+					<div className={style.item}>
+						<PlayerSearch/>
+					</div>
+					<div className={style.divider}/>
+					<div className={style.item}>
+						<ClanSearch/>
+					</div>
 				</div>
-				<div className={style.divider}/>
-				<div className={style.item}>
-					<ClanSearch/>
+				<div>
+					<GameCard/>
 				</div>
 			</div>
 		</Modal>
