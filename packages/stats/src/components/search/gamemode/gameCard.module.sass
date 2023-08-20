@@ -1,44 +1,53 @@
-.root
+.image
   width: 100%
-  height: 150px
+  height: 100%
   background-size: cover
   background-repeat: no-repeat
   background-position: center
-  border-radius: 8px
+  position: absolute
 
-.content
+.root
   width: 100%
-  height: 100%
+  height: 100px
   border-radius: 8px
-  display: flex
-  align-items: center
-  justify-content: center
   position: relative
+  overflow: hidden
 
-.content::before
-  content: ""
+.item
   width: 100%
   height: 100%
   top: 0
   left: 0
   position: absolute
-  backdrop-filter: blur(1px)
-  border-radius: 8px
+  pointer-events: none
 
-.blur
-  width: 200px
-  height: 80px
+  .image
+    transition: clip-path ease 0.5s, z-index ease 1s, transform ease 0.5s
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+
+  .hitbox
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    position: absolute
+    pointer-events: all
+    cursor: pointer
+
+.hitbox:hover + .image
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important
+  transform: scale(1.1)
+
+.overlay
   position: absolute
-  filter: blur(32px)
-  background-color: rgba(0, 0, 0, 0.4)
-  border-radius: 32px
+  width: 100%
+  height: 100%
+  z-index: 120
+  pointer-events: none
 
-.title
-  position: relative
-  padding: 32px
-  border-radius: 8px
-
-
-
-
-
+.text
+  z-index: 999999
+  filter: drop-shadow(0px 0px 8px #000)
+  margin-top: -6px

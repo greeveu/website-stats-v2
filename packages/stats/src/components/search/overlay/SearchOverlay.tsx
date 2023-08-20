@@ -7,6 +7,7 @@ import {PlayerSearch} from 'components/search/player/PlayerSearch';
 import {ClanSearch} from 'components/search/clan/ClanSearch';
 import {useLocation} from 'react-router-dom';
 import {GameCard} from 'components/search/gamemode/GameCard';
+import {SingleGameCard} from 'components/search/gamemode/singleGameCard/SingleGameCard';
 
 /**
  * Portal to middle for the opening animation!
@@ -82,6 +83,7 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 			title={'Search everything'}
 			open={context.search.open}
 			onCancel={closeSearchBar}
+			footer={null}
 		>
 			<div className={style.content}>
 				<Input
@@ -100,8 +102,10 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 						<ClanSearch/>
 					</div>
 				</div>
-				<div>
+				<div className={style.minigames}>
 					<GameCard/>
+					<div style={{height: 16}}></div>
+					<SingleGameCard/>
 				</div>
 			</div>
 		</Modal>
