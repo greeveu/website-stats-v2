@@ -2,19 +2,20 @@ import React, {ChangeEvent, useContext, useEffect, useRef} from 'react';
 import {Input, InputRef, Modal} from 'antd';
 import {observer} from 'mobx-react-lite';
 import {globalContext} from 'components/context/ContextProvider';
-import style from "./searchOverlay.module.sass"
+import style from './searchOverlay.module.sass';
 import {PlayerSearch} from 'components/search/player/PlayerSearch';
 import {ClanSearch} from 'components/search/clan/ClanSearch';
 import {useLocation} from 'react-router-dom';
-import {GameCard} from 'components/search/gamemode/GameCard';
-import {SingleGameCard} from 'components/search/gamemode/singleGameCard/SingleGameCard';
+import image1 from './temp/fastbridge.jpg';
+import image2 from './temp/fastbridge_islands.jpg';
+import {MultiGameCard} from 'components/gameCard/multi/MultiGameCard';
 
 /**
  * Portal to middle for the opening animation!
  */
 export const SearchOverlay: React.FunctionComponent = observer(() =>
 {
-	const location = useLocation()
+	const location = useLocation();
 	const ref = useRef<null | InputRef>(null);
 	const context = useContext(globalContext);
 
@@ -74,9 +75,10 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 	/**
 	 * Close the search overlay after navigation
 	 */
-	useEffect(() => {
-		context.search.open=false;
-	}, [location.pathname])
+	useEffect(() =>
+	{
+		context.search.open = false;
+	}, [location.pathname]);
 
 	return (
 		<Modal
@@ -85,7 +87,7 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 			onCancel={closeSearchBar}
 			footer={null}
 		>
-			<div className={style.content}>
+			<div className={style.rgb}>
 				<Input
 					placeholder={'Player / Clan / Minigame'}
 					value={context.search.text}
@@ -95,17 +97,25 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 				/>
 				<div className={style.container}>
 					<div className={style.item}>
-						<PlayerSearch/>
+						<PlayerSearch />
 					</div>
-					<div className={style.divider}/>
+					<div className={style.divider} />
 					<div className={style.item}>
-						<ClanSearch/>
+						<ClanSearch />
 					</div>
 				</div>
 				<div className={style.minigames}>
-					<GameCard/>
-					<div style={{height: 16}}></div>
-					<SingleGameCard/>
+					<MultiGameCard
+						title={'Fastbridge'}
+						subTitle={'6 bridges'}
+						minigames={[{href: 'one', image: image1, subTitle: 'Normal'}, {
+							href: 'two',
+							image: image2,
+							subTitle: 'Island',
+						}]}
+					/>
+					<div style={{height: 16}} />
+
 				</div>
 			</div>
 		</Modal>
