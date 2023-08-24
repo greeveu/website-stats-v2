@@ -1,22 +1,35 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
 import style from 'components/gameCard/multi/multiGameCard.module.sass';
 import sharedStyle from '../gameCard.module.sass';
 import {Typography} from 'antd';
-import {Link} from 'react-router-dom';
 
-interface Minigame {
-	subTitle: string, // Short descriptive title only
+interface Minigame
+{
+	/**
+	 * Gets highlighted in the subtitle and gets a special glow
+	 */
+	highlight: boolean,
+	/**
+	 * Subtitle which replaces the cards subtitle on hover
+	 */
+	subTitle: string,
 	image: string,
 	href: string,
 }
 
 interface GameCardProps
 {
+	/**
+	 * Main title of the card
+	 */
 	title: string,
 	/**
-	 * Initial sub title
+	 * Initial sub title, gets overridden by on hover
 	 */
 	subTitle: string,
+	/**
+	 * Sub minigames of the card
+	 */
 	minigames: Minigame[]
 }
 
@@ -57,15 +70,39 @@ const generateClipPath = (index: number, length: number) =>
  */
 export const MultiGameCard: React.FunctionComponent<GameCardProps> = (props) =>
 {
+	// Generate a default title, depending on highlighted items
+	const defaultTitle = useMemo(() => {
+
+		const highlighted = props.minigames.filter((item) => {
+			return item.highlight;
+		})
+
+		if(highlighted.length === 0){
+			return props.subTitle
+		}
+
+		if(highlighted.length === 1){
+			return ` ${highlighted[0].subTitle}  Mode`
+		}
+
+		if(highlighted.length === 2){
+			return `${highlighted[0].subTitle} & ${highlighted[1].subTitle}`
+		}
+
+		return props.subTitle
+	}, [props.minigames, props.subTitle])
+
 	/**
 	 * zIndex to allow for smooth animation stacking
 	 */
 	const zIndexCounter = useRef(10);
-	const [subTitle, setSubTitle] = useState(props.subTitle);
+	const [overrideSubTitle, setOverrideSubTitle] = useState<string | null>(null);
+	const subTitle = overrideSubTitle || defaultTitle;
 
-	const onMouseLeave = useCallback(() => {
-		setSubTitle(props.subTitle)
-	}, [])
+	const onMouseLeave = useCallback(() =>
+	{
+		setOverrideSubTitle(null);
+	}, []);
 
 	return (
 		<div
@@ -78,24 +115,22 @@ export const MultiGameCard: React.FunctionComponent<GameCardProps> = (props) =>
 					return (
 						<div
 							key={key}
-							className={style.item}
+							className={minigame.highlight ? style.highlighted : style.item}
 						>
-							<Link to={minigame.href}>
-								<div
-									className={style.hitbox}
-									style={{
-										clipPath: generateClipPath(key, props.minigames.length),
-									}}
-									onMouseOver={(event) =>
-									{
-										zIndexCounter.current++;
+							<div
+								className={style.hitbox}
+								style={{
+									clipPath: generateClipPath(key, props.minigames.length),
+								}}
+								onMouseOver={(event) =>
+								{
+									zIndexCounter.current++;
 
-										// @ts-ignore
-										event.target.parentElement.style.zIndex = zIndexCounter.current;
-										setSubTitle(minigame.subTitle);
-									}}
-								/>
-							</Link>
+									// @ts-ignore
+									event.target.parentElement.style.zIndex = zIndexCounter.current;
+									setOverrideSubTitle(minigame.subTitle);
+								}}
+							/>
 							<div
 								className={style.image}
 								style={{

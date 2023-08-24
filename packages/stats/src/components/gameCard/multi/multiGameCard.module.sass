@@ -40,6 +40,21 @@
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important
   transform: scale(1.1)
 
+.highlighted
+  @extend .item
+
+  .image::after
+    // TODO some fancy highlight effect here
+    //box-shadow: inset 0px 0px 35px 27px #36e318
+    //content: ""
+    //width: 100%
+    //height: 100%
+    //top: 0
+    //left: 0
+    //position: absolute
+    //pointer-events: none
+    //animation: slide 0.75s ease infinite
+
 .overlay
   position: absolute
   width: 100%

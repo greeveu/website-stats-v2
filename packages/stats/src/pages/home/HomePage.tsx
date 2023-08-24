@@ -11,7 +11,7 @@ export const HomePage: React.FunctionComponent<HomePageProps> = (props) =>
 		<div>
 			search,
 
-			featured (top players)
+			featured (top players) ?
 
 			featured modi
 

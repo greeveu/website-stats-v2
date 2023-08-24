@@ -6,9 +6,7 @@ import style from './searchOverlay.module.sass';
 import {PlayerSearch} from 'components/search/player/PlayerSearch';
 import {ClanSearch} from 'components/search/clan/ClanSearch';
 import {useLocation} from 'react-router-dom';
-import image1 from './temp/fastbridge.jpg';
-import image2 from './temp/fastbridge_islands.jpg';
-import {MultiGameCard} from 'components/gameCard/multi/MultiGameCard';
+import {MinigameSearch} from 'components/search/minigame/MinigameSearch';
 
 /**
  * Portal to middle for the opening animation!
@@ -86,6 +84,7 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 			open={context.search.open}
 			onCancel={closeSearchBar}
 			footer={null}
+			wrapClassName={style.modal}
 		>
 			<div className={style.rgb}>
 				<Input
@@ -105,17 +104,7 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 					</div>
 				</div>
 				<div className={style.minigames}>
-					<MultiGameCard
-						title={'Fastbridge'}
-						subTitle={'6 bridges'}
-						minigames={[{href: 'one', image: image1, subTitle: 'Normal'}, {
-							href: 'two',
-							image: image2,
-							subTitle: 'Island',
-						}]}
-					/>
-					<div style={{height: 16}} />
-
+					<MinigameSearch/>
 				</div>
 			</div>
 		</Modal>
