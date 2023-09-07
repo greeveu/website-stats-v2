@@ -67,7 +67,7 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 			default:
 				return {
 					skin: 'MrKavatch',
-					name: 'MrKavatch'.substring(0, 16),
+					name: 'Player search',
 					nameDisabled: true,
 					joined: 'Awaiting input...',
 					joinedDisabled: true,

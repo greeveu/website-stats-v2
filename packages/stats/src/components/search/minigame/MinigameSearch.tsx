@@ -6,6 +6,7 @@ import {MinigameGroup, minigames, SingleMinigame, Type} from 'minigames';
 import {SingleGameCard} from 'components/gameCard/single/SingleGameCard';
 import style from './minigameSearch.module.sass';
 import {config} from 'config';
+import {Typography} from 'antd';
 
 /**
  * Filters minigames and minigame groups for a specific regex
@@ -62,8 +63,24 @@ export const MinigameSearch: React.FunctionComponent = observer(() =>
 
 	}, [context.search.searchFor]);
 
+	if (context.search.searchFor === null)
+	{
+		return null;
+	}
+
+	if (results.length === 0)
+	{
+		return (
+			<div className={style.notFound}>
+				<Typography.Text disabled={true}>
+					No minigame found
+				</Typography.Text>
+			</div>
+		);
+	}
+
 	return (
-		<div>
+		<React.Fragment>
 			{
 				results.map((item) =>
 				{
@@ -105,6 +122,6 @@ export const MinigameSearch: React.FunctionComponent = observer(() =>
 					);
 				})
 			}
-		</div>
+		</React.Fragment>
 	);
 });
