@@ -44,19 +44,11 @@ export enum Type
 	Gamegroup
 }
 
-/**
- * Clanboard - Playerboard (Primary)
- * Tokens - Loginstreak  (Secondary)
- * PReferred Minigames (Tertiary)
- * Other Stuff (Defailt)
- * TODO rework
- */
-enum Group
+export enum Group
 {
-	Primary,
-	Secondary,
-	Tertiary,
-	Normal,
+	Misc,
+	Featured,
+	Minigames,
 }
 
 interface BaseMinigame
@@ -75,8 +67,9 @@ export interface SingleMinigame extends BaseMinigame
 	group: Group,
 }
 
-export interface MultiMinigame extends SingleMinigame
+export interface MultiMinigame extends BaseMinigame
 {
+	type: Type.Minigame;
 	/**
 	 * Subbtitle on multi cards
 	 */
@@ -89,79 +82,15 @@ export interface MinigameGroup
 	title: string,
 	subTitle: string,
 	minigames: MultiMinigame[]
+	group: Group,
 }
 
 export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	{
-		type: Type.Minigame,
-		title: 'Clans',
-		fields: ['name', 'tag', 'size', 'performance'],
-		image: clans,
-		group: Group.Primary,
-	},
-	{
-		type: Type.Minigame,
-		title: 'Performance',
-		image: performance,
-		fields: ['name', 'playerperformance'],
-		group: Group.Primary,
-	},
-	{
-		type: Type.Minigame,
-		title: 'Tokens',
-		image: tokens,
-		fields: ['name', 'tokens'],
-		group: Group.Secondary,
-	},
-	{
-		type: Type.Minigame,
-		title: 'Loginstreak',
-		image: loginstreak,
-		fields: ['name', 'currentstreak', 'maxstreak'],
-		group: Group.Secondary,
-	},
-	{
-		type: Type.Gamegroup,
-		title: 'KnockGames',
-		subTitle: '4 Modes',
-		minigames: [
-			{
-				type: Type.Minigame,
-				title: 'KnockPvP',
-				subtitle: 'Normal',
-				image: knockpvp_normal,
-				fields: ['name', 'kills', 'deaths'],
-				group: Group.Normal,
-			},
-			{
-				type: Type.Minigame,
-				title: 'KnockFFA',
-				subtitle: 'FFA',
-				image: knockpvp_ffa,
-				fields: ['name', 'kills', 'deaths'],
-				group: Group.Normal,
-			},
-			{
-				type: Type.Minigame,
-				title: 'KnockPVP Wars',
-				subtitle: 'Wars',
-				image: knockpvp_wars,
-				fields: ['name', 'kills', 'deaths'],
-				group: Group.Normal,
-			},
-			{
-				type: Type.Minigame,
-				title: 'KnockPvP Lab',
-				subtitle: 'LAB',
-				image: knockpvp_lab,
-				fields: [],
-				group: Group.Normal,
-			}],
-	},
-	{
 		type: Type.Gamegroup,
 		title: 'Fastbridge',
 		subTitle: '6 Modes',
+		group: Group.Featured,
 		minigames: [
 			{
 				type: Type.Minigame,
@@ -169,7 +98,6 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Normal',
 				image: fastbridge_normal,
 				fields: ['name', 'time'],
-				group: Group.Normal,
 			},
 			{
 				type: Type.Minigame,
@@ -177,7 +105,6 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Islands',
 				image: fastbridge_islands,
 				fields: ['name', 'time'],
-				group: Group.Normal,
 			},
 			{
 				type: Type.Minigame,
@@ -185,7 +112,6 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Inclined',
 				image: fastbridge_inclined,
 				fields: ['name', 'time'],
-				group: Group.Normal,
 			},
 			{
 				type: Type.Minigame,
@@ -193,7 +119,6 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Staircase',
 				image: fastbridge_staircase,
 				fields: ['name', 'time'],
-				group: Group.Normal,
 			},
 			{
 				type: Type.Minigame,
@@ -201,7 +126,6 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Short',
 				image: fastbridge_short,
 				fields: ['name', 'time'],
-				group: Group.Normal,
 			},
 			{
 				type: Type.Minigame,
@@ -209,91 +133,140 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Inclined Short',
 				image: fastbridge_inclinedShort,
 				fields: ['name', 'time'],
-				group: Group.Normal,
 			},
 		],
+	},
+	{
+		type: Type.Gamegroup,
+		title: 'KnockGames',
+		subTitle: '4 Modes',
+		group: Group.Featured,
+		minigames: [
+			{
+				type: Type.Minigame,
+				title: 'KnockPvP',
+				subtitle: 'Normal',
+				image: knockpvp_normal,
+				fields: ['name', 'kills', 'deaths'],
+			},
+			{
+				type: Type.Minigame,
+				title: 'KnockFFA',
+				subtitle: 'FFA',
+				image: knockpvp_ffa,
+				fields: ['name', 'kills', 'deaths'],
+			},
+			{
+				type: Type.Minigame,
+				title: 'KnockPVP Wars',
+				subtitle: 'Wars',
+				image: knockpvp_wars,
+				fields: ['name', 'kills', 'deaths'],
+			},
+			{
+				type: Type.Minigame,
+				title: 'KnockPvP Lab',
+				subtitle: 'LAB',
+				image: knockpvp_lab,
+				fields: [],
+			}],
 	},
 	{
 		type: Type.Minigame,
 		title: 'Minesweeper', // TODO difficulty settings, Generator settings
 		image: minesweeper,
 		fields: [],
-		group: Group.Tertiary,
-	},
-	{
-		type: Type.Minigame,
-		title: 'Bedwars',
-		image: bedwars,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths', 'brokenBeds'],
-		group: Group.Normal,
-	},
-	{
-		type: Type.Minigame,
-		title: 'Rush',
-		image: rush,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths', 'brokenBeds'],
-		group: Group.Normal,
-	},
-	{
-		type: Type.Minigame,
-		title: 'Quake',
-		image: quake,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths'],
-		group: Group.Normal,
-	},
-	{
-		type: Type.Minigame,
-		title: 'Skywars',
-		image: skywars,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths'],
-		group: Group.Normal,
-	},
-	{
-		type: Type.Minigame,
-		title: 'Snowballfight',
-		image: snowballfight,
-		fields: ['name', 'kills', 'deaths'],
-		group: Group.Normal,
-	},
-	{
-		type: Type.Minigame,
-		title: '1vs1',
-		image: onevs1,
-		fields: ['name', 'kills', 'deaths'],
-		group: Group.Normal,
+		group: Group.Featured,
 	},
 	{
 		type: Type.Minigame,
 		title: 'MLG Rush',
 		image: mlgrush,
 		fields: ['name', 'wins', 'loses', 'brokenBeds', 'lostBeds'],
-		group: Group.Normal,
+		group: Group.Minigames,
 	},
 	{
 		type: Type.Minigame,
-		title: 'OneLine',
-		image: oneline,
-		fields: ['name', 'kills', 'deaths'],
-		group: Group.Normal,
+		title: 'Bedwars',
+		image: bedwars,
+		fields: ['name', 'wins', 'loses', 'kills', 'deaths', 'brokenBeds'],
+		group: Group.Minigames,
+	},
+	{
+		type: Type.Minigame,
+		title: 'Rush',
+		image: rush,
+		fields: ['name', 'wins', 'loses', 'kills', 'deaths', 'brokenBeds'],
+		group: Group.Minigames,
+	},
+	{
+		type: Type.Minigame,
+		title: 'Skywars',
+		image: skywars,
+		fields: ['name', 'wins', 'loses', 'kills', 'deaths'],
+		group: Group.Minigames,
+	},
+	{
+		type: Type.Minigame,
+		title: 'TnT Run',
+		image: tntrun,
+		fields: ['name', 'wins', 'loses'],
+		group: Group.Minigames,
+	},
+	{
+		type: Type.Minigame,
+		title: 'Cores',
+		image: cores,
+		fields: ['name', 'wins', 'loses', 'kills', 'deaths', 'brokenCores'],
+		group: Group.Minigames,
 	},
 	{
 		type: Type.Minigame,
 		title: 'QSG',
 		image: qsg,
 		fields: ['name', 'wins', 'loses', 'kills', 'deaths'],
-		group: Group.Normal,
+		group: Group.Minigames,
+	},
+	{
+		type: Type.Minigame,
+		title: 'Quake',
+		image: quake,
+		fields: ['name', 'wins', 'loses', 'kills', 'deaths'],
+		group: Group.Minigames,
+	},
+	{
+		type: Type.Minigame,
+		title: 'Snowballfight',
+		image: snowballfight,
+		fields: ['name', 'kills', 'deaths'],
+		group: Group.Minigames,
+	},
+	{
+		type: Type.Minigame,
+		title: '1vs1',
+		image: onevs1,
+		fields: ['name', 'kills', 'deaths'],
+		group: Group.Minigames,
+	},
+	{
+		type: Type.Minigame,
+		title: 'OneLine',
+		image: oneline,
+		fields: ['name', 'kills', 'deaths'],
+		group: Group.Minigames,
 	},
 	{
 		type: Type.Minigame,
 		title: 'Sumo',
 		image: sumo,
 		fields: ['name', 'kills', 'deaths'],
-		group: Group.Normal,
+		group: Group.Minigames,
 	},
 	{
 		type: Type.Gamegroup,
 		title: 'Spleef',
 		subTitle: 'World of spleef',
+		group: Group.Minigames,
 		minigames: [
 			{
 				type: Type.Minigame,
@@ -301,7 +274,6 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Normal',
 				image: spleef_normal,
 				fields: ['name', 'wins', 'loses'],
-				group: Group.Normal,
 			},
 			{
 				type: Type.Minigame,
@@ -309,29 +281,42 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Bow Spleef',
 				image: spleef_bow,
 				fields: ['name', 'wins', 'loses'],
-				group: Group.Normal,
 			},
 		],
-	},
-	{
-		type: Type.Minigame,
-		title: 'TnT Run',
-		image: tntrun,
-		fields: ['name', 'wins', 'loses'],
-		group: Group.Normal,
-	},
-	{
-		type: Type.Minigame,
-		title: 'Cores',
-		image: cores,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths', 'brokenCores'],
-		group: Group.Normal,
 	},
 	{
 		type: Type.Minigame,
 		title: 'UHC',
 		image: uhc,
 		fields: ['name', 'wins', 'loses', 'kills', 'deaths'],
-		group: Group.Normal,
+		group: Group.Minigames,
+	},
+	{
+		type: Type.Minigame,
+		title: 'Clans',
+		fields: ['name', 'tag', 'size', 'performance'],
+		image: clans,
+		group: Group.Misc,
+	},
+	{
+		type: Type.Minigame,
+		title: 'Performance',
+		image: performance,
+		fields: ['name', 'playerperformance'],
+		group: Group.Misc,
+	},
+	{
+		type: Type.Minigame,
+		title: 'Tokens',
+		image: tokens,
+		fields: ['name', 'tokens'],
+		group: Group.Misc,
+	},
+	{
+		type: Type.Minigame,
+		title: 'Loginstreak',
+		image: loginstreak,
+		fields: ['name', 'currentstreak', 'maxstreak'],
+		group: Group.Misc,
 	},
 ];

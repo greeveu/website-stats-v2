@@ -1,22 +1,89 @@
 import React from 'react';
+import {ContentSpacing} from 'components/layout/contentSpacing/ContentSpacing';
+import {Group, MinigameGroup, minigames, MultiMinigame, SingleMinigame, Type} from 'minigames';
+import {SingleGameCard} from 'components/gameCard/single/SingleGameCard';
+import {MultiGameCard} from 'components/gameCard/multi/MultiGameCard';
+import {Divider, Typography} from 'antd';
+import style from './homePage.module.sass';
 
-interface HomePageProps
+const renderMinigames = (group: Group) =>
 {
 
-}
+	const filtered = minigames.filter((item) =>
+	{
+		return item.group === group;
+	});
 
-export const HomePage: React.FunctionComponent<HomePageProps> = (props) =>
+	return filtered.map((item, key) =>
+	{
+		const className = filtered.length % 2 === 1 && key === 0 ? style.oddMinigame : style.minigame;
+
+		if (item.type === Type.Minigame)
+		{
+			return (
+				<div className={className} key={item.title}>
+					<SingleGameCard
+						title={item.title}
+						image={item.image}
+						href={''}
+					/>
+				</div>
+			);
+		}
+		return (
+			<div className={className} key={item.title}>
+				<MultiGameCard
+					title={item.title}
+					subTitle={item.subTitle}
+					minigames={item.minigames.map((item) =>
+					{
+						return {
+							href: '',
+							image: item.image,
+							subTitle: item.subtitle,
+							highlight: false,
+						};
+					})}
+				/>
+			</div>
+		);
+	});
+};
+
+export const HomePage: React.FunctionComponent = () =>
 {
 	return (
 		<div>
-			search,
+			<ContentSpacing>
+				<div className={style.group}>
+					<Typography.Title level={2}>
+						Featured
+					</Typography.Title>
+					<Divider />
+					<div className={style.container}>
+						{renderMinigames(Group.Featured)}
+					</div>
+				</div>
+				<div className={style.group}>
+					<Typography.Title level={2}>
+						Minigames
+					</Typography.Title>
+					<Divider />
+					<div className={style.container}>
+						{renderMinigames(Group.Minigames)}
+					</div>
+				</div>
 
-			featured (top players) ?
-
-			featured modi
-
-
-			all minigames
+				<div className={style.group}>
+					<Typography.Title level={2}>
+						Misc
+					</Typography.Title>
+					<Divider />
+					<div className={style.container}>
+						{renderMinigames(Group.Misc)}
+					</div>
+				</div>
+			</ContentSpacing>
 		</div>
 	);
 };

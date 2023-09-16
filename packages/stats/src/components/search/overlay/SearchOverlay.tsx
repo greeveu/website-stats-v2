@@ -85,6 +85,7 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 			onCancel={closeSearchBar}
 			footer={null}
 			wrapClassName={style.modal}
+			zIndex={99999}
 		>
 			<div className={style.rgb}>
 				<Input
