@@ -95,7 +95,7 @@ export const MinigameSearch: React.FunctionComponent = observer(() =>
 								<SingleGameCard
 									title={item.title}
 									image={item.image}
-									href={''}
+									link={item.link}
 								/>
 							</div>
 						);
@@ -108,10 +108,11 @@ export const MinigameSearch: React.FunctionComponent = observer(() =>
 							<MultiGameCard
 								title={item.title}
 								subTitle={item.subTitle}
+								link={item.link}
 								minigames={item.minigames.map((item) =>
 								{
 									return {
-										href: '',
+										link: item.link,
 										image: item.image,
 										subTitle: item.subtitle,
 										highlight: !!item.subtitle.match(new RegExp(`${context.search.searchFor}`, 'i')),

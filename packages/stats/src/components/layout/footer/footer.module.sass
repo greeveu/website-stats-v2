@@ -1,0 +1,41 @@
+@property --colorPrimary
+  syntax: "<color>"
+  initial-value: magenta
+  inherits: false
+
+@property --colorSecondary
+  syntax: "<color>"
+  initial-value: magenta
+  inherits: false
+
+.strip
+  width: 100%
+  height: 4px
+  background: linear-gradient(90deg, var(--colorPrimary), var(--colorSecondary))
+  transition: --colorPrimary 3s ease, --colorSecondary 3s ease
+
+.success
+  @extend .strip
+  --colorPrimary: #11998e
+  --colorSecondary: #38ef7d
+
+.pending
+  @extend .strip
+  --colorPrimary: #3a7bd5
+  --colorSecondary: #3a6073
+
+.notFound
+  @extend .strip
+  --colorPrimary: #ED213A
+  --colorSecondary: #93291E
+
+.error
+  @extend .strip
+  --colorPrimary: #E94057
+  --colorSecondary: #F27121
+
+.content
+  width: 100%
+  display: flex
+  flex-direction: column
+  padding: 32px 0 32px 0

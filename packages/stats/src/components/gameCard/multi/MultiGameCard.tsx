@@ -2,6 +2,7 @@ import React, {useCallback, useMemo, useRef, useState} from 'react';
 import style from 'components/gameCard/multi/multiGameCard.module.sass';
 import sharedStyle from '../gameCard.module.sass';
 import {Typography} from 'antd';
+import {Link} from 'react-router-dom';
 
 interface Minigame
 {
@@ -14,7 +15,10 @@ interface Minigame
 	 */
 	subTitle: string,
 	image: string,
-	href: string,
+	/**
+	 * Minigame link
+	 */
+	link: string,
 }
 
 interface GameCardProps
@@ -27,6 +31,10 @@ interface GameCardProps
 	 * Initial sub title, gets overridden by on hover
 	 */
 	subTitle: string,
+	/**
+	 * Link of the group
+	 */
+	link: string,
 	/**
 	 * Sub minigames of the card
 	 */
@@ -117,7 +125,8 @@ export const MultiGameCard: React.FunctionComponent<GameCardProps> = (props) =>
 							key={key}
 							className={minigame.highlight ? style.highlighted : style.item}
 						>
-							<div
+							<Link
+								to={`minigame/${props.link}/${minigame.link}`}
 								className={style.hitbox}
 								style={{
 									clipPath: generateClipPath(key, props.minigames.length),

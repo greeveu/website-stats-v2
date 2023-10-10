@@ -44,11 +44,27 @@ export enum Type
 	Gamegroup
 }
 
+export enum ApiType
+{
+	/**
+	 * Assumes following <br/>
+	 * name + uuid in response <br/>
+	 * amount + offset parameter
+	 */
+	Normal
+}
+
 export enum Group
 {
 	Misc,
 	Featured,
 	Minigames,
+}
+
+export interface Api {
+	type: ApiType,
+	endpoint: string,
+	data: Record<string, string>
 }
 
 interface BaseMinigame
@@ -58,7 +74,9 @@ interface BaseMinigame
 	 */
 	title: string,
 	image: string,
-	fields: string[]
+	fields?: string[],
+	link: string,
+	api?: Api
 }
 
 export interface SingleMinigame extends BaseMinigame
@@ -79,6 +97,7 @@ export interface MultiMinigame extends BaseMinigame
 export interface MinigameGroup
 {
 	type: Type.Gamegroup
+	link: string,
 	title: string,
 	subTitle: string,
 	minigames: MultiMinigame[]
@@ -88,12 +107,14 @@ export interface MinigameGroup
 export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	{
 		type: Type.Gamegroup,
+		link: 'fastbridge',
 		title: 'Fastbridge',
 		subTitle: '6 Modes',
 		group: Group.Featured,
 		minigames: [
 			{
 				type: Type.Minigame,
+				link: 'normal',
 				title: 'Fastbridge',
 				subtitle: 'Normal',
 				image: fastbridge_normal,
@@ -101,6 +122,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			},
 			{
 				type: Type.Minigame,
+				link: 'island',
 				title: 'Fastbridge Islands',
 				subtitle: 'Islands',
 				image: fastbridge_islands,
@@ -108,6 +130,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			},
 			{
 				type: Type.Minigame,
+				link: 'inclined',
 				title: 'Fastbridge Inclined',
 				subtitle: 'Inclined',
 				image: fastbridge_inclined,
@@ -115,6 +138,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			},
 			{
 				type: Type.Minigame,
+				link: 'staircase',
 				title: 'Fastbridge Staircase',
 				subtitle: 'Staircase',
 				image: fastbridge_staircase,
@@ -122,6 +146,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			},
 			{
 				type: Type.Minigame,
+				link: 'short',
 				title: 'Fastbridge Short',
 				subtitle: 'Short',
 				image: fastbridge_short,
@@ -129,6 +154,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			},
 			{
 				type: Type.Minigame,
+				link: 'inclined_short',
 				title: 'Fastbridge Inclined Short',
 				subtitle: 'Inclined Short',
 				image: fastbridge_inclinedShort,
@@ -138,12 +164,14 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	},
 	{
 		type: Type.Gamegroup,
+		link: 'knockgames',
 		title: 'KnockGames',
 		subTitle: '4 Modes',
 		group: Group.Featured,
 		minigames: [
 			{
 				type: Type.Minigame,
+				link: 'normal',
 				title: 'KnockPvP',
 				subtitle: 'Normal',
 				image: knockpvp_normal,
@@ -151,6 +179,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			},
 			{
 				type: Type.Minigame,
+				link: 'ffa',
 				title: 'KnockFFA',
 				subtitle: 'FFA',
 				image: knockpvp_ffa,
@@ -158,6 +187,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			},
 			{
 				type: Type.Minigame,
+				link: 'wars',
 				title: 'KnockPVP Wars',
 				subtitle: 'Wars',
 				image: knockpvp_wars,
@@ -165,6 +195,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			},
 			{
 				type: Type.Minigame,
+				link: 'lab',
 				title: 'KnockPvP Lab',
 				subtitle: 'LAB',
 				image: knockpvp_lab,
@@ -173,6 +204,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	},
 	{
 		type: Type.Minigame,
+		link: 'minesweeper',
 		title: 'Minesweeper', // TODO difficulty settings, Generator settings
 		image: minesweeper,
 		fields: [],
@@ -180,96 +212,211 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	},
 	{
 		type: Type.Minigame,
+		link: 'mlgrush',
 		title: 'MLG Rush',
 		image: mlgrush,
-		fields: ['name', 'wins', 'loses', 'brokenBeds', 'lostBeds'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				wins: 'Wins',
+				loses: 'Loses',
+				brokenBeds: 'Broken Beds',
+				lostBeds: 'Lost Beds',
+			},
+			endpoint: '/stats/mlgrush/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'bedwars',
 		title: 'Bedwars',
 		image: bedwars,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths', 'brokenBeds'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				wins: 'Wins',
+				loses: 'Loses',
+				kills: 'Kills',
+				deaths: 'Deaths',
+				brokenBeds: 'Broken Beds',
+			},
+			endpoint: '/stats/bedwars/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'rush',
 		title: 'Rush',
 		image: rush,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths', 'brokenBeds'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				wins: 'Wins',
+				loses: 'Loses',
+				kills: "Kills",
+				deaths: "Deaths",
+				brokenBeds: 'Broken Beds',
+			},
+			endpoint: '/stats/rush/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'skywars',
 		title: 'Skywars',
 		image: skywars,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				wins: 'Wins',
+				loses: 'Loses',
+				kills: "Kills",
+				deaths: "Deaths",
+			},
+			endpoint: '/stats/skywars/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'tntrun',
 		title: 'TnT Run',
 		image: tntrun,
-		fields: ['name', 'wins', 'loses'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				wins: 'Wins',
+				loses: 'Loses',
+			},
+			endpoint: '/stats/tntrun/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'cores',
 		title: 'Cores',
 		image: cores,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths', 'brokenCores'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				wins: 'Wins',
+				loses: 'Loses',
+				kills: "Kills",
+				deaths: "Deaths",
+				brokenCores: 'Broken Cores',
+			},
+			endpoint: '/stats/cores/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'qsg',
 		title: 'QSG',
 		image: qsg,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				wins: 'Wins',
+				loses: 'Loses',
+				kills: "Kills",
+				deaths: "Deaths",
+			},
+			endpoint: '/stats/qsg/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'quake',
 		title: 'Quake',
 		image: quake,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				wins: 'Wins',
+				loses: 'Loses',
+				kills: "Kills",
+				deaths: "Deaths",
+			},
+			endpoint: '/stats/quake/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'snowballfight',
 		title: 'Snowballfight',
 		image: snowballfight,
-		fields: ['name', 'kills', 'deaths'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				kills: "Kills",
+				deaths: "Deaths",
+			},
+			endpoint: '/stats/snowballfight/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: '1vs1',
 		title: '1vs1',
 		image: onevs1,
-		fields: ['name', 'kills', 'deaths'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				kills: "Kills",
+				deaths: "Deaths",
+			},
+			endpoint: '/stats/1vs1/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'oneline',
 		title: 'OneLine',
 		image: oneline,
-		fields: ['name', 'kills', 'deaths'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				kills: "Kills",
+				deaths: "Deaths",
+			},
+			endpoint: '/stats/oneline/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'sumo',
 		title: 'Sumo',
 		image: sumo,
-		fields: ['name', 'kills', 'deaths'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				kills: "Kills",
+				deaths: "Deaths",
+			},
+			endpoint: '/stats/sumo/top',
+		}
 	},
 	{
 		type: Type.Gamegroup,
+		link: 'spleef',
 		title: 'Spleef',
-		subTitle: 'World of spleef',
+		subTitle: '2 Modes',
 		group: Group.Minigames,
 		minigames: [
 			{
 				type: Type.Minigame,
+				link: 'normal',
 				title: 'Spleef',
 				subtitle: 'Normal',
 				image: spleef_normal,
@@ -277,6 +424,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			},
 			{
 				type: Type.Minigame,
+				link: 'bow',
 				title: 'Bow Spleef',
 				subtitle: 'Bow Spleef',
 				image: spleef_bow,
@@ -286,13 +434,24 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	},
 	{
 		type: Type.Minigame,
+		link: 'uhc',
 		title: 'UHC',
 		image: uhc,
-		fields: ['name', 'wins', 'loses', 'kills', 'deaths'],
 		group: Group.Minigames,
+		api: {
+			type: ApiType.Normal,
+			data: {
+				wins: "Wins",
+				loses: "Loses",
+				kills: "Kills",
+				deaths: "Deaths",
+			},
+			endpoint: '/stats/uhc/top',
+		}
 	},
 	{
 		type: Type.Minigame,
+		link: 'clans',
 		title: 'Clans',
 		fields: ['name', 'tag', 'size', 'performance'],
 		image: clans,
@@ -300,6 +459,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	},
 	{
 		type: Type.Minigame,
+		link: 'performance',
 		title: 'Performance',
 		image: performance,
 		fields: ['name', 'playerperformance'],
@@ -307,6 +467,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	},
 	{
 		type: Type.Minigame,
+		link: 'tokens',
 		title: 'Tokens',
 		image: tokens,
 		fields: ['name', 'tokens'],
@@ -314,6 +475,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	},
 	{
 		type: Type.Minigame,
+		link: 'loginstreak',
 		title: 'Loginstreak',
 		image: loginstreak,
 		fields: ['name', 'currentstreak', 'maxstreak'],

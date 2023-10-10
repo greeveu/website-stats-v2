@@ -1,26 +1,23 @@
 import React, {ReactNode} from 'react';
-import {Layout as AntdLayout} from 'antd';
-import style from "./layout.module.sass"
+import style from './layout.module.sass';
 import {Header} from 'components/layout/header/Header';
+import {Footer} from 'components/layout/footer/Footer';
 
-const {Content, Footer} = AntdLayout;
-
-interface LayoutProps {
-	children: ReactNode
+interface LayoutProps
+{
+	children: ReactNode;
 }
 
 export const Layout: React.FunctionComponent<LayoutProps> = (props) =>
 {
 
 	return (
-		<AntdLayout>
-			<Header />
-			<Content
-				className={style.content}
-			>
+		<div className={style.root}>
+			<div className={style.content}>
+				<Header />
 				{props.children}
-			</Content>
-			<Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
-		</AntdLayout>
+			</div>
+			<Footer/>
+		</div>
 	);
 };

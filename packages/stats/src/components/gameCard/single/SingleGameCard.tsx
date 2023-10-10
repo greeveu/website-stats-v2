@@ -8,7 +8,7 @@ interface SingleGameCardProps
 {
 	title: string,
 	image: string,
-	href: string,
+	link: string,
 }
 
 /**
@@ -19,7 +19,7 @@ interface SingleGameCardProps
 export const SingleGameCard: React.FunctionComponent<SingleGameCardProps> = (props) =>
 {
 	return (
-		<Link to={props.href}>
+		<Link to={`/minigame/${props.link}`}>
 			<div
 				className={style.root}
 			>

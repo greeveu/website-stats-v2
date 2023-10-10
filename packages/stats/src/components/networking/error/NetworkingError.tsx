@@ -18,7 +18,7 @@ export const NetworkingError: React.FunctionComponent = () =>
 				level={3}
 				type={'danger'}
 			>
-				Networking error
+				Networking error :(
 			</Typography.Title>
 		</div>
 	);

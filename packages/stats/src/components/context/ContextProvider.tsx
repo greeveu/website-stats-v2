@@ -1,9 +1,17 @@
 import React, {createContext, ReactNode, useState} from 'react';
 import {makeAutoObservable} from 'mobx';
+import {NetworkStatus} from 'lib/NetworkRequest';
 
 interface SearchContextProps
 {
 	children?: ReactNode;
+}
+
+enum NetworkEffect
+{
+	Default,
+	Loading,
+	Error
 }
 
 export interface Context
@@ -22,6 +30,9 @@ export interface Context
 		 */
 		searchFor: null | string,
 	};
+	effect: {
+		network: NetworkStatus
+	}
 }
 
 const initialContext: Context = makeAutoObservable({
@@ -30,6 +41,9 @@ const initialContext: Context = makeAutoObservable({
 		text: '',
 		searchFor: null,
 	},
+	effect: {
+		network: NetworkStatus.Success
+	}
 });
 
 export const globalContext = createContext<Context>(initialContext);

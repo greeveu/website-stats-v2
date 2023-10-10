@@ -8,6 +8,8 @@ import {NetworkingLoading} from 'components/networking/loading/NetworkingLoading
 import {NetworkingError} from 'components/networking/error/NetworkingError';
 import {NetworkingNotFound} from 'components/networking/notFound/NetworkingNotFound';
 import style from 'pages/clan/clanPage.module.sass';
+import {ContentSpacing} from 'components/layout/contentSpacing/ContentSpacing';
+import {Player} from 'components/player/Player';
 
 interface Clan
 {
@@ -27,9 +29,10 @@ const columns = [
 	{
 		title: 'Player',
 		dataIndex: 'name',
-		render: (player: string) => {
-			return <div className={style.player}>{player}</div>
-		}
+		render: (player: string, record: any) =>
+		{
+			return <div className={style.player}>{player}</div>;
+		},
 	},
 	{
 		title: 'Rank',
@@ -38,9 +41,15 @@ const columns = [
 		{
 			if (rank === 1)
 			{
-				return (<Tag color={'#03a05e'} className={style.tag}>Leader</Tag>);
+				return (<Tag
+					color={'#03a05e'}
+					className={style.tag}
+				>Leader</Tag>);
 			}
-			return (<Tag color={'rgba(255, 255, 255, 0.04)'} className={style.tag}>Member</Tag>);
+			return (<Tag
+				color={'rgba(255, 255, 255, 0.04)'}
+				className={style.tag}
+			>Member</Tag>);
 		},
 	},
 ];
@@ -86,8 +95,8 @@ export const ClanPage: React.FunctionComponent = observer((props) =>
 	}
 
 	return (
-		<div>
-			<Breadcrumb>
+		<ContentSpacing>
+			<Breadcrumb className={style.breadcrump}>
 				<Breadcrumb.Item>
 					<Link to={'/'}>
 						Stats
@@ -124,6 +133,6 @@ export const ClanPage: React.FunctionComponent = observer((props) =>
 					/>
 				</div>
 			</div>
-		</div>
+		</ContentSpacing>
 	);
 });

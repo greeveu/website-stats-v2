@@ -25,7 +25,7 @@ const renderMinigames = (group: Group) =>
 					<SingleGameCard
 						title={item.title}
 						image={item.image}
-						href={''}
+						link={item.link}
 					/>
 				</div>
 			);
@@ -35,10 +35,11 @@ const renderMinigames = (group: Group) =>
 				<MultiGameCard
 					title={item.title}
 					subTitle={item.subTitle}
+					link={item.link}
 					minigames={item.minigames.map((item) =>
 					{
 						return {
-							href: '',
+							link: item.link,
 							image: item.image,
 							subTitle: item.subtitle,
 							highlight: false,
