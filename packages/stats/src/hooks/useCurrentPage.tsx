@@ -25,16 +25,13 @@ export const useCurrentPage = (): Current =>
 		{
 			return 1;
 		}
-		const page = Number.parseInt(params.page);
-		if (!Number.isSafeInteger(page))
-		{
+
+		// Positive whole number only
+		const isNumber = params.page.match(/^[\d]*$/gm);
+		if(!isNumber){
 			return 1;
 		}
-		if (page <= 0)
-		{
-			return 1;
-		}
-		return page;
+		return +isNumber;
 	}, [params.page]);
 
 	return {
