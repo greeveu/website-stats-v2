@@ -1,9 +1,14 @@
-@property --colorPrimary
+@property --colorOne
   syntax: "<color>"
   initial-value: magenta
   inherits: false
 
-@property --colorSecondary
+@property --colorTwo
+  syntax: "<color>"
+  initial-value: magenta
+  inherits: false
+
+@property --colorThree
   syntax: "<color>"
   initial-value: magenta
   inherits: false
@@ -11,28 +16,32 @@
 .strip
   width: 100%
   height: 4px
-  background: linear-gradient(90deg, var(--colorPrimary), var(--colorSecondary))
-  transition: --colorPrimary 3s ease, --colorSecondary 3s ease
+  background: linear-gradient(90deg, var(--colorOne), var(--colorTwo),  var(--colorThree))
+  transition: --colorOne 3s ease, --colorTwo 3s ease
 
 .success
   @extend .strip
-  --colorPrimary: #11998e
-  --colorSecondary: #38ef7d
+  --colorOne: #11998e
+  --colorTwo: #38ef7d
+  --colorThree: #67B26F
 
 .pending
   @extend .strip
-  --colorPrimary: #3a7bd5
-  --colorSecondary: #3a6073
+  --colorOne: #5433FF
+  --colorTwo: #20BDFF
+  --colorThree: #A5FECB
 
 .notFound
   @extend .strip
-  --colorPrimary: #ED213A
-  --colorSecondary: #93291E
+  --colorOne: #833ab4
+  --colorTwo: #fd1d1d
+  --colorThree: #fcb045
 
 .error
   @extend .strip
-  --colorPrimary: #E94057
-  --colorSecondary: #F27121
+  --colorOne: #8A2387
+  --colorTwo: #E94057
+  --colorThree: #fcb045
 
 .content
   width: 100%

@@ -7,5 +7,9 @@ export const config = {
 	 * Max amount of minigames displayed on a search
 	 */
 	searchResultLimit: 5,
+	/**
+	 * Amount of displayed rows
+	 */
+	defaultLimit: 25,
 };
 
