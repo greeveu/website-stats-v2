@@ -14,9 +14,9 @@ interface TimeProps
 export const Time: React.FunctionComponent<TimeProps> = (props) =>
 {
 	const ms = props.ms.toString().slice(-3).padStart(3, '0');
-	const seconds = Math.floor(props.ms / 1000).toString().padStart(2, '0');
-	const minutes = Math.floor(props.ms / 1000 / 60).toString().padStart(2, '0');
-	const hours = Math.floor(props.ms / 1000 / 60 / 60).toString().padStart(2, '0');
+	const seconds = Math.floor(props.ms / 1000 % 60).toString().padStart(2, '0');
+	const minutes = Math.floor(props.ms / 1000 / 60 % 60).toString().padStart(2, '0');
+	const hours = Math.floor(props.ms / 1000 / 60 / 60 % 60).toString().padStart(2, '0');
 
 	return <div>
 		<Typography.Text type={hours === '00' ? 'secondary' : undefined}>{hours}</Typography.Text>
