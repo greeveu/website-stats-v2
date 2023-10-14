@@ -9,6 +9,7 @@ import {observer} from 'mobx-react-lite';
 import {RenderMethod} from 'minigames';
 import {Options} from 'components/minigame/options/Options';
 import {Pagination} from 'components/minigame/pagination/Pagination';
+import {Time} from 'components/minigame/display/Time';
 
 export const DisplayResult: React.FunctionComponent = observer(() =>
 	{
@@ -41,6 +42,18 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 					render: (value: any, record: any, index: number) =>
 					{
 						return <Player name={value} />;
+					},
+				};
+			}
+
+			if (value.renderMethod === RenderMethod.Time)
+			{
+				return {
+					title: value.display,
+					dataIndex: key,
+					render: (value: any, record: any, index: number) =>
+					{
+						return <Time ms={value} />
 					},
 				};
 			}
