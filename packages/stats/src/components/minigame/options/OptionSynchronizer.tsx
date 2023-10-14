@@ -52,6 +52,10 @@ export const OptionSynchronizer: React.FunctionComponent = observer(() =>
 	 */
 	useEffect(() =>
 	{
+		// So we don't add a useless stack to the history
+		if(search === "" && searchParams.size === 0){
+			return;
+		}
 		navigate({pathname: './', search});
 	}, [JSON.stringify(context.options)]);
 

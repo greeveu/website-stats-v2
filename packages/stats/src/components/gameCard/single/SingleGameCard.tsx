@@ -19,7 +19,7 @@ interface SingleGameCardProps
 export const SingleGameCard: React.FunctionComponent<SingleGameCardProps> = (props) =>
 {
 	return (
-		<Link to={`/minigame/${props.link}`}>
+		<Link to={`/minigame/${props.link}/`}>
 			<div
 				className={style.root}
 			>
