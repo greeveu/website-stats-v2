@@ -32,6 +32,7 @@ export const RootPage: React.FunctionComponent = () =>
 						<Route
 							path={`minigame/${item.link}/:page?`}
 							element={<MinigamePage minigame={item} />}
+							key={item.link}
 						/>
 					);
 				})

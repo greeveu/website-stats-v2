@@ -61,10 +61,26 @@ export enum Group
 	Minigames,
 }
 
-export interface Api {
+export enum OptionType
+{
+	Select
+}
+
+export interface SelectOption
+{
+	type: OptionType.Select;
+	values: Record<string, string>;
+	default: string;
+}
+
+export type Option = SelectOption
+
+export interface Api
+{
 	type: ApiType,
 	endpoint: string,
 	data: Record<string, string>
+	options?: Record<string, Option>
 }
 
 interface BaseMinigame
@@ -74,6 +90,9 @@ interface BaseMinigame
 	 */
 	title: string,
 	image: string,
+	/**
+	 * TODO, remove fields
+	 */
 	fields?: string[],
 	link: string,
 	api?: Api
@@ -205,10 +224,39 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	{
 		type: Type.Minigame,
 		link: 'minesweeper',
-		title: 'Minesweeper', // TODO difficulty settings, Generator settings
+		title: 'Minesweeper',
 		image: minesweeper,
-		fields: [],
 		group: Group.Featured,
+		api: {
+			endpoint: '/stats/minesweeper/top/:type/:generator',
+			type: ApiType.Normal,
+			data: {
+				time: 'Time',
+			},
+			options: {
+				':type': {
+					type: OptionType.Select,
+					values: {
+						'EASY': 'Easy',
+						'MEDIUM': 'Medium',
+						'HARD': 'Hard',
+						'EXTREME': 'Extreme',
+						'HELL': 'Hell',
+					},
+					default: 'MEDIUM',
+				},
+				':generator': {
+					type: OptionType.Select,
+					values: {
+						'OG': 'Microsoft',
+						'GREEV': 'Greev.eu',
+						'NO_GUESSING': 'No Guessing',
+						'SPEEDRUN': 'Speedrun',
+					},
+					default: 'GREEV',
+				},
+			},
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -225,7 +273,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				lostBeds: 'Lost Beds',
 			},
 			endpoint: '/stats/mlgrush/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -243,7 +291,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				brokenBeds: 'Broken Beds',
 			},
 			endpoint: '/stats/bedwars/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -256,12 +304,12 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				wins: 'Wins',
 				loses: 'Loses',
-				kills: "Kills",
-				deaths: "Deaths",
+				kills: 'Kills',
+				deaths: 'Deaths',
 				brokenBeds: 'Broken Beds',
 			},
 			endpoint: '/stats/rush/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -274,11 +322,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				wins: 'Wins',
 				loses: 'Loses',
-				kills: "Kills",
-				deaths: "Deaths",
+				kills: 'Kills',
+				deaths: 'Deaths',
 			},
 			endpoint: '/stats/skywars/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -293,7 +341,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				loses: 'Loses',
 			},
 			endpoint: '/stats/tntrun/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -306,12 +354,12 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				wins: 'Wins',
 				loses: 'Loses',
-				kills: "Kills",
-				deaths: "Deaths",
+				kills: 'Kills',
+				deaths: 'Deaths',
 				brokenCores: 'Broken Cores',
 			},
 			endpoint: '/stats/cores/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -324,11 +372,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				wins: 'Wins',
 				loses: 'Loses',
-				kills: "Kills",
-				deaths: "Deaths",
+				kills: 'Kills',
+				deaths: 'Deaths',
 			},
 			endpoint: '/stats/qsg/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -341,11 +389,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				wins: 'Wins',
 				loses: 'Loses',
-				kills: "Kills",
-				deaths: "Deaths",
+				kills: 'Kills',
+				deaths: 'Deaths',
 			},
 			endpoint: '/stats/quake/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -356,11 +404,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				kills: "Kills",
-				deaths: "Deaths",
+				kills: 'Kills',
+				deaths: 'Deaths',
 			},
 			endpoint: '/stats/snowballfight/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -371,11 +419,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				kills: "Kills",
-				deaths: "Deaths",
+				kills: 'Kills',
+				deaths: 'Deaths',
 			},
 			endpoint: '/stats/1vs1/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -386,11 +434,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				kills: "Kills",
-				deaths: "Deaths",
+				kills: 'Kills',
+				deaths: 'Deaths',
 			},
 			endpoint: '/stats/oneline/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,
@@ -401,11 +449,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				kills: "Kills",
-				deaths: "Deaths",
+				kills: 'Kills',
+				deaths: 'Deaths',
 			},
 			endpoint: '/stats/sumo/top',
-		}
+		},
 	},
 	{
 		type: Type.Gamegroup,
@@ -441,13 +489,13 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				wins: "Wins",
-				loses: "Loses",
-				kills: "Kills",
-				deaths: "Deaths",
+				wins: 'Wins',
+				loses: 'Loses',
+				kills: 'Kills',
+				deaths: 'Deaths',
 			},
 			endpoint: '/stats/uhc/top',
-		}
+		},
 	},
 	{
 		type: Type.Minigame,

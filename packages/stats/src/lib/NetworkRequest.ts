@@ -15,6 +15,11 @@ interface Props
 	delay?: number;
 }
 
+/**
+ * TODO
+ * Refactor generic type
+ * And props
+ */
 export class NetworkRequest<T>
 {
 	public network: NetworkStatus = NetworkStatus.Pending;
@@ -35,47 +40,53 @@ export class NetworkRequest<T>
 			try
 			{
 				const result = await fetch(input, init);
-				await this.awaitDelay()
+				await this.awaitDelay();
 
 				if (result.status === 500)
 				{
-					return this.setNetwork(NetworkStatus.Error)
+					return this.setNetwork(NetworkStatus.Error);
 				}
 
 				if (result.status === 404)
 				{
-					return this.setNetwork(NetworkStatus.NotFound)
+					return this.setNetwork(NetworkStatus.NotFound);
 				}
 
 				if (!result.ok)
 				{
-					return this.setNetwork(NetworkStatus.Error)
+					return this.setNetwork(NetworkStatus.Error);
 				}
 
 				this.result = await result.json();
-				this.setNetwork(NetworkStatus.Success)
+				this.setNetwork(NetworkStatus.Success);
 			}
 			catch (e: any)
 			{
 				console.error('NetworkError', e);
-				return this.setNetwork(NetworkStatus.Error)
+				return this.setNetwork(NetworkStatus.Error);
 			}
 		})();
 
 	}
 
-	private setNetwork(status: NetworkStatus): void{
-		if(!this.context){
-			this.network = status;
-			return;
+	public playEffect(status: NetworkStatus): void
+	{
+		if (this.context)
+		{
+			this.context.effect.network = status;
 		}
-		this.context.effect.network = status;
+	}
+
+	private setNetwork(status: NetworkStatus): void
+	{
+		this.playEffect(status);
 		this.network = status;
 	}
 
 	private async awaitDelay()
 	{
-		if(this.delay <= 0){
+		if (this.delay <= 0)
+		{
 			return;
 		}
 		return new Promise((resolve) =>
