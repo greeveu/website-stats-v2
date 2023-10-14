@@ -1,12 +1,12 @@
 import React, {useContext, useMemo} from 'react';
 import {CaretLeftOutlined, CaretRightOutlined} from '@ant-design/icons';
 import {Button} from 'antd';
-import {createSearchParams, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useCurrentPage} from 'hooks/useCurrentPage';
 import style from './pagination.module.sass';
 import {minigameContext} from 'components/minigame/MinigameContextProvider';
 import {config} from 'config';
-import {useFilteredOptions} from 'components/minigame/options/useFilteredOptions';
+import {useSearch} from 'components/minigame/options/useSearch';
 
 /**
  * Simple pagination component <br />
@@ -18,7 +18,7 @@ export const Pagination: React.FunctionComponent = () =>
 	const context = useContext(minigameContext);
 	const current = useCurrentPage();
 	const nextDisabled = Array.isArray(context.network?.result) && context.network?.result.length !== config.defaultLimit;
-	const filtered = useFilteredOptions();
+	const search = useSearch();
 
 	const navigation = useMemo(() =>
 	{
@@ -49,8 +49,6 @@ export const Pagination: React.FunctionComponent = () =>
 		};
 
 	}, [current.page, current.topLevel]);
-
-	const search = `?${createSearchParams(filtered)}`;
 
 	return (
 		<div className={style.root}>

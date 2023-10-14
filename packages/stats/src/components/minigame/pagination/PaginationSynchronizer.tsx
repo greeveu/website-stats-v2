@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from 'react';
 import {minigameContext} from 'components/minigame/MinigameContextProvider';
 import {useCurrentPage} from 'hooks/useCurrentPage';
-import {createSearchParams, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react-lite';
-import {useFilteredOptions} from 'components/minigame/options/useFilteredOptions';
+import {useSearch} from 'components/minigame/options/useSearch';
 
 /**
  * Synchronizes pagination and options between browser and state
@@ -15,7 +15,7 @@ export const PaginationSynchronizer: React.FunctionComponent = observer(() =>
 	const context = useContext(minigameContext);
 	const current = useCurrentPage();
 	const navigate = useNavigate();
-	const filtered = useFilteredOptions()
+	const search = useSearch();
 
 	useEffect(() =>
 	{
@@ -28,8 +28,6 @@ export const PaginationSynchronizer: React.FunctionComponent = observer(() =>
 		{
 			return;
 		}
-
-		const search = `?${createSearchParams(filtered)}`;
 
 		if (current.topLevel)
 		{

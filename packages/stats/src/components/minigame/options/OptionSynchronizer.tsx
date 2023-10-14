@@ -1,8 +1,8 @@
 import React, {useContext, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
 import {minigameContext} from 'components/minigame/MinigameContextProvider';
-import {useSearchParams} from 'react-router-dom';
-import {useFilteredOptions} from 'components/minigame/options/useFilteredOptions';
+import {useNavigate, useSearchParams} from 'react-router-dom';
+import {useSearch} from 'components/minigame/options/useSearch';
 
 /**
  * Synchronises all options between the browser and the context state
@@ -12,8 +12,9 @@ import {useFilteredOptions} from 'components/minigame/options/useFilteredOptions
 export const OptionSynchronizer: React.FunctionComponent = observer(() =>
 {
 	const context = useContext(minigameContext);
-	const [searchParams, setSearchParams] = useSearchParams();
-	const fitered = useFilteredOptions();
+	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
+	const search = useSearch();
 
 	/**
 	 * Update the state
@@ -25,30 +26,24 @@ export const OptionSynchronizer: React.FunctionComponent = observer(() =>
 			return;
 		}
 
-		for (const [key, value] of Object.entries(Object.fromEntries(searchParams)))
+		for (const [key, value] of Object.entries(context.config.api.options))
 		{
 
-			// Option key does not exist
-			if (!context.config.api.options[key])
+			const param = searchParams.get(key);
+			if (!param)
 			{
+				context.options[key] = value.default;
 				return;
 			}
 
-			// Option key does not exist
-			if (!context.config.api.options[key])
+			const options = Object.keys(value.options);
+			if (!options.includes(param))
 			{
+				context.options[key] = value.default;
 				return;
 			}
 
-			// Option value does not exist
-			const options = Object.keys(context.config.api.options[key].options);
-			if (!options.includes(value))
-			{
-				return;
-			}
-
-			// Set option
-			context.options[key] = value;
+			context.options[key] = param;
 		}
 	}, [context, searchParams]);
 
@@ -57,7 +52,7 @@ export const OptionSynchronizer: React.FunctionComponent = observer(() =>
 	 */
 	useEffect(() =>
 	{
-		setSearchParams(fitered);
+		navigate({pathname: './', search});
 	}, [JSON.stringify(context.options)]);
 
 	return null;
