@@ -109,8 +109,15 @@ interface BaseMinigame
 	 */
 	fields?: string[],
 	link: string,
-	api?: Api
+	api: Api
 }
+
+const apiMock: Api = {
+	type: ApiType.Normal,
+	data: {},
+	endpoint: '',
+	options: undefined,
+};
 
 export interface SingleMinigame extends BaseMinigame
 {
@@ -152,6 +159,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Normal',
 				image: fastbridge_normal,
 				fields: ['name', 'time'],
+				api: apiMock,
 			},
 			{
 				type: Type.Minigame,
@@ -160,6 +168,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Islands',
 				image: fastbridge_islands,
 				fields: ['name', 'time'],
+				api: apiMock,
 			},
 			{
 				type: Type.Minigame,
@@ -168,6 +177,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Inclined',
 				image: fastbridge_inclined,
 				fields: ['name', 'time'],
+				api: apiMock,
 			},
 			{
 				type: Type.Minigame,
@@ -176,6 +186,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Staircase',
 				image: fastbridge_staircase,
 				fields: ['name', 'time'],
+				api: apiMock,
 			},
 			{
 				type: Type.Minigame,
@@ -184,6 +195,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Short',
 				image: fastbridge_short,
 				fields: ['name', 'time'],
+				api: apiMock,
 			},
 			{
 				type: Type.Minigame,
@@ -192,6 +204,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Inclined Short',
 				image: fastbridge_inclinedShort,
 				fields: ['name', 'time'],
+				api: apiMock,
 			},
 		],
 	},
@@ -209,6 +222,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Normal',
 				image: knockpvp_normal,
 				fields: ['name', 'kills', 'deaths'],
+				api: apiMock,
 			},
 			{
 				type: Type.Minigame,
@@ -217,6 +231,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'FFA',
 				image: knockpvp_ffa,
 				fields: ['name', 'kills', 'deaths'],
+				api: apiMock,
 			},
 			{
 				type: Type.Minigame,
@@ -225,6 +240,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Wars',
 				image: knockpvp_wars,
 				fields: ['name', 'kills', 'deaths'],
+				api: apiMock,
 			},
 			{
 				type: Type.Minigame,
@@ -233,6 +249,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'LAB',
 				image: knockpvp_lab,
 				fields: [],
+				api: apiMock,
 			}],
 	},
 	{
@@ -660,6 +677,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Normal',
 				image: spleef_normal,
 				fields: ['name', 'wins', 'loses'],
+				api: apiMock,
 			},
 			{
 				type: Type.Minigame,
@@ -668,6 +686,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				subtitle: 'Bow Spleef',
 				image: spleef_bow,
 				fields: ['name', 'wins', 'loses'],
+				api: apiMock,
 			},
 		],
 	},
@@ -711,6 +730,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		fields: ['name', 'tag', 'size', 'performance'],
 		image: clans,
 		group: Group.Misc,
+		api: apiMock,
 	},
 	{
 		type: Type.Minigame,
@@ -719,6 +739,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		image: performance,
 		fields: ['name', 'playerperformance'],
 		group: Group.Misc,
+		api: apiMock,
 	},
 	{
 		type: Type.Minigame,
@@ -727,6 +748,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		image: tokens,
 		fields: ['name', 'tokens'],
 		group: Group.Misc,
+		api: apiMock,
 	},
 	{
 		type: Type.Minigame,
@@ -735,5 +757,6 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		image: loginstreak,
 		fields: ['name', 'currentstreak', 'maxstreak'],
 		group: Group.Misc,
+		api: apiMock,
 	},
 ];

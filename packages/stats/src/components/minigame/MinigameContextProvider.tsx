@@ -1,5 +1,5 @@
 import React, {ReactNode, useContext, useEffect, useState} from 'react';
-import {Group, SingleMinigame, Type} from 'minigames';
+import {ApiType, Group, SingleMinigame, Type} from 'minigames';
 import knockpvp_lab from 'media/minigames/knockpvp_lab.jpg';
 import {Context, globalContext} from 'components/context/ContextProvider';
 import {makeAutoObservable, reaction} from 'mobx';
@@ -39,7 +39,7 @@ export class MinigameContext
 		/**
 		 * Populate options with initial states
 		 */
-		if (props.config.api?.options)
+		if (props.config.api.options)
 		{
 			Object.entries(props.config.api.options).forEach(([key, value]) =>
 			{
@@ -75,7 +75,7 @@ export class MinigameContext
 			return;
 		}
 
-		let url = `${config.endpoint}${this.config.api?.endpoint}?offset=${this.offset * config.defaultLimit}&amount=${config.defaultLimit}`;
+		let url = `${config.endpoint}${this.config.api.endpoint}?offset=${this.offset * config.defaultLimit}&amount=${config.defaultLimit}`;
 		Object.entries(this.options).forEach(([key, value]) =>
 		{
 			url = url.replace(`:${key}`, value);
@@ -94,6 +94,11 @@ const minigame: SingleMinigame = {
 	image: knockpvp_lab,
 	fields: [],
 	group: Group.Minigames,
+	api: {
+		type: ApiType.Normal,
+		data: {},
+		endpoint: '',
+	},
 };
 
 const defaultContext = new MinigameContext({config: minigame, dummy: true, context: {} as Context});

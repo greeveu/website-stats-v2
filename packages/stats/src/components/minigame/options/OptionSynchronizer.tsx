@@ -20,8 +20,7 @@ export const OptionSynchronizer: React.FunctionComponent = observer(() =>
 	 */
 	useEffect(() =>
 	{
-		// Typescript check
-		if (!context.config.api?.options)
+		if (!context.config.api.options)
 		{
 			return;
 		}

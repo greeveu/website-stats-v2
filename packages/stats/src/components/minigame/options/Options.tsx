@@ -9,7 +9,7 @@ export const Options: React.FunctionComponent = observer(() =>
 {
 	const context = useContext(minigameContext);
 
-	if (!context.config.api?.options)
+	if (!context.config.api.options)
 	{
 		return null;
 	}
