@@ -1,6 +1,6 @@
 import React from 'react';
 import {ContentSpacing} from 'components/layout/contentSpacing/ContentSpacing';
-import {Group, MinigameGroup, minigames, MultiMinigame, SingleMinigame, Type} from 'minigames';
+import {Group, minigames, Type} from 'minigames';
 import {SingleGameCard} from 'components/gameCard/single/SingleGameCard';
 import {MultiGameCard} from 'components/gameCard/multi/MultiGameCard';
 import {Divider, Typography} from 'antd';
@@ -8,7 +8,6 @@ import style from './homePage.module.sass';
 
 const renderMinigames = (group: Group) =>
 {
-
 	const filtered = minigames.filter((item) =>
 	{
 		return item.group === group;
@@ -21,7 +20,10 @@ const renderMinigames = (group: Group) =>
 		if (item.type === Type.Minigame)
 		{
 			return (
-				<div className={className} key={item.title}>
+				<div
+					className={className}
+					key={item.title}
+				>
 					<SingleGameCard
 						title={item.title}
 						image={item.image}
@@ -31,7 +33,10 @@ const renderMinigames = (group: Group) =>
 			);
 		}
 		return (
-			<div className={className} key={item.title}>
+			<div
+				className={className}
+				key={item.title}
+			>
 				<MultiGameCard
 					title={item.title}
 					subTitle={item.subTitle}
@@ -56,32 +61,34 @@ export const HomePage: React.FunctionComponent = () =>
 	return (
 		<div>
 			<ContentSpacing>
-				<div className={style.group}>
-					<Typography.Title level={2}>
-						Featured
-					</Typography.Title>
-					<Divider />
-					<div className={style.container}>
-						{renderMinigames(Group.Featured)}
+				<div>
+					<div className={style.group}>
+						<Typography.Title level={2}>
+							Featured
+						</Typography.Title>
+						<Divider />
+						<div className={style.container}>
+							{renderMinigames(Group.Featured)}
+						</div>
 					</div>
-				</div>
-				<div className={style.group}>
-					<Typography.Title level={2}>
-						Minigames
-					</Typography.Title>
-					<Divider />
-					<div className={style.container}>
-						{renderMinigames(Group.Minigames)}
+					<div className={style.group}>
+						<Typography.Title level={2}>
+							Minigames
+						</Typography.Title>
+						<Divider />
+						<div className={style.container}>
+							{renderMinigames(Group.Minigames)}
+						</div>
 					</div>
-				</div>
 
-				<div className={style.group}>
-					<Typography.Title level={2}>
-						Misc
-					</Typography.Title>
-					<Divider />
-					<div className={style.container}>
-						{renderMinigames(Group.Misc)}
+					<div className={style.group}>
+						<Typography.Title level={2}>
+							Misc
+						</Typography.Title>
+						<Divider />
+						<div className={style.container}>
+							{renderMinigames(Group.Misc)}
+						</div>
 					</div>
 				</div>
 			</ContentSpacing>

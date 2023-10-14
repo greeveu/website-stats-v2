@@ -1,11 +1,11 @@
-import React, {ReactNode, useContext, useEffect, useMemo, useState} from 'react';
-import {Group, minigames, SingleMinigame, Type} from 'minigames';
+import React, {ReactNode, useContext, useEffect, useState} from 'react';
+import {Group, SingleMinigame, Type} from 'minigames';
 import knockpvp_lab from 'media/minigames/knockpvp_lab.jpg';
 import {Context, globalContext} from 'components/context/ContextProvider';
-import {makeAutoObservable} from 'mobx';
+import {makeAutoObservable, reaction} from 'mobx';
 import {NetworkRequest} from 'lib/NetworkRequest';
-import {useCurrentPage} from 'hooks/useCurrentPage';
 import {config} from 'config';
+import {observer} from 'mobx-react-lite';
 
 interface MinigameContextProps
 {
@@ -16,13 +16,18 @@ interface MinigameContextProps
 export class MinigameContext
 {
 	/**
-	 * Do not DO network or context stuff in dummy mode
+	 * Do NOT do network or context stuff in dummy mode
 	 * @private
 	 */
-	private dummy: boolean;
-	public config: SingleMinigame;
-	private context: Context;
+	public dummy: boolean;
 	public network: null | NetworkRequest<any> = null;
+	public readonly config: SingleMinigame;
+	private readonly context: Context;
+
+	public offset: number = 0;
+	public options: Record<string, string> = {};
+
+	private debounce: NodeJS.Timeout | null = null;
 
 	constructor(props: { config: SingleMinigame, dummy: boolean, context: Context })
 	{
@@ -30,6 +35,55 @@ export class MinigameContext
 		this.config = props.config;
 		this.dummy = props.dummy;
 		this.context = props.context;
+
+		/**
+		 * Populate options with initial states
+		 */
+		if (props.config.api?.options)
+		{
+			Object.entries(props.config.api.options).forEach(([key, value]) =>
+			{
+				this.options[key] = value.default;
+			});
+		}
+
+		reaction(() =>
+		{
+			return {offset: this.offset, options: JSON.stringify(this.options)};
+		}, this.autoRun.bind(this));
+
+		this.autoRun();
+	}
+
+	autoRun()
+	{
+		if (this.debounce !== null)
+		{
+			clearTimeout(this.debounce);
+		}
+
+		this.debounce = setTimeout(() =>
+		{
+			this.fetch();
+		}, 50);
+	}
+
+	private fetch(): void
+	{
+		if (this.dummy)
+		{
+			return;
+		}
+
+		let url = `${config.endpoint}${this.config.api?.endpoint}?offset=${this.offset * config.defaultLimit}&amount=${config.defaultLimit}`;
+		Object.entries(this.options).forEach(([key, value]) =>
+		{
+			url = url.replace(`:${key}`, value);
+		});
+
+		this.network = new NetworkRequest(url, undefined, {
+			context: this.context,
+		});
 	}
 }
 
@@ -41,31 +95,28 @@ const minigame: SingleMinigame = {
 	fields: [],
 	group: Group.Minigames,
 };
-const defaultContext = new MinigameContext({config: minigame, dummy: true, context: {} as Context});
 
+const defaultContext = new MinigameContext({config: minigame, dummy: true, context: {} as Context});
 export const minigameContext = React.createContext<MinigameContext>(defaultContext);
 
-export const MinigameContextProvider: React.FunctionComponent<MinigameContextProps> = (props) =>
+export const MinigameContextProvider: React.FunctionComponent<MinigameContextProps> = observer((props) =>
 {
 	const global = useContext(globalContext);
 	const [context, setContext] = useState(defaultContext);
-	const current = useCurrentPage();
 
 	useEffect(() =>
 	{
 		setContext(new MinigameContext({config: props.minigame, dummy: false, context: global}));
 	}, [props.minigame]);
 
-	useEffect(() =>
+	if (context.dummy)
 	{
-		context.network = new NetworkRequest(`${config.endpoint}${props.minigame.api?.endpoint}?offset=${current.offset}&amount=${config.defaultLimit}`, undefined, {
-			context: global,
-		});
-	}, [context, current.offset, props.minigame]);
+		return null;
+	}
 
 	return (
 		<minigameContext.Provider value={context}>
 			{props.children}
 		</minigameContext.Provider>
 	);
-};
+});

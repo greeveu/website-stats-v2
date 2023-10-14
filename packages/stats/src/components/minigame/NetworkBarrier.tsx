@@ -5,6 +5,7 @@ import {NetworkingLoading} from 'components/networking/loading/NetworkingLoading
 import {NetworkStatus} from 'lib/NetworkRequest';
 import {NetworkingError} from 'components/networking/error/NetworkingError';
 import {NetworkingNotFound} from 'components/networking/notFound/NetworkingNotFound';
+import {NetworkingNoData} from 'components/networking/noData/NetworkingNoData';
 
 interface NetworkBarrierProps
 {
@@ -14,8 +15,6 @@ interface NetworkBarrierProps
 export const NetworkBarrier: React.FunctionComponent<NetworkBarrierProps> = observer((props) =>
 {
 	const context = useContext(minigameContext);
-
-	console.log(context.network?.network)
 
 	if (!context.network)
 	{
@@ -35,7 +34,7 @@ export const NetworkBarrier: React.FunctionComponent<NetworkBarrierProps> = obse
 	if (context.network.result.length === 0)
 	{
 		context.network.playEffect(NetworkStatus.NotFound)
-		return <NetworkingNotFound />;
+		return <NetworkingNoData />;
 	}
 
 	return <React.Fragment>{props.children}</React.Fragment>;

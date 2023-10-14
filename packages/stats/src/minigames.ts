@@ -68,18 +68,32 @@ export enum OptionType
 
 export interface SelectOption
 {
+	display: string;
 	type: OptionType.Select;
-	values: Record<string, string>;
+	options: Record<string, string>;
 	default: string;
 }
 
 export type Option = SelectOption
 
+export enum RenderMethod
+{
+	Raw,
+	Player,
+	Time,
+}
+
+export interface Data
+{
+	display: string,
+	renderMethod: RenderMethod
+}
+
 export interface Api
 {
 	type: ApiType,
 	endpoint: string,
-	data: Record<string, string>
+	data: Record<string, Data>
 	options?: Record<string, Option>
 }
 
@@ -231,12 +245,20 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			endpoint: '/stats/minesweeper/top/:type/:generator',
 			type: ApiType.Normal,
 			data: {
-				time: 'Time',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				time: {
+					display: 'Time',
+					renderMethod: RenderMethod.Time,
+				},
 			},
 			options: {
-				':type': {
+				'type': {
+					display: 'Difficulty',
 					type: OptionType.Select,
-					values: {
+					options: {
 						'EASY': 'Easy',
 						'MEDIUM': 'Medium',
 						'HARD': 'Hard',
@@ -245,9 +267,10 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					},
 					default: 'MEDIUM',
 				},
-				':generator': {
+				'generator': {
+					display: 'Generator',
 					type: OptionType.Select,
-					values: {
+					options: {
 						'OG': 'Microsoft',
 						'GREEV': 'Greev.eu',
 						'NO_GUESSING': 'No Guessing',
@@ -267,10 +290,26 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				wins: 'Wins',
-				loses: 'Loses',
-				brokenBeds: 'Broken Beds',
-				lostBeds: 'Lost Beds',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				wins: {
+					display: 'Wins',
+					renderMethod: RenderMethod.Raw,
+				},
+				loses: {
+					display: 'Loses',
+					renderMethod: RenderMethod.Raw,
+				},
+				brokenBeds: {
+					display: 'Broken Beds',
+					renderMethod: RenderMethod.Raw,
+				},
+				lostBeds: {
+					display: 'Lost Beds',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/mlgrush/top',
 		},
@@ -284,11 +323,26 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				wins: 'Wins',
-				loses: 'Loses',
-				kills: 'Kills',
-				deaths: 'Deaths',
-				brokenBeds: 'Broken Beds',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				wins: {
+					display: 'Wins',
+					renderMethod: RenderMethod.Raw,
+				},
+				loses: {
+					display: 'Loses',
+					renderMethod: RenderMethod.Raw,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				brokenBeds: {
+					display: 'Broken Beds',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/bedwars/top',
 		},
@@ -302,11 +356,30 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				wins: 'Wins',
-				loses: 'Loses',
-				kills: 'Kills',
-				deaths: 'Deaths',
-				brokenBeds: 'Broken Beds',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				wins: {
+					display: 'Wins',
+					renderMethod: RenderMethod.Raw,
+				},
+				loses: {
+					display: 'Loses',
+					renderMethod: RenderMethod.Raw,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				deaths: {
+					display: 'Deaths',
+					renderMethod: RenderMethod.Raw,
+				},
+				brokenBeds: {
+					display: 'Broken Beds',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/rush/top',
 		},
@@ -320,10 +393,26 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				wins: 'Wins',
-				loses: 'Loses',
-				kills: 'Kills',
-				deaths: 'Deaths',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				wins: {
+					display: 'Wins',
+					renderMethod: RenderMethod.Raw,
+				},
+				loses: {
+					display: 'Loses',
+					renderMethod: RenderMethod.Raw,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				deaths: {
+					display: 'Deaths',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/skywars/top',
 		},
@@ -337,8 +426,18 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				wins: 'Wins',
-				loses: 'Loses',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				wins: {
+					display: 'Wins',
+					renderMethod: RenderMethod.Raw,
+				},
+				loses: {
+					display: 'Loses',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/tntrun/top',
 		},
@@ -352,11 +451,30 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				wins: 'Wins',
-				loses: 'Loses',
-				kills: 'Kills',
-				deaths: 'Deaths',
-				brokenCores: 'Broken Cores',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				wins: {
+					display: 'Wins',
+					renderMethod: RenderMethod.Raw,
+				},
+				loses: {
+					display: 'Loses',
+					renderMethod: RenderMethod.Raw,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				deaths: {
+					display: 'Deaths',
+					renderMethod: RenderMethod.Raw,
+				},
+				brokenCores: {
+					display: 'Broken Cores',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/cores/top',
 		},
@@ -370,10 +488,26 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				wins: 'Wins',
-				loses: 'Loses',
-				kills: 'Kills',
-				deaths: 'Deaths',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				wins: {
+					display: 'Wins',
+					renderMethod: RenderMethod.Raw,
+				},
+				loses: {
+					display: 'Loses',
+					renderMethod: RenderMethod.Raw,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				deaths: {
+					display: 'Deaths',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/qsg/top',
 		},
@@ -387,10 +521,26 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				wins: 'Wins',
-				loses: 'Loses',
-				kills: 'Kills',
-				deaths: 'Deaths',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				wins: {
+					display: 'Wins',
+					renderMethod: RenderMethod.Raw,
+				},
+				loses: {
+					display: 'Loses',
+					renderMethod: RenderMethod.Raw,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				deaths: {
+					display: 'Deaths',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/quake/top',
 		},
@@ -404,8 +554,18 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				kills: 'Kills',
-				deaths: 'Deaths',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				deaths: {
+					display: 'Deaths',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/snowballfight/top',
 		},
@@ -419,8 +579,18 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				kills: 'Kills',
-				deaths: 'Deaths',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				deaths: {
+					display: 'Deaths',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/1vs1/top',
 		},
@@ -434,8 +604,18 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				kills: 'Kills',
-				deaths: 'Deaths',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				deaths: {
+					display: 'Deaths',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/oneline/top',
 		},
@@ -449,9 +629,20 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				kills: 'Kills',
-				deaths: 'Deaths',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				deaths: {
+					display: 'Deaths',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
+
 			endpoint: '/stats/sumo/top',
 		},
 	},
@@ -489,10 +680,26 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		api: {
 			type: ApiType.Normal,
 			data: {
-				wins: 'Wins',
-				loses: 'Loses',
-				kills: 'Kills',
-				deaths: 'Deaths',
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				wins: {
+					display: 'Wins',
+					renderMethod: RenderMethod.Raw,
+				},
+				loses: {
+					display: 'Loses',
+					renderMethod: RenderMethod.Raw,
+				},
+				kills: {
+					display: 'Kills',
+					renderMethod: RenderMethod.Raw,
+				},
+				deaths: {
+					display: 'Deaths',
+					renderMethod: RenderMethod.Raw,
+				},
 			},
 			endpoint: '/stats/uhc/top',
 		},

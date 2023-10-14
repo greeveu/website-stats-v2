@@ -3,15 +3,15 @@ import {minigameContext} from 'components/minigame/MinigameContextProvider';
 import {config} from 'config';
 import {Player} from 'components/player/Player';
 import {ContentSpacing} from 'components/layout/contentSpacing/ContentSpacing';
-import style from "./displayResult.module.sass"
+import style from './displayResult.module.sass';
 import {Divider, Table, Typography} from 'antd';
-import {useCurrentPage} from 'hooks/useCurrentPage';
 import {observer} from 'mobx-react-lite';
-import {Pagination} from 'components/minigame/Pagination';
+import {RenderMethod} from 'minigames';
+import {Options} from 'components/minigame/options/Options';
+import {Pagination} from 'components/minigame/pagination/Pagination';
 
 export const DisplayResult: React.FunctionComponent = observer(() =>
 	{
-		const current = useCurrentPage();
 		const context = useContext(minigameContext);
 
 		if (!context.network)
@@ -25,47 +25,47 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 				dataIndex: 'name',
 				render: (value: any, record: any, index: number) =>
 				{
-					const place = config.defaultLimit * current.offset + index + 1;
+					const place = config.defaultLimit * context.offset + index + 1;
 					return <div>{place}</div>;
 				},
 				align: 'center',
-			},
-			{
-				title: 'Player',
-				dataIndex: 'name',
-				render: (value: string) =>
-				{
-					return <Player
-						name={value}
-					/>;
-				},
 			}];
 
 		const dataColumns = Object.entries(context.config.api!.data).map(([key, value]) =>
 		{
+			if (value.renderMethod === RenderMethod.Player)
+			{
+				return {
+					title: value.display,
+					dataIndex: key,
+					render: (value: any, record: any, index: number) =>
+					{
+						return <Player name={value} />;
+					},
+				};
+			}
+
 			return {
-				title: value,
+				title: value.display,
 				dataIndex: key,
 			};
 		});
 
 		return (
-			<ContentSpacing>
-				<div className={style.root}>
-					<Typography.Title>
-						{context.config.title}
-					</Typography.Title>
-					<Divider />
-					<Table
-						columns={[...defaultColumns, ...dataColumns]}
-						dataSource={context.network.result}
-						pagination={false}
-					/>
-					<div className={style.pagination}>
-						<Pagination />
-					</div>
+			<div className={style.root}>
+				<Typography.Title>
+					{context.config.title}
+				</Typography.Title>
+				<Divider />
+				<Table
+					columns={[...defaultColumns, ...dataColumns]}
+					dataSource={context.network.result}
+					pagination={false}
+				/>
+				<div className={style.pagination}>
+					<Pagination />
 				</div>
-			</ContentSpacing>
+			</div>
 		);
 	},
 );

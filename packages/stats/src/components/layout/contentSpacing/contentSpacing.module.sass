@@ -1,9 +1,18 @@
+$padding: 16px
+$mid: 1000px
+$side: calc((100vw - #{$mid}) * 0.5 - #{$padding})
+
 .root
-  display: flex
-  justify-content: center
+  display: grid
   width: 100%
   height: 100%
+  grid-template-columns: $side $mid $side
 
-.content
-  width: 1000px
-  margin: 0 16px 0 16px
+.left
+
+.mid
+  flex-grow: 2
+  width: $mid
+  margin: 0 $padding 0 $padding
+
+.right

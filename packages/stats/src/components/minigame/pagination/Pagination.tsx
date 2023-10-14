@@ -1,9 +1,12 @@
-import React, {useMemo} from 'react';
+import React, {useContext, useMemo} from 'react';
 import {CaretLeftOutlined, CaretRightOutlined} from '@ant-design/icons';
 import {Button} from 'antd';
-import {Link} from 'react-router-dom';
+import {createSearchParams, Link} from 'react-router-dom';
 import {useCurrentPage} from 'hooks/useCurrentPage';
-import style from "./pagination.module.sass"
+import style from './pagination.module.sass';
+import {minigameContext} from 'components/minigame/MinigameContextProvider';
+import {config} from 'config';
+import {useFilteredOptions} from 'components/minigame/options/useFilteredOptions';
 
 /**
  * Simple pagination component <br />
@@ -12,7 +15,11 @@ import style from "./pagination.module.sass"
  */
 export const Pagination: React.FunctionComponent = () =>
 {
+	const context = useContext(minigameContext);
 	const current = useCurrentPage();
+	const nextDisabled = Array.isArray(context.network?.result) && context.network?.result.length !== config.defaultLimit;
+	const filtered = useFilteredOptions();
+
 	const navigation = useMemo(() =>
 	{
 
@@ -24,7 +31,7 @@ export const Pagination: React.FunctionComponent = () =>
 					link: current.page === 2 ? './../' : `./../${current.page - 1}`,
 				},
 				next: {
-					disabled: false,
+					disabled: nextDisabled,
 					link: `./../${current.page + 1}`,
 				},
 			};
@@ -36,23 +43,25 @@ export const Pagination: React.FunctionComponent = () =>
 				link: '',
 			},
 			next: {
-				disabled: false,
+				disabled: nextDisabled,
 				link: `./${current.page + 1}`,
 			},
 		};
 
 	}, [current.page, current.topLevel]);
 
+	const search = `?${createSearchParams(filtered)}`;
+
 	return (
 		<div className={style.root}>
-			<Link to={navigation.prev.link}>
+			<Link to={{pathname: navigation.prev.link, search}}>
 				<Button
 					size={'large'}
 					icon={<CaretLeftOutlined />}
 					disabled={navigation.prev.disabled}
 				/>
 			</Link>
-			<Link to={navigation.next.link}>
+			<Link to={{pathname: navigation.next.link, search}}>
 				<Button
 					size={'large'}
 					icon={<CaretRightOutlined />}

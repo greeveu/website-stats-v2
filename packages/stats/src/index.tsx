@@ -18,23 +18,21 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-	    <ConfigProvider
-		    theme={{
-			    algorithm: theme.darkAlgorithm,
-			    token: {
-				    colorPrimary: '#00b96b',
-			    },
-		    }}
-	    >
-		    <ContextProvider>
-			    <Layout>
-				    <SearchOverlay/>
-				    <RootPage/>
-			    </Layout>
-		    </ContextProvider>
-	    </ConfigProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+	<BrowserRouter>
+		<ConfigProvider
+			theme={{
+				algorithm: theme.darkAlgorithm,
+				token: {
+					colorPrimary: '#00b96b',
+				},
+			}}
+		>
+			<ContextProvider>
+				<Layout>
+					<SearchOverlay/>
+					<RootPage/>
+				</Layout>
+			</ContextProvider>
+		</ConfigProvider>
+	</BrowserRouter>,
 );
