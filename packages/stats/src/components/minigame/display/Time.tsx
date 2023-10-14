@@ -6,6 +6,11 @@ interface TimeProps
 	ms: number;
 }
 
+/**
+ * Format and display time
+ * @param props
+ * @constructor
+ */
 export const Time: React.FunctionComponent<TimeProps> = (props) =>
 {
 	const ms = props.ms.toString().slice(-3).padStart(3, '0');

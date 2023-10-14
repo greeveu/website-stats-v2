@@ -1,15 +1,14 @@
 import React, {useContext} from 'react';
 import {minigameContext} from 'components/minigame/MinigameContextProvider';
 import {config} from 'config';
-import {Player} from 'components/player/Player';
-import {ContentSpacing} from 'components/layout/contentSpacing/ContentSpacing';
+import {Crown, Player} from 'components/player/Player';
 import style from './displayResult.module.sass';
 import {Divider, Table, Typography} from 'antd';
 import {observer} from 'mobx-react-lite';
 import {RenderMethod} from 'minigames';
-import {Options} from 'components/minigame/options/Options';
 import {Pagination} from 'components/minigame/pagination/Pagination';
 import {Time} from 'components/minigame/display/Time';
+import {Place} from 'components/minigame/display/Place';
 
 export const DisplayResult: React.FunctionComponent = observer(() =>
 	{
@@ -27,7 +26,7 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 				render: (value: any, record: any, index: number) =>
 				{
 					const place = config.defaultLimit * context.offset + index + 1;
-					return <div>{place}</div>;
+					return <Place place={place} />;
 				},
 				align: 'center',
 			}];
@@ -41,6 +40,29 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 					dataIndex: key,
 					render: (value: any, record: any, index: number) =>
 					{
+						const place = config.defaultLimit * context.offset + index + 1;
+						if (place === 1)
+						{
+							return <Player
+								name={value}
+								crown={Crown.Gold}
+							/>;
+						}
+						if (place === 2)
+						{
+							return <Player
+								name={value}
+								crown={Crown.Silver}
+							/>;
+						}
+						if (place === 3)
+						{
+							return <Player
+								name={value}
+								crown={Crown.Bronze}
+							/>;
+						}
+
 						return <Player name={value} />;
 					},
 				};
@@ -53,7 +75,7 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 					dataIndex: key,
 					render: (value: any, record: any, index: number) =>
 					{
-						return <Time ms={value} />
+						return <Time ms={value} />;
 					},
 				};
 			}
