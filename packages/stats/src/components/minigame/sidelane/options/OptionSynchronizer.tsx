@@ -33,16 +33,15 @@ export const OptionSynchronizer: React.FunctionComponent = observer(() =>
 			if (!param)
 			{
 				context.options[key] = value.default;
-				return;
+				continue;
 			}
 
 			const options = Object.keys(value.options);
 			if (!options.includes(param))
 			{
 				context.options[key] = value.default;
-				return;
+				continue;
 			}
-
 			context.options[key] = param;
 		}
 	}, [context, searchParams]);
@@ -53,7 +52,8 @@ export const OptionSynchronizer: React.FunctionComponent = observer(() =>
 	useEffect(() =>
 	{
 		// So we don't add a useless stack to the history
-		if(search === "" && searchParams.size === 0){
+		if (search === '' && searchParams.size === 0)
+		{
 			return;
 		}
 		navigate({pathname: './', search});
