@@ -2,11 +2,10 @@ import React, {useContext} from 'react';
 import {config} from 'config';
 import {Crown, Player} from 'components/player/Player';
 import style from './displayResult.module.sass';
-import {Divider, Table} from 'antd';
+import {Table} from 'antd';
 import {observer} from 'mobx-react-lite';
 import {RenderMethod} from 'minigames';
 import {Pagination} from 'components/minigame/pagination/Pagination';
-import {MinigameTitle} from 'components/minigame/title/MinigameTitle';
 import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
 import {Place} from 'components/minigame/table/display/Place';
 import {Time} from 'components/minigame/table/display/Time';
@@ -102,8 +101,6 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 
 		return (
 			<div className={style.root}>
-				<MinigameTitle />
-				<Divider />
 				<Table
 					columns={[...defaultColumns, ...dataColumns]}
 					dataSource={(context.network.data?.items || undefined) as any[]}

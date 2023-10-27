@@ -36,7 +36,7 @@ export const RootPage: React.FunctionComponent = () =>
 												path={`minigame/${item.link}/${minigame.link}/:page?`}
 												element={<MinigamePage
 													minigame={minigame}
-													group={null}
+													group={item}
 												/>}
 												key={item.link}
 											/>

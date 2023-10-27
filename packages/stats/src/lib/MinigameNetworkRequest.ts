@@ -26,6 +26,8 @@ export class MinigameNetworkRequest
 		this.context = props.context;
 		this.setNetwork(NetworkStatus.Pending);
 
+		//return;
+
 		(async () =>
 		{
 			try

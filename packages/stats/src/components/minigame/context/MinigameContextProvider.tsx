@@ -94,7 +94,6 @@ const minigame: SingleMinigame = {
 	link: 'lab',
 	title: 'KnockPvP Lab',
 	image: knockpvp_lab,
-	fields: [],
 	group: Group.Minigames,
 	api: {
 		type: ApiType.Normal,

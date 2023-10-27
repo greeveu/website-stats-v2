@@ -8,7 +8,6 @@ import loginstreak from 'media/minigames/loginstreak.jpg';
 import knockpvp_normal from 'media/minigames/knockpvp_normal.jpg';
 import knockpvp_ffa from 'media/minigames/knockpvp_ffa.jpg';
 import knockpvp_lab from 'media/minigames/knockpvp_lab.jpg';
-import knockpvp_wars from 'media/minigames/knockpvp_wars.jpg';
 
 // Fastbridge images
 import fastbridge_normal from 'media/minigames/fastbridge_normal.jpg';
@@ -79,6 +78,14 @@ export type Option = SelectOption
 export enum RenderMethod
 {
 	Raw,
+	/**
+	 * TODO Implement combined clan name + tag renderer (Like clan page)
+	 */
+	ClanName,
+	/**
+	 * TODO Implement
+	 */
+	ClanTag,
 	Player,
 	TimeS,
 	TimeMs
@@ -105,10 +112,6 @@ export interface BaseMinigame
 	 */
 	title: string,
 	image: string,
-	/**
-	 * TODO, remove fields
-	 */
-	fields?: string[],
 	link: string,
 	api: Api
 }
@@ -183,7 +186,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				image: fastbridge_islands,
 				api: {
 					type: ApiType.Normal,
-					endpoint: '/stats/fastbridge_islands/top',
+					endpoint: '/stats/fastbridge_islands/top/:map',
 					data: {
 						name: {
 							display: 'Player',
@@ -194,7 +197,20 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 							renderMethod: RenderMethod.TimeS,
 						},
 					},
-					options: undefined,
+					options: {
+						map: {
+							type: OptionType.Select,
+							display: 'Map',
+							default: 'CUBES',
+							options: {
+								CUBES: 'Cubes',
+								RAILS: 'Rails',
+								STREET: 'Street',
+								CORAL: 'Coral',
+								ATHEN: 'Athen',
+							},
+						},
+					},
 				},
 			},
 			{
@@ -289,9 +305,9 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 	},
 	{
 		type: Type.Gamegroup,
-		link: 'knockgames',
-		title: 'KnockGames',
-		subTitle: '4 Modes',
+		link: 'knockpvp',
+		title: 'KnockPVP',
+		subTitle: '3 Modes',
 		group: Group.Featured,
 		minigames: [
 			{
@@ -300,8 +316,25 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'KnockPvP',
 				subtitle: 'Normal',
 				image: knockpvp_normal,
-				fields: ['name', 'kills', 'deaths'],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/knockpvp/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						kills: {
+							display: 'Kills',
+							renderMethod: RenderMethod.Raw,
+						},
+						deaths: {
+							display: 'Deaths',
+							renderMethod: RenderMethod.Raw,
+						},
+					},
+					options: undefined,
+				},
 			},
 			{
 				type: Type.Minigame,
@@ -309,17 +342,25 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'KnockFFA',
 				subtitle: 'FFA',
 				image: knockpvp_ffa,
-				fields: ['name', 'kills', 'deaths'],
-				api: apiMock,
-			},
-			{
-				type: Type.Minigame,
-				link: 'wars',
-				title: 'KnockPVP Wars',
-				subtitle: 'Wars',
-				image: knockpvp_wars,
-				fields: ['name', 'kills', 'deaths'],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/knockffa/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						kills: {
+							display: 'Kills',
+							renderMethod: RenderMethod.Raw,
+						},
+						deaths: {
+							display: 'Deaths',
+							renderMethod: RenderMethod.Raw,
+						},
+					},
+					options: undefined,
+				},
 			},
 			{
 				type: Type.Minigame,
@@ -327,8 +368,25 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'KnockPvP Lab',
 				subtitle: 'LAB',
 				image: knockpvp_lab,
-				fields: [],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/knockpvplab/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						kills: {
+							display: 'Kills',
+							renderMethod: RenderMethod.Raw,
+						},
+						deaths: {
+							display: 'Deaths',
+							renderMethod: RenderMethod.Raw,
+						},
+					},
+					options: undefined,
+				},
 			}],
 	},
 	{
@@ -755,8 +813,24 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'Spleef',
 				subtitle: 'Normal',
 				image: spleef_normal,
-				fields: ['name', 'wins', 'loses'],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/spleef/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						wins: {
+							display: 'Wins',
+							renderMethod: RenderMethod.Raw,
+						},
+						loses: {
+							display: 'Loses',
+							renderMethod: RenderMethod.Raw,
+						},
+					},
+				},
 			},
 			{
 				type: Type.Minigame,
@@ -764,8 +838,24 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'Bow Spleef',
 				subtitle: 'Bow Spleef',
 				image: spleef_bow,
-				fields: ['name', 'wins', 'loses'],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/bowspleef/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						wins: {
+							display: 'Wins',
+							renderMethod: RenderMethod.Raw,
+						},
+						loses: {
+							display: 'Loses',
+							renderMethod: RenderMethod.Raw,
+						},
+					},
+				},
 			},
 		],
 	},
@@ -803,20 +893,43 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		},
 	},
 	{
+		/**
+		 * TODO type misc so we don't have minigame in the url etc.
+		 */
 		type: Type.Minigame,
 		link: 'clans',
 		title: 'Clans',
-		fields: ['name', 'tag', 'size', 'performance'],
 		image: clans,
 		group: Group.Misc,
-		api: apiMock,
+		api: {
+			type: ApiType.Normal,
+			endpoint: '/clan/top',
+			data: {
+				name: {
+					display: 'Name',
+					renderMethod: RenderMethod.ClanName,
+				},
+				tag: {
+					display: 'Tag',
+					renderMethod: RenderMethod.ClanTag,
+				},
+				size: {
+					display: 'Size',
+					renderMethod: RenderMethod.Raw,
+				},
+				playerperformance: {
+					display: 'Combined PP',
+					renderMethod: RenderMethod.Raw,
+				},
+			},
+		},
 	},
 	{
 		type: Type.Minigame,
 		link: 'performance',
 		title: 'Performance',
 		image: performance,
-		fields: ['name', 'playerperformance'],
+		//fields: ['name', 'playerperformance'],
 		group: Group.Misc,
 		api: apiMock,
 	},
@@ -825,7 +938,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		link: 'tokens',
 		title: 'Tokens',
 		image: tokens,
-		fields: ['name', 'tokens'],
+		//fields: ['name', 'tokens'],
 		group: Group.Misc,
 		api: apiMock,
 	},
@@ -834,7 +947,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		link: 'loginstreak',
 		title: 'Loginstreak',
 		image: loginstreak,
-		fields: ['name', 'currentstreak', 'maxstreak'],
+		//fields: ['name', 'currentstreak', 'maxstreak'],
 		group: Group.Misc,
 		api: apiMock,
 	},

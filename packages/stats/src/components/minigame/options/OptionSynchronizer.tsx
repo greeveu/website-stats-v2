@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
 import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
 import {useNavigate, useSearchParams} from 'react-router-dom';
-import {useSearch} from 'components/minigame/sidelane/options/useSearch';
+import {useSearch} from 'components/minigame/options/useSearch';
 
 /**
  * Synchronises all options between the browser and the context state

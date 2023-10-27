@@ -3,10 +3,15 @@ import {MinigameGroup, MultiMinigame, SingleMinigame} from 'minigames';
 import {PaginationSynchronizer} from 'components/minigame/pagination/PaginationSynchronizer';
 import {ContentSpacing} from 'components/layout/contentSpacing/ContentSpacing';
 import {NetworkBarrier} from 'components/minigame/context/NetworkBarrier';
-import {Options} from 'components/minigame/sidelane/options/Options';
-import {OptionSynchronizer} from 'components/minigame/sidelane/options/OptionSynchronizer';
 import {MinigameContextProvider} from 'components/minigame/context/MinigameContextProvider';
 import {DisplayResult} from 'components/minigame/table/DisplayResult';
+import {OptionSynchronizer} from 'components/minigame/options/OptionSynchronizer';
+import {Options} from 'components/minigame/options/Options';
+import style from "./minigamePage.module.sass"
+import {MinigameTitle} from 'components/minigame/title/MinigameTitle';
+import {Path} from 'components/minigame/table/path/Path';
+import {Divider} from 'antd';
+
 
 interface MinigamePageProps
 {
@@ -24,10 +29,19 @@ export const MinigamePage: React.FunctionComponent<MinigamePageProps> = (props) 
 			<OptionSynchronizer />
 			<PaginationSynchronizer />
 			<ContentSpacing>
-				<NetworkBarrier>
-					<DisplayResult />
-				</NetworkBarrier>
-				<Options />
+				<div className={style.content}>
+					<div>
+						<MinigameTitle />
+						<Path />
+						<Divider />
+					</div>
+					<div className={style.barrier}>
+						<NetworkBarrier>
+							<DisplayResult />
+						</NetworkBarrier>
+					</div>
+				</div>
+				<Options/>
 			</ContentSpacing>
 		</MinigameContextProvider>
 	);
