@@ -23,16 +23,39 @@ export const Footer: React.FunctionComponent = observer(() =>
 			<div>
 				<ContentSpacing>
 					<div className={style.content}>
-						<Typography.Text>
-							WIP
-						</Typography.Text>
-						<Typography.Text>
-							Impressum
-						</Typography.Text>
-						<Typography.Text>
-							Datenschutz
-						</Typography.Text>
+						<div>
+							<Typography.Title level={4}>
+								Contact
+							</Typography.Title>
+							<Typography.Text>
+								admin@greev.eu
+							</Typography.Text>
+							<Typography.Text>
+								ts.greev.eu
+							</Typography.Text>
+							<Typography.Text>
+								<a href={'https://greev.eu/discord'}>
+									Discord
+								</a>
+							</Typography.Text>
+						</div>
+						<div>
+							<Typography.Title level={4}>
+								Legal
+							</Typography.Title>
+							<Typography.Text>
+								<a href={'https://pluoi.com/imprint/'}>
+									Imprint
+								</a>
+							</Typography.Text>
+							<Typography.Text>
+								<a href={'https://pluoi.com/privacy/'}>
+									Privacy
+								</a>
+							</Typography.Text>
+						</div>
 					</div>
+
 				</ContentSpacing>
 			</div>
 		</div>

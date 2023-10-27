@@ -1,14 +1,15 @@
 import React, {useContext} from 'react';
-import {minigameContext} from 'components/minigame/MinigameContextProvider';
 import {config} from 'config';
 import {Crown, Player} from 'components/player/Player';
 import style from './displayResult.module.sass';
-import {Divider, Table, Typography} from 'antd';
+import {Divider, Table} from 'antd';
 import {observer} from 'mobx-react-lite';
 import {RenderMethod} from 'minigames';
 import {Pagination} from 'components/minigame/pagination/Pagination';
-import {Time} from 'components/minigame/display/Time';
-import {Place} from 'components/minigame/display/Place';
+import {MinigameTitle} from 'components/minigame/title/MinigameTitle';
+import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
+import {Place} from 'components/minigame/table/display/Place';
+import {Time} from 'components/minigame/table/display/Time';
 
 export const DisplayResult: React.FunctionComponent = observer(() =>
 	{
@@ -68,7 +69,7 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 				};
 			}
 
-			if (value.renderMethod === RenderMethod.Time)
+			if (value.renderMethod === RenderMethod.TimeMs)
 			{
 				return {
 					title: value.display,
@@ -76,6 +77,19 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 					render: (value: any, record: any, index: number) =>
 					{
 						return <Time ms={value} />;
+					},
+				};
+			}
+
+			if (value.renderMethod === RenderMethod.TimeS)
+			{
+				return {
+					title: value.display,
+					dataIndex: key,
+					render: (value: any, record: any, index: number) =>
+					{
+						const time = Number.parseFloat(value) * 1000;
+						return <Time ms={time} />;
 					},
 				};
 			}
@@ -88,13 +102,11 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 
 		return (
 			<div className={style.root}>
-				<Typography.Title>
-					{context.config.title}
-				</Typography.Title>
+				<MinigameTitle />
 				<Divider />
 				<Table
 					columns={[...defaultColumns, ...dataColumns]}
-					dataSource={context.network.result}
+					dataSource={(context.network.data?.items || undefined) as any[]}
 					pagination={false}
 				/>
 				<div className={style.pagination}>

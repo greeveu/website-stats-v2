@@ -1,10 +1,9 @@
 import React, {ReactNode, useContext} from 'react';
 import {observer} from 'mobx-react-lite';
-import {minigameContext} from 'components/minigame/MinigameContextProvider';
+import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
 import {NetworkingLoading} from 'components/networking/loading/NetworkingLoading';
 import {NetworkStatus} from 'lib/NetworkRequest';
 import {NetworkingError} from 'components/networking/error/NetworkingError';
-import {NetworkingNotFound} from 'components/networking/notFound/NetworkingNotFound';
 import {NetworkingNoData} from 'components/networking/noData/NetworkingNoData';
 
 interface NetworkBarrierProps
@@ -31,7 +30,7 @@ export const NetworkBarrier: React.FunctionComponent<NetworkBarrierProps> = obse
 		return <NetworkingLoading />;
 	}
 
-	if (context.network.result.length === 0)
+	if (context.network.data?.items.length === 0)
 	{
 		context.network.playEffect(NetworkStatus.NotFound)
 		return <NetworkingNoData />;

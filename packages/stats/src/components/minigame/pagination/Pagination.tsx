@@ -4,9 +4,8 @@ import {Button} from 'antd';
 import {Link} from 'react-router-dom';
 import {useCurrentPage} from 'hooks/useCurrentPage';
 import style from './pagination.module.sass';
-import {minigameContext} from 'components/minigame/MinigameContextProvider';
-import {config} from 'config';
-import {useSearch} from 'components/minigame/options/useSearch';
+import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
+import {useSearch} from 'components/minigame/sidelane/options/useSearch';
 
 /**
  * Simple pagination component <br />
@@ -17,7 +16,7 @@ export const Pagination: React.FunctionComponent = () =>
 {
 	const context = useContext(minigameContext);
 	const current = useCurrentPage();
-	const nextDisabled = Array.isArray(context.network?.result) && context.network?.result.length !== config.defaultLimit;
+	const nextDisabled = context.network?.data?.nextPage === false;
 	const search = useSearch();
 
 	const navigation = useMemo(() =>

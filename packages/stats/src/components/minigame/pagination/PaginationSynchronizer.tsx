@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from 'react';
-import {minigameContext} from 'components/minigame/MinigameContextProvider';
+import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
 import {useCurrentPage} from 'hooks/useCurrentPage';
 import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react-lite';
-import {useSearch} from 'components/minigame/options/useSearch';
+import {useSearch} from 'components/minigame/sidelane/options/useSearch';
 
 /**
  * Synchronizes pagination and options between browser and state

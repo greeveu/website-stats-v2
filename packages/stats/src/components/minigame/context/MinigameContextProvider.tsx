@@ -1,15 +1,17 @@
 import React, {ReactNode, useContext, useEffect, useState} from 'react';
-import {ApiType, Group, SingleMinigame, Type} from 'minigames';
+import {ApiType, Group, MinigameGroup, MultiMinigame, SingleMinigame, Type} from 'minigames';
 import knockpvp_lab from 'media/minigames/knockpvp_lab.jpg';
 import {Context, globalContext} from 'components/context/ContextProvider';
 import {makeAutoObservable, reaction} from 'mobx';
 import {NetworkRequest} from 'lib/NetworkRequest';
 import {config} from 'config';
 import {observer} from 'mobx-react-lite';
+import {MinigameNetworkRequest} from 'lib/MinigameNetworkRequest';
 
 interface MinigameContextProps
 {
-	minigame: SingleMinigame;
+	minigame: SingleMinigame | MultiMinigame;
+	group: MinigameGroup | null;
 	children: ReactNode;
 }
 
@@ -20,8 +22,9 @@ export class MinigameContext
 	 * @private
 	 */
 	public dummy: boolean;
-	public network: null | NetworkRequest<any> = null;
-	public readonly config: SingleMinigame;
+	public network: null | MinigameNetworkRequest = null;
+	public readonly config: SingleMinigame | MultiMinigame;
+	public readonly group: MinigameGroup | null;
 	private readonly context: Context;
 
 	public offset: number = 0;
@@ -29,10 +32,11 @@ export class MinigameContext
 
 	private debounce: NodeJS.Timeout | null = null;
 
-	constructor(props: { config: SingleMinigame, dummy: boolean, context: Context })
+	constructor(props: { config: SingleMinigame | MultiMinigame, group: MinigameGroup | null, dummy: boolean, context: Context })
 	{
 		makeAutoObservable(this);
 		this.config = props.config;
+		this.group = props.group;
 		this.dummy = props.dummy;
 		this.context = props.context;
 
@@ -75,15 +79,13 @@ export class MinigameContext
 			return;
 		}
 
-		let url = `${config.endpoint}${this.config.api.endpoint}?offset=${this.offset * config.defaultLimit}&amount=${config.defaultLimit}`;
+		let url = this.config.api.endpoint;
 		Object.entries(this.options).forEach(([key, value]) =>
 		{
 			url = url.replace(`:${key}`, value);
 		});
 
-		this.network = new NetworkRequest(url, undefined, {
-			context: this.context,
-		});
+		this.network = new MinigameNetworkRequest({url: url, context: this.context, offset: this.offset});
 	}
 }
 
@@ -101,7 +103,7 @@ const minigame: SingleMinigame = {
 	},
 };
 
-const defaultContext = new MinigameContext({config: minigame, dummy: true, context: {} as Context});
+const defaultContext = new MinigameContext({config: minigame, group: null, dummy: true, context: {} as Context});
 export const minigameContext = React.createContext<MinigameContext>(defaultContext);
 
 export const MinigameContextProvider: React.FunctionComponent<MinigameContextProps> = observer((props) =>
@@ -111,7 +113,7 @@ export const MinigameContextProvider: React.FunctionComponent<MinigameContextPro
 
 	useEffect(() =>
 	{
-		setContext(new MinigameContext({config: props.minigame, dummy: false, context: global}));
+		setContext(new MinigameContext({config: props.minigame, group: props.group, dummy: false, context: global}));
 	}, [props.minigame]);
 
 	if (context.dummy)

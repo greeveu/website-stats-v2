@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {minigameContext} from 'components/minigame/MinigameContextProvider';
+import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
 import {Form, Select} from 'antd';
 import {observer} from 'mobx-react-lite';
 import {Option, OptionType} from 'minigames';

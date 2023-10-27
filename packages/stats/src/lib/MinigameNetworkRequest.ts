@@ -1,41 +1,37 @@
 import {makeAutoObservable} from 'mobx';
 import {Context} from 'components/context/ContextProvider';
-
-export enum NetworkStatus
-{
-	Pending = 'PENDING',
-	Error = 'ERROR',
-	Success = 'SUCCESS',
-	NotFound = 'NOT_FOUND'
-}
+import {config} from 'config';
+import {NetworkStatus} from 'lib/NetworkRequest';
 
 interface Props
 {
-	context?: Context;
-	delay?: number;
+	url: string,
+	offset: number,
+	context: Context;
 }
 
-export class NetworkRequest<T>
+/**
+ * Reworked NetworkRequest tailored to minigame page
+ */
+export class MinigameNetworkRequest
 {
 	public network: NetworkStatus = NetworkStatus.Pending;
-	public result: T = null as unknown as T;
-	private readonly context: Context | null = null;
-	private readonly delay: number;
+	public data: null | { items: unknown[], nextPage: boolean } = null;
+	private readonly context: Context;
 
-	constructor(input: RequestInfo | URL, init?: RequestInit, props?: Props)
+	constructor(props: Props)
 	{
 		makeAutoObservable(this);
 
-		this.context = props?.context || null;
-		this.delay = props?.delay || 0;
+		this.context = props.context;
 		this.setNetwork(NetworkStatus.Pending);
 
 		(async () =>
 		{
 			try
 			{
-				const result = await fetch(input, init);
-				await this.awaitDelay();
+
+				const result = await fetch(`${config.endpoint}${props.url}?offset=${props.offset * config.defaultLimit}&amount=${config.defaultLimit + 1}`);
 
 				if (result.status === 500)
 				{
@@ -52,7 +48,11 @@ export class NetworkRequest<T>
 					return this.setNetwork(NetworkStatus.Error);
 				}
 
-				this.result = await result.json();
+				const res: unknown[] = await result.json();
+				this.data = {
+					nextPage: res.length === config.defaultLimit + 1,
+					items: res.splice(0, config.defaultLimit),
+				};
 				this.setNetwork(NetworkStatus.Success);
 			}
 			catch (e: any)
@@ -66,30 +66,15 @@ export class NetworkRequest<T>
 
 	public playEffect(status: NetworkStatus): void
 	{
-		if (this.context)
-		{
-			this.context.effect.network = status;
-		}
+		/**
+		 * TODO add override logic
+		 */
+		this.context.effect.network = status;
 	}
 
 	private setNetwork(status: NetworkStatus): void
 	{
 		this.playEffect(status);
 		this.network = status;
-	}
-
-	private async awaitDelay()
-	{
-		if (this.delay <= 0)
-		{
-			return;
-		}
-		return new Promise((resolve) =>
-		{
-			setTimeout(() =>
-			{
-				resolve(null);
-			}, this.delay);
-		});
 	}
 }

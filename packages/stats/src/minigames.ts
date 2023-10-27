@@ -80,7 +80,8 @@ export enum RenderMethod
 {
 	Raw,
 	Player,
-	Time,
+	TimeS,
+	TimeMs
 }
 
 export interface Data
@@ -97,7 +98,7 @@ export interface Api
 	options?: Record<string, Option>
 }
 
-interface BaseMinigame
+export interface BaseMinigame
 {
 	/**
 	 * Page title & card
@@ -158,8 +159,21 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'Fastbridge',
 				subtitle: 'Normal',
 				image: fastbridge_normal,
-				fields: ['name', 'time'],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/fastbridge/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						time: {
+							display: 'Time',
+							renderMethod: RenderMethod.TimeS,
+						},
+					},
+					options: undefined,
+				},
 			},
 			{
 				type: Type.Minigame,
@@ -167,8 +181,21 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'Fastbridge Islands',
 				subtitle: 'Islands',
 				image: fastbridge_islands,
-				fields: ['name', 'time'],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/fastbridge_islands/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						time: {
+							display: 'Time',
+							renderMethod: RenderMethod.TimeS,
+						},
+					},
+					options: undefined,
+				},
 			},
 			{
 				type: Type.Minigame,
@@ -176,8 +203,21 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'Fastbridge Inclined',
 				subtitle: 'Inclined',
 				image: fastbridge_inclined,
-				fields: ['name', 'time'],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/fastbridge_inclined/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						time: {
+							display: 'Time',
+							renderMethod: RenderMethod.TimeS,
+						},
+					},
+					options: undefined,
+				},
 			},
 			{
 				type: Type.Minigame,
@@ -185,8 +225,21 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'Fastbridge Staircase',
 				subtitle: 'Staircase',
 				image: fastbridge_staircase,
-				fields: ['name', 'time'],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/fastbridge_staircase/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						time: {
+							display: 'Time',
+							renderMethod: RenderMethod.TimeS,
+						},
+					},
+					options: undefined,
+				},
 			},
 			{
 				type: Type.Minigame,
@@ -194,8 +247,21 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'Fastbridge Short',
 				subtitle: 'Short',
 				image: fastbridge_short,
-				fields: ['name', 'time'],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/fastbridge_short/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						time: {
+							display: 'Time',
+							renderMethod: RenderMethod.TimeS,
+						},
+					},
+					options: undefined,
+				},
 			},
 			{
 				type: Type.Minigame,
@@ -203,8 +269,21 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				title: 'Fastbridge Inclined Short',
 				subtitle: 'Inclined Short',
 				image: fastbridge_inclinedShort,
-				fields: ['name', 'time'],
-				api: apiMock,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/fastbridge_inclined_short/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						time: {
+							display: 'Time',
+							renderMethod: RenderMethod.TimeS,
+						},
+					},
+					options: undefined,
+				},
 			},
 		],
 	},
@@ -259,7 +338,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		image: minesweeper,
 		group: Group.Featured,
 		api: {
-			endpoint: '/stats/minesweeper/top/:type/:generator',
+			endpoint: '/stats/minesweeper/top/:difficulty/:generator',
 			type: ApiType.Normal,
 			data: {
 				name: {
@@ -268,11 +347,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				},
 				time: {
 					display: 'Time',
-					renderMethod: RenderMethod.Time,
+					renderMethod: RenderMethod.TimeMs,
 				},
 			},
 			options: {
-				'type': {
+				'difficulty': {
 					display: 'Difficulty',
 					type: OptionType.Select,
 					options: {

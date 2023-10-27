@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import {minigameContext} from 'components/minigame/MinigameContextProvider';
+import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
 import {createSearchParams} from 'react-router-dom';
 
 /**

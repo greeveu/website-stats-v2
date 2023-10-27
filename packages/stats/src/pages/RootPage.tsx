@@ -25,13 +25,35 @@ export const RootPage: React.FunctionComponent = () =>
 
 					if (item.type === Type.Gamegroup)
 					{
-						return null;
+						return (
+							<React.Fragment>
+								{
+									item.minigames.map((minigame) =>
+									{
+
+										return (
+											<Route
+												path={`minigame/${item.link}/${minigame.link}/:page?`}
+												element={<MinigamePage
+													minigame={minigame}
+													group={null}
+												/>}
+												key={item.link}
+											/>
+										);
+									})
+								}
+							</React.Fragment>
+						);
 					}
 
 					return (
 						<Route
 							path={`minigame/${item.link}/:page?`}
-							element={<MinigamePage minigame={item} />}
+							element={<MinigamePage
+								minigame={item}
+								group={null}
+							/>}
 							key={item.link}
 						/>
 					);
@@ -44,7 +66,3 @@ export const RootPage: React.FunctionComponent = () =>
 		</Routes>
 	);
 };
-
-/**
- * Minigame/*
- */
