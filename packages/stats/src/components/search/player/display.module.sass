@@ -5,18 +5,20 @@
   justify-content: center
 
 .img
-  width: 180px
-  height: 180px
   transition: background-image .3s ease
   background-size: contain
+  background-repeat: no-repeat
+  background-position: center center
+  width: clamp(180px, 33vw, 100px)
+  height: clamp(180px, 33vw, 100px)
 
 .preload
   opacity: 0
-  width: 0px
-  height: 0px
+  width: 0
+  height: 0
 
 .title
-  margin: 8px 0px 0px 0px !important
+  margin: 8px 0 0 0 !important
   @extend .fixCursor
 
 .disabled
