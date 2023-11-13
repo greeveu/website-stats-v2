@@ -370,7 +370,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				image: knockpvp_lab,
 				api: {
 					type: ApiType.Normal,
-					endpoint: '/stats/knockpvplab/top',
+					endpoint: '/stats/knockpvplab/top/:experiment',
 					data: {
 						name: {
 							display: 'Player',
@@ -385,7 +385,22 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 							renderMethod: RenderMethod.Raw,
 						},
 					},
-					options: undefined,
+					options: {
+						experiment: {
+							display: 'Experiment',
+							type: OptionType.Select,
+							default: 'KNOCKFFA',
+							options: {
+								DOUBLEJUMP: 'Double Jump',
+								FIREBALL: 'Fireballs',
+								GRAPPLING_HOOK: 'Grappling Hook',
+								SWITCHBALLS: 'Switcher',
+								SUMO: 'Sumo',
+								KNOCKSTICK: 'Knock Stick',
+								KNOCKFFA: 'Knock FFA',
+							},
+						},
+					},
 				},
 			}],
 	},

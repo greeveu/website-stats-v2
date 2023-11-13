@@ -20,10 +20,6 @@ export const Path: React.FunctionComponent = observer(() =>
 					{
 						href: '/',
 						title: 'Home',
-						onClick: () =>
-						{
-							navigate('/');
-						},
 					},
 					{
 						title: 'Minigame',

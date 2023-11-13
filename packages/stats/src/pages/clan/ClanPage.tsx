@@ -29,7 +29,7 @@ const columns = [
 	{
 		title: 'Player',
 		dataIndex: 'name',
-		render: (player: string, record: any) =>
+		render: (player: string) =>
 		{
 			return <div className={style.player}>{player}</div>;
 		},
@@ -54,7 +54,7 @@ const columns = [
 	},
 ];
 
-export const ClanPage: React.FunctionComponent = observer((props) =>
+export const ClanPage: React.FunctionComponent = observer(() =>
 {
 	const params = useParams<{ clan: string }>();
 	const [clanRequest, setClanRequest] = useState<NetworkRequest<Clan> | null>(null);
@@ -96,43 +96,49 @@ export const ClanPage: React.FunctionComponent = observer((props) =>
 
 	return (
 		<ContentSpacing>
-			<Breadcrumb className={style.breadcrump}>
-				<Breadcrumb.Item>
-					<Link to={'/'}>
-						Stats
-					</Link>
-				</Breadcrumb.Item>
-				<Breadcrumb.Item>Clan</Breadcrumb.Item>
-				<Breadcrumb.Item>{params.clan}</Breadcrumb.Item>
-			</Breadcrumb>
-			<div className={style.heading}>
-				<Typography.Title level={1}>{clan.name} ({clan.tag})</Typography.Title>
-				<Divider />
-				<div
-					className={style.info}
-				>
-					<Typography.Title level={5}>Members</Typography.Title>
-					<Input
-						disabled={true}
-						value={clan.size}
-					/>
-
-					<Typography.Title level={5}>Average player performance</Typography.Title>
-					<Input
-						disabled={true}
-						value={clan.playerperformance}
-					/>
-
-				</div>
-				<div className={style.subheading}>
-					<Typography.Title level={2}>Members</Typography.Title>
+			<React.Fragment>
+				<div>
+					<Typography.Title
+						level={1}
+						className={style.heading}
+					>{clan.name} ({clan.tag})</Typography.Title>
+					<Breadcrumb>
+						<Breadcrumb.Item>
+							<Link to={'/'}>
+								Home
+							</Link>
+						</Breadcrumb.Item>
+						<Breadcrumb.Item>Clan</Breadcrumb.Item>
+						<Breadcrumb.Item>{params.clan}</Breadcrumb.Item>
+					</Breadcrumb>
 					<Divider />
-					<Table
-						columns={columns}
-						dataSource={memberRequest.result}
-					/>
+					<div
+						className={style.info}
+					>
+						<Typography.Title level={5}>Members</Typography.Title>
+						<Input
+							disabled={true}
+							value={clan.size}
+						/>
+
+						<Typography.Title level={5}>Average player performance</Typography.Title>
+						<Input
+							disabled={true}
+							value={clan.playerperformance}
+						/>
+
+					</div>
+					<div className={style.subheading}>
+						<Typography.Title level={2}>Members</Typography.Title>
+						<Divider />
+						<Table
+							columns={columns}
+							dataSource={memberRequest.result}
+							pagination={{showSizeChanger: false}}
+						/>
+					</div>
 				</div>
-			</div>
+			</React.Fragment>
 		</ContentSpacing>
 	);
 });

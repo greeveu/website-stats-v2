@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {useCurrentPage} from 'hooks/useCurrentPage';
 import style from './pagination.module.sass';
 import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
-import {useSearch} from 'components/minigame/sidelane/options/useSearch';
+import {useSearch} from 'components/minigame/options/useSearch';
 
 /**
  * Simple pagination component <br />
