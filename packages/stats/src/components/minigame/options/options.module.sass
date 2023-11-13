@@ -1,10 +1,19 @@
-.root
-  margin-top: 146px
-  display: flex
-  flex-direction: row
-  justify-content: end
-  padding-right: 32px
+@use "src/shared" as shared
 
 .form
   width: 300px
+
+.desktop
+  display: flex
+  flex-direction: row
+  padding-right: 32px
+  margin-top: 146px
+  justify-content: end
+
+  @media (min-width: shared.$breakpoint-0) and (max-width: shared.$breakpoint-1300)
+    display: none
+
+.mobile
+  @media (min-width: shared.$breakpoint-1300)
+    display: none
 

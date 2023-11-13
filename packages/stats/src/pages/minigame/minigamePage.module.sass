@@ -1,3 +1,5 @@
+@use "./src/shared" as shared
+
 .content
   height: 100%
   display: flex
@@ -5,3 +7,11 @@
 
 .barrier
   flex-grow: 1
+
+.optionsDesktop
+  @media (min-width: shared.$breakpoint-0) and (max-width: shared.$breakpoint-1300)
+    display: none
+
+.optionsMobile
+  @media (min-width: shared.$breakpoint-1300)
+    display: none

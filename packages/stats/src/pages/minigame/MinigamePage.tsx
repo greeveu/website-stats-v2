@@ -33,6 +33,9 @@ export const MinigamePage: React.FunctionComponent<MinigamePageProps> = (props) 
 					<div>
 						<MinigameTitle />
 						<Path />
+						<div className={style.optionsMobile}>
+							<Options />
+						</div>
 						<Divider />
 					</div>
 					<div className={style.barrier}>
@@ -41,7 +44,9 @@ export const MinigamePage: React.FunctionComponent<MinigamePageProps> = (props) 
 						</NetworkBarrier>
 					</div>
 				</div>
-				<Options/>
+				<div className={style.optionsDesktop}>
+					<Options/>
+				</div>
 			</ContentSpacing>
 		</MinigameContextProvider>
 	);

@@ -32,7 +32,7 @@ export interface Context
 	};
 	effect: {
 		network: NetworkStatus
-	}
+	};
 }
 
 const initialContext: Context = makeAutoObservable({
@@ -42,8 +42,8 @@ const initialContext: Context = makeAutoObservable({
 		searchFor: null,
 	},
 	effect: {
-		network: NetworkStatus.Success
-	}
+		network: NetworkStatus.Success,
+	},
 });
 
 export const globalContext = createContext<Context>(initialContext);
