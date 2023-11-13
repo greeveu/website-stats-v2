@@ -1,3 +1,5 @@
+@use "./src/shared" as shared
+
 .root
   background-color: rgb(20, 20, 20)
   box-shadow: rgba(0, 0, 0, 0.65) 0 2px 8px 0
@@ -7,11 +9,11 @@
 
 .container
   display: flex
-  justify-content: space-between
   align-items: center
   gap: 16px
   padding: 16px 0 16px 0
   text-decoration: none
+  justify-content: space-between
 
 .branding
   display: flex
@@ -23,3 +25,16 @@
   width: 32px
   height: 32px
 
+.title
+  margin: 0 !important
+
+  @media (min-width: shared.$breakpoint-0) and (max-width: shared.$breakpoint-760)
+    display: none
+
+.searchBar
+  @media (min-width: shared.$breakpoint-0) and (max-width: shared.$breakpoint-760)
+    display: none
+
+.searchIcon
+  @media (min-width: shared.$breakpoint-760)
+    display: none

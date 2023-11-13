@@ -5,6 +5,7 @@ import logo from 'media/logo.png';
 import {Link, useLocation} from 'react-router-dom';
 import {SearchBar} from 'components/search/SearchBar';
 import {ContentSpacing} from 'components/layout/contentSpacing/ContentSpacing';
+import {SearchIcon} from 'components/search/SearchIcon';
 
 export const Header: React.FunctionComponent = () =>
 {
@@ -28,14 +29,19 @@ export const Header: React.FunctionComponent = () =>
 							/>
 							<Typography.Title
 								level={4}
-								style={{margin: '0px'}}
+								className={style.title}
 							>
 								Greev.eu Stats
 							</Typography.Title>
 
 						</div>
 					</Link>
-					<SearchBar />
+					<div className={style.searchBar}>
+						<SearchBar />
+					</div>
+					<div className={style.searchIcon}>
+						<SearchIcon />
+					</div>
 				</div>
 			</ContentSpacing>
 		</div>
