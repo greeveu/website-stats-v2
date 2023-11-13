@@ -39,7 +39,7 @@ export const Footer: React.FunctionComponent = observer(() =>
 								</a>
 							</Typography.Text>
 						</div>
-						<div>
+						<div className={style.secondColumn}>
 							<Typography.Title level={4}>
 								Legal
 							</Typography.Title>

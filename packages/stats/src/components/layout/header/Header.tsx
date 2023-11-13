@@ -33,7 +33,12 @@ export const Header: React.FunctionComponent = () =>
 							>
 								Greev.eu Stats
 							</Typography.Title>
-
+							<Typography.Title
+								level={4}
+								className={style.shortTitle}
+							>
+								Stats
+							</Typography.Title>
 						</div>
 					</Link>
 					<div className={style.searchBar}>
