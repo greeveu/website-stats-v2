@@ -131,11 +131,14 @@ export const ClanPage: React.FunctionComponent = observer(() =>
 					<div className={style.subheading}>
 						<Typography.Title level={2}>Members</Typography.Title>
 						<Divider />
-						<Table
-							columns={columns}
-							dataSource={memberRequest.result}
-							pagination={{showSizeChanger: false}}
-						/>
+						<div className={style.tableWrapper}>
+							<Table
+								className={style.table}
+								columns={columns}
+								dataSource={memberRequest.result}
+								pagination={{showSizeChanger: false}}
+							/>
+						</div>
 					</div>
 				</div>
 			</React.Fragment>
