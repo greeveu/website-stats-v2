@@ -73,7 +73,7 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 				return {
 					title: value.display,
 					dataIndex: key,
-					render: (value: any, record: any, index: number) =>
+					render: (value: any) =>
 					{
 						return <Time ms={value} />;
 					},
@@ -85,7 +85,7 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 				return {
 					title: value.display,
 					dataIndex: key,
-					render: (value: any, record: any, index: number) =>
+					render: (value: any) =>
 					{
 						const time = Number.parseFloat(value) * 1000;
 						return <Time ms={time} />;
@@ -101,11 +101,14 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 
 		return (
 			<div className={style.root}>
-				<Table
-					columns={[...defaultColumns, ...dataColumns]}
-					dataSource={(context.network.data?.items || undefined) as any[]}
-					pagination={false}
-				/>
+				<div className={style.tableWrapper}>
+					<Table
+						columns={[...defaultColumns, ...dataColumns]}
+						dataSource={(context.network.data?.items || undefined) as any[]}
+						pagination={false}
+						className={style.table}
+					/>
+				</div>
 				<div className={style.pagination}>
 					<Pagination />
 				</div>

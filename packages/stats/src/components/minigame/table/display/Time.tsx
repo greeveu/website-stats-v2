@@ -1,5 +1,6 @@
 import React from 'react';
 import {Typography} from 'antd';
+import style from './time.module.sass';
 
 interface TimeProps
 {
@@ -18,13 +19,15 @@ export const Time: React.FunctionComponent<TimeProps> = (props) =>
 	const minutes = Math.floor(props.ms / 1000 / 60 % 60).toString().padStart(2, '0');
 	const hours = Math.floor(props.ms / 1000 / 60 / 60 % 60).toString().padStart(2, '0');
 
-	return <div>
-		<Typography.Text type={hours === '00' ? 'secondary' : undefined}>{hours}</Typography.Text>
-		<Typography.Text type={'secondary'}>:</Typography.Text>
-		<Typography.Text type={minutes === '00' ? 'secondary' : undefined}>{minutes}</Typography.Text>
-		<Typography.Text type={'secondary'}>:</Typography.Text>
-		<Typography.Text type={seconds === '00' ? 'secondary' : undefined}>{seconds}</Typography.Text>
-		<Typography.Text type={'secondary'}>.</Typography.Text>
-		<Typography.Text type={ms === '000' ? 'secondary' : undefined}>{ms}</Typography.Text>
-	</div>;
+	return (
+		<div className={style.root}>
+			<Typography.Text type={hours === '00' ? 'secondary' : undefined}>{hours}</Typography.Text>
+			<Typography.Text type={'secondary'}>:</Typography.Text>
+			<Typography.Text type={minutes === '00' ? 'secondary' : undefined}>{minutes}</Typography.Text>
+			<Typography.Text type={'secondary'}>:</Typography.Text>
+			<Typography.Text type={seconds === '00' ? 'secondary' : undefined}>{seconds}</Typography.Text>
+			<Typography.Text type={'secondary'}>.</Typography.Text>
+			<Typography.Text type={ms === '000' ? 'secondary' : undefined}>{ms}</Typography.Text>
+		</div>
+	);
 };
