@@ -1,8 +1,20 @@
+@use "./src/shared" as shared
+
 .minigame
-  width: calc(50% - 8px)
+
+  @media (min-width: shared.$breakpoint-0) and (max-width: shared.$breakpoint-760)
+    width: 100%
+
+  @media (min-width: shared.$breakpoint-760)
+    width: calc(50% - 8px)
 
 .oddMinigame
-  width: calc(50%)
+
+  @media (min-width: shared.$breakpoint-0) and (max-width: shared.$breakpoint-760)
+    width: 100%
+
+  @media (min-width: shared.$breakpoint-760)
+    width: 50%
 
 .container
   width: 100%
