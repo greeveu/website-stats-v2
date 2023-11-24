@@ -31,7 +31,7 @@ const columns = [
 		dataIndex: 'name',
 		render: (player: string) =>
 		{
-			return <div className={style.player}>{player}</div>;
+			return <div className={style.player}><Player name={player} /></div>;
 		},
 	},
 	{
