@@ -8,10 +8,13 @@ import { configure } from "mobx"
 import {RootPage} from 'pages/RootPage';
 import {Layout} from 'components/layout/Layout';
 import {SearchOverlay} from 'components/search/overlay/SearchOverlay';
+import {clearCachedImages} from 'lib/clearCachedImages';
 
 configure({
 	enforceActions: "never",
 })
+
+clearCachedImages()
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
