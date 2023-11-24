@@ -5,6 +5,7 @@ import {ContentSpacing} from 'components/layout/contentSpacing/ContentSpacing';
 import {NetworkStatus} from 'lib/NetworkRequest';
 import {globalContext} from 'components/context/ContextProvider';
 import {observer} from 'mobx-react-lite';
+import {PreloadImages} from 'components/layout/preloadImages/PreloadImages';
 
 const effect: Record<NetworkStatus, string> = {
 	[NetworkStatus.Success]: style.success,
@@ -58,6 +59,7 @@ export const Footer: React.FunctionComponent = observer(() =>
 
 				</ContentSpacing>
 			</div>
+			<PreloadImages />
 		</div>
 	);
 });
