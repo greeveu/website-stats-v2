@@ -78,14 +78,7 @@ export type Option = SelectOption
 export enum RenderMethod
 {
 	Raw,
-	/**
-	 * TODO Implement combined clan name + tag renderer (Like clan page)
-	 */
-	ClanName,
-	/**
-	 * TODO Implement
-	 */
-	ClanTag,
+	Clan,
 	Player,
 	TimeS,
 	TimeMs
@@ -922,11 +915,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Name',
-					renderMethod: RenderMethod.ClanName,
-				},
-				tag: {
-					display: 'Tag',
-					renderMethod: RenderMethod.ClanTag,
+					renderMethod: RenderMethod.Clan,
 				},
 				size: {
 					display: 'Size',

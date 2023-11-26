@@ -1,4 +1,17 @@
+@use "./src/components/clan/clan.module"
+
+.partyText
+  @extend .party
+
 .heading
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  align-items: center
+  justify-content: start
+  gap: 1.4em
+
+.headingComponents
   margin-bottom: 4px !important
 
 .info

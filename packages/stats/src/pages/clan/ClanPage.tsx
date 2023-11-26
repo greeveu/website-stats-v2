@@ -10,6 +10,7 @@ import {NetworkingNotFound} from 'components/networking/notFound/NetworkingNotFo
 import style from 'pages/clan/clanPage.module.sass';
 import {ContentSpacing} from 'components/layout/contentSpacing/ContentSpacing';
 import {Player} from 'components/player/Player';
+import {MinecraftText} from 'components/text/MinecraftText';
 
 interface Clan
 {
@@ -41,15 +42,23 @@ const columns = [
 		{
 			if (rank === 1)
 			{
-				return (<Tag
-					color={'#03a05e'}
-					className={style.tag}
-				>Leader</Tag>);
+				return (
+					<Tag
+						color={'#03a05e'}
+						className={style.tag}
+					>
+						Leader
+					</Tag>
+				);
 			}
-			return (<Tag
-				color={'rgba(255, 255, 255, 0.04)'}
-				className={style.tag}
-			>Member</Tag>);
+			return (
+				<Tag
+					color={'rgba(255, 255, 255, 0.04)'}
+					className={style.tag}
+				>
+					Member
+				</Tag>
+			);
 		},
 	},
 ];
@@ -94,14 +103,37 @@ export const ClanPage: React.FunctionComponent = observer(() =>
 		return <NetworkingNotFound />;
 	}
 
+	const tag = (() =>
+	{
+		if (clan.name === 'Einhörner')
+		{
+			return <span className={style.partyText}> <MinecraftText text={`§l* ^o^`} /> </span>;
+		}
+		return <MinecraftText text={`§l§7* §r§e ${clan.tag}`} />;
+	})();
+
 	return (
 		<ContentSpacing>
 			<React.Fragment>
 				<div>
-					<Typography.Title
-						level={1}
-						className={style.heading}
-					>{clan.name} ({clan.tag})</Typography.Title>
+					<div className={style.heading}>
+						<Typography.Title
+							level={1}
+							className={style.headingComponents}
+						>
+							{clan.name}
+						</Typography.Title>
+
+						<div>
+							<Typography.Title
+								level={2}
+								className={style.headingComponents}
+							>
+								{tag}
+							</Typography.Title>
+						</div>
+					</div>
+
 					<Breadcrumb>
 						<Breadcrumb.Item>
 							<Link to={'/'}>

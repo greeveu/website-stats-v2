@@ -19,6 +19,7 @@ export const PreloadImages: React.FunctionComponent = observer(() =>
 						return <img
 							src={item.image}
 							alt={alt}
+							key={item.image}
 						/>;
 					}
 					return (<>
@@ -28,6 +29,7 @@ export const PreloadImages: React.FunctionComponent = observer(() =>
 								return <img
 									src={minigame.image}
 									alt={alt}
+									key={minigame.image}
 								/>;
 							})
 						}

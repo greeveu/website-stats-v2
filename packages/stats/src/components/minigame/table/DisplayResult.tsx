@@ -9,6 +9,7 @@ import {Pagination} from 'components/minigame/pagination/Pagination';
 import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
 import {Place} from 'components/minigame/table/display/Place';
 import {Time} from 'components/minigame/table/display/Time';
+import {Clan} from 'components/clan/Clan';
 
 export const DisplayResult: React.FunctionComponent = observer(() =>
 	{
@@ -64,6 +65,21 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 						}
 
 						return <Player name={value} />;
+					},
+				};
+			}
+
+			if (value.renderMethod === RenderMethod.Clan)
+			{
+				return {
+					title: value.display,
+					dataIndex: key,
+					render: (value: any, row: { name: string, tag: string }) =>
+					{
+						return <Clan
+							name={row.name}
+							tag={`§l§7* §r§e${row.tag}`}
+						/>;
 					},
 				};
 			}
