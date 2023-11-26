@@ -107,7 +107,7 @@ export const ClanPage: React.FunctionComponent = observer(() =>
 	{
 		if (clan.name === 'Einhörner')
 		{
-			return <span className={style.partyText}> <MinecraftText text={`§l* ^o^`} /> </span>;
+			return <span className={style.party}> <MinecraftText text={`§l* ^o^`} /> </span>;
 		}
 		return <MinecraftText text={`§l§7* §r§e ${clan.tag}`} />;
 	})();

@@ -12,19 +12,6 @@ interface ClanProps
 
 export const Clan: React.FunctionComponent<ClanProps> = (props) =>
 {
-
-	if (props.name === 'Einhörner')
-	{
-		return (
-			<Link to={`/clan/${props.name}`}>
-				<div className={style.root}>
-					<Typography.Text>{props.name}</Typography.Text>
-					<Typography.Text><MinecraftText text={props.tag} /></Typography.Text>
-				</div>
-			</Link>
-		);
-	}
-
 	return (
 		<Link to={`/clan/${props.name}`}>
 			<div className={style.root}>
