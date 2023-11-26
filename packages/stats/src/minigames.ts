@@ -112,13 +112,6 @@ export interface BaseMinigame
 	api: Api
 }
 
-const apiMock: Api = {
-	type: ApiType.Normal,
-	data: {},
-	endpoint: '',
-	options: undefined,
-};
-
 export interface SingleMinigame extends BaseMinigame
 {
 	type: Type.Minigame
@@ -942,7 +935,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			endpoint: '/stats/performance/top',
 			data: {
 				name: {
-					display: 'Name',
+					display: 'Player',
 					renderMethod: RenderMethod.Player,
 				},
 				playerperformance: {
@@ -963,7 +956,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			endpoint: '/stats/tokens/top',
 			data: {
 				name: {
-					display: 'Name',
+					display: 'Player',
 					renderMethod: RenderMethod.Player,
 				},
 				tokens: {
@@ -978,8 +971,24 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		link: 'loginstreak',
 		title: 'Loginstreak',
 		image: loginstreak,
-		//fields: ['name', 'currentstreak', 'maxstreak'],
 		group: Group.Misc,
-		api: apiMock,
+		api: {
+			type: ApiType.Normal,
+			endpoint: '/stats/loginstreak/top',
+			data: {
+				name: {
+					display: 'Player',
+					renderMethod: RenderMethod.Player,
+				},
+				currentstreak: {
+					display: 'Current streak',
+					renderMethod: RenderMethod.Raw,
+				},
+				maxstreak: {
+					display: 'Highest streak',
+					renderMethod: RenderMethod.Raw,
+				},
+			},
+		},
 	},
 ];
