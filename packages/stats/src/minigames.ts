@@ -37,6 +37,9 @@ import tntrun from 'media/minigames/tntrun.jpg';
 import cores from 'media/minigames/cores.jpg';
 import uhc from 'media/minigames/uhc.jpg';
 
+/**
+ * Discriminate between a single minigame and a game group containing single minigames
+ */
 export enum Type
 {
 	Minigame,
@@ -933,9 +936,21 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		link: 'performance',
 		title: 'Performance',
 		image: performance,
-		//fields: ['name', 'playerperformance'],
 		group: Group.Misc,
-		api: apiMock,
+		api: {
+			type: ApiType.Normal,
+			endpoint: '/stats/performance/top',
+			data: {
+				name: {
+					display: 'Name',
+					renderMethod: RenderMethod.Player,
+				},
+				playerperformance: {
+					display: 'Performance',
+					renderMethod: RenderMethod.Raw,
+				},
+			},
+		},
 	},
 	{
 		type: Type.Minigame,
