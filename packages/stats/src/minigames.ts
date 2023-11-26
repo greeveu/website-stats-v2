@@ -957,9 +957,21 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		link: 'tokens',
 		title: 'Tokens',
 		image: tokens,
-		//fields: ['name', 'tokens'],
 		group: Group.Misc,
-		api: apiMock,
+		api: {
+			type: ApiType.Normal,
+			endpoint: '/stats/tokens/top',
+			data: {
+				name: {
+					display: 'Name',
+					renderMethod: RenderMethod.Player,
+				},
+				tokens: {
+					display: 'Amount',
+					renderMethod: RenderMethod.Raw,
+				},
+			},
+		},
 	},
 	{
 		type: Type.Minigame,
