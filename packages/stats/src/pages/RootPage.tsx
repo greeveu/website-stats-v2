@@ -9,7 +9,7 @@ import { MinigamePage } from 'pages/minigame/MinigamePage';
 export const RootPage: React.FunctionComponent = () => {
 	return (
 		<Routes>
-			<Route path={'/player/:uuid'} element={<PlayerPage />} />
+			<Route path={'/player/:identifier'} element={<PlayerPage />} />
 			<Route path={'/clan/:clan'} element={<ClanPage />} />
 			{minigames.map((item) => {
 				if (item.type === Type.Gamegroup) {

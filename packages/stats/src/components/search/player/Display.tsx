@@ -77,7 +77,7 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) => {
 			: style.disabled;
 	const linkTo = useMemo(() => {
 		if (props.state.status === PlayerSearchStatus.Success) {
-			return `/player/${props.state.data.uuid}`;
+			return `/player/${props.state.data.name}`;
 		}
 		return '/';
 	}, [props.state]);
