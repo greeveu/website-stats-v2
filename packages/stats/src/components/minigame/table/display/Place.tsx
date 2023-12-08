@@ -1,16 +1,10 @@
 import React from 'react';
-import {Typography} from 'antd';
+import { Typography } from 'antd';
 
-interface PlaceProps
-{
+interface PlaceProps {
 	place: number;
 }
 
-export const Place: React.FunctionComponent<PlaceProps> = (props) =>
-{
-	return (
-		<Typography.Text>
-			{props.place}
-		</Typography.Text>
-	);
+export const Place: React.FunctionComponent<PlaceProps> = (props) => {
+	return <Typography.Text>{props.place}</Typography.Text>;
 };

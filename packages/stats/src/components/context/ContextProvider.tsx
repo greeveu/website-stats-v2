@@ -1,37 +1,34 @@
-import React, {createContext, ReactNode, useState} from 'react';
-import {makeAutoObservable} from 'mobx';
-import {NetworkStatus} from 'lib/NetworkRequest';
+import React, { createContext, ReactNode, useState } from 'react';
+import { makeAutoObservable } from 'mobx';
+import { NetworkStatus } from 'lib/NetworkRequest';
 
-interface SearchContextProps
-{
+interface SearchContextProps {
 	children?: ReactNode;
 }
 
-enum NetworkEffect
-{
+enum NetworkEffect {
 	Default,
 	Loading,
-	Error
+	Error,
 }
 
-export interface Context
-{
+export interface Context {
 	search: {
 		/**
 		 * Open state of the searchbar modal
 		 */
-		open: boolean,
+		open: boolean;
 		/**
 		 * Current text that is entered on a search, not debounced
 		 */
-		text: string,
+		text: string;
 		/**
 		 * Current text to search, debounced and usable for networking requesting
 		 */
-		searchFor: null | string,
+		searchFor: null | string;
 	};
 	effect: {
-		network: NetworkStatus
+		network: NetworkStatus;
 	};
 }
 
@@ -48,8 +45,9 @@ const initialContext: Context = makeAutoObservable({
 
 export const globalContext = createContext<Context>(initialContext);
 
-export const ContextProvider: React.FunctionComponent<SearchContextProps> = (props) =>
-{
+export const ContextProvider: React.FunctionComponent<SearchContextProps> = (
+	props,
+) => {
 	const [state] = useState<Context>(initialContext);
 
 	return (

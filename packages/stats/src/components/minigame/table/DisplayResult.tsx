@@ -1,67 +1,52 @@
-import React, {useContext} from 'react';
-import {config} from 'config';
-import {Crown, Player} from 'components/player/Player';
+import React, { useContext } from 'react';
+import { config } from 'config';
+import { Crown, Player } from 'components/player/Player';
 import style from './displayResult.module.sass';
-import {Table} from 'antd';
-import {observer} from 'mobx-react-lite';
-import {RenderMethod} from 'minigames';
-import {Pagination} from 'components/minigame/pagination/Pagination';
-import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
-import {Place} from 'components/minigame/table/display/Place';
-import {Time} from 'components/minigame/table/display/Time';
-import {Clan} from 'components/clan/Clan';
+import { Table } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { RenderMethod } from 'minigames';
+import { Pagination } from 'components/minigame/pagination/Pagination';
+import { minigameContext } from 'components/minigame/context/MinigameContextProvider';
+import { Place } from 'components/minigame/table/display/Place';
+import { Time } from 'components/minigame/table/display/Time';
+import { Clan } from 'components/clan/Clan';
 
-export const DisplayResult: React.FunctionComponent = observer(() =>
-	{
-		const context = useContext(minigameContext);
+export const DisplayResult: React.FunctionComponent = observer(() => {
+	const context = useContext(minigameContext);
 
-		if (!context.network)
+	if (!context.network) {
+		return null;
+	}
+
+	const defaultColumns = [
 		{
-			return null;
-		}
+			title: 'Place',
+			dataIndex: 'name',
+			render: (value: any, record: any, index: number) => {
+				const place = config.defaultLimit * context.offset + index + 1;
+				return <Place place={place} />;
+			},
+			align: 'center',
+		},
+	];
 
-		const defaultColumns = [
-			{
-				title: 'Place',
-				dataIndex: 'name',
-				render: (value: any, record: any, index: number) =>
-				{
-					const place = config.defaultLimit * context.offset + index + 1;
-					return <Place place={place} />;
-				},
-				align: 'center',
-			}];
-
-		const dataColumns = Object.entries(context.config.api!.data).map(([key, value]) =>
-		{
-			if (value.renderMethod === RenderMethod.Player)
-			{
+	const dataColumns = Object.entries(context.config.api!.data).map(
+		([key, value]) => {
+			if (value.renderMethod === RenderMethod.Player) {
 				return {
 					title: value.display,
 					dataIndex: key,
-					render: (value: any, record: any, index: number) =>
-					{
-						const place = config.defaultLimit * context.offset + index + 1;
-						if (place === 1)
-						{
-							return <Player
-								name={value}
-								crown={Crown.Gold}
-							/>;
+					render: (value: any, record: any, index: number) => {
+						const place =
+							config.defaultLimit * context.offset + index + 1;
+						if (place === 1) {
+							return <Player name={value} crown={Crown.Gold} />;
 						}
-						if (place === 2)
-						{
-							return <Player
-								name={value}
-								crown={Crown.Silver}
-							/>;
+						if (place === 2) {
+							return <Player name={value} crown={Crown.Silver} />;
 						}
-						if (place === 3)
-						{
-							return <Player
-								name={value}
-								crown={Crown.Bronze}
-							/>;
+						if (place === 3) {
+							return <Player name={value} crown={Crown.Bronze} />;
 						}
 
 						return <Player name={value} />;
@@ -69,40 +54,39 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 				};
 			}
 
-			if (value.renderMethod === RenderMethod.Clan)
-			{
+			if (value.renderMethod === RenderMethod.Clan) {
 				return {
 					title: value.display,
 					dataIndex: key,
-					render: (value: any, row: { name: string, tag: string }) =>
-					{
-						return <Clan
-							name={row.name}
-							tag={`§l§7* §r§e${row.tag}`}
-						/>;
+					render: (
+						value: any,
+						row: { name: string; tag: string },
+					) => {
+						return (
+							<Clan
+								name={row.name}
+								tag={`§l§7* §r§e${row.tag}`}
+							/>
+						);
 					},
 				};
 			}
 
-			if (value.renderMethod === RenderMethod.TimeMs)
-			{
+			if (value.renderMethod === RenderMethod.TimeMs) {
 				return {
 					title: value.display,
 					dataIndex: key,
-					render: (value: any) =>
-					{
+					render: (value: any) => {
 						return <Time ms={value} />;
 					},
 				};
 			}
 
-			if (value.renderMethod === RenderMethod.TimeS)
-			{
+			if (value.renderMethod === RenderMethod.TimeS) {
 				return {
 					title: value.display,
 					dataIndex: key,
-					render: (value: any) =>
-					{
+					render: (value: any) => {
 						const time = Number.parseFloat(value) * 1000;
 						return <Time ms={time} />;
 					},
@@ -113,22 +97,24 @@ export const DisplayResult: React.FunctionComponent = observer(() =>
 				title: value.display,
 				dataIndex: key,
 			};
-		});
+		},
+	);
 
-		return (
-			<div className={style.root}>
-				<div className={style.tableWrapper}>
-					<Table
-						columns={[...defaultColumns, ...dataColumns]}
-						dataSource={(context.network.data?.items || undefined) as any[]}
-						pagination={false}
-						className={style.table}
-					/>
-				</div>
-				<div className={style.pagination}>
-					<Pagination />
-				</div>
+	return (
+		<div className={style.root}>
+			<div className={style.tableWrapper}>
+				<Table
+					columns={[...defaultColumns, ...dataColumns]}
+					dataSource={
+						(context.network.data?.items || undefined) as any[]
+					}
+					pagination={false}
+					className={style.table}
+				/>
 			</div>
-		);
-	},
-);
+			<div className={style.pagination}>
+				<Pagination />
+			</div>
+		</div>
+	);
+});

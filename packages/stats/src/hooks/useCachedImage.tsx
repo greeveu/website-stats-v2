@@ -1,34 +1,27 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
-interface Item
-{
-	ttl: Date,
-	cached: string
+interface Item {
+	ttl: Date;
+	cached: string;
 }
 
 /**
  * Fetches and caches images in local storage, returns an empty image during loading
  * @param url
  */
-export const useCachedImage = (url: string): string =>
-{
+export const useCachedImage = (url: string): string => {
 	const [state, setState] = useState<string | null>(null);
 	const id = `cached-${url}`;
 
-	useEffect(() =>
-	{
+	useEffect(() => {
 		setState(null);
 
-		try
-		{
-			(async () =>
-			{
+		try {
+			(async () => {
 				const stored = localStorage.getItem(id);
-				if (stored)
-				{
+				if (stored) {
 					const item = JSON.parse(stored);
-					if (new Date(item.ttl) > new Date)
-					{
+					if (new Date(item.ttl) > new Date()) {
 						setState(item.cached);
 						return;
 					}
@@ -40,26 +33,25 @@ export const useCachedImage = (url: string): string =>
 
 				const reader = new FileReader();
 				reader.readAsDataURL(blob);
-				reader.onload = function ()
-				{
+				reader.onload = function () {
 					const item: Item = {
-						ttl: new Date(new Date().getTime() + 12 * 60 * 60 * 1000),
+						ttl: new Date(
+							new Date().getTime() + 12 * 60 * 60 * 1000,
+						),
 						cached: this.result as string,
 					};
 					localStorage.setItem(id, JSON.stringify(item));
 					setState(this.result as string);
 				};
-
 			})();
-
-		}
-		catch (e)
-		{
+		} catch (e) {
 			console.error(e);
 			setState(url);
 		}
-
 	}, [url]);
 
-	return state || 'data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22/%3E';
+	return (
+		state ||
+		'data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22/%3E'
+	);
 };

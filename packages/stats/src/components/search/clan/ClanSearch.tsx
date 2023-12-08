@@ -1,51 +1,46 @@
-import React, {useContext, useEffect, useMemo, useState} from 'react';
-import {observer} from 'mobx-react-lite';
-import {globalContext} from 'components/context/ContextProvider';
-import {NetworkRequest, NetworkStatus} from 'lib/NetworkRequest';
-import {config} from 'config';
-import {Typography} from 'antd';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { globalContext } from 'components/context/ContextProvider';
+import { NetworkRequest, NetworkStatus } from 'lib/NetworkRequest';
+import { config } from 'config';
+import { Typography } from 'antd';
 import style from './clanSearch.module.sass';
 import logo from '../../../media/logo.png';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-interface Clan
-{
-	name: string,
-	tag: string,
-	size: number,
-	playerperformance: number,
-	id: number
+interface Clan {
+	name: string;
+	tag: string;
+	size: number;
+	playerperformance: number;
+	id: number;
 }
 
-interface State
-{
-	title: string,
-	text: string,
-	disabled: boolean,
+interface State {
+	title: string;
+	text: string;
+	disabled: boolean;
 
-	link: string,
+	link: string;
 }
 
-export const ClanSearch: React.FunctionComponent = observer(() =>
-{
+export const ClanSearch: React.FunctionComponent = observer(() => {
 	const context = useContext(globalContext);
 	const [request, setRequest] = useState<NetworkRequest<Clan> | null>(null);
 	// Clan has a max length of 16 chars
-	const clanName = context.search.searchFor ? context.search.searchFor.substring(0, 16) : null;
+	const clanName = context.search.searchFor
+		? context.search.searchFor.substring(0, 16)
+		: null;
 
-	useEffect(() =>
-	{
-		if (clanName === null)
-		{
+	useEffect(() => {
+		if (clanName === null) {
 			setRequest(null);
 			return;
 		}
 		setRequest(new NetworkRequest(config.endpoint + `/clan/${clanName}`));
 	}, [clanName]);
 
-	const state: State = useMemo(() =>
-	{
-
+	const state: State = useMemo(() => {
 		const doesNotExists = {
 			title: `${clanName} Clan`,
 			text: 'Does not exist',
@@ -53,8 +48,7 @@ export const ClanSearch: React.FunctionComponent = observer(() =>
 			disabled: true,
 		};
 
-		if (request === null)
-		{
+		if (request === null) {
 			return {
 				title: 'Clan search',
 				text: 'Awaiting input...',
@@ -63,8 +57,7 @@ export const ClanSearch: React.FunctionComponent = observer(() =>
 			};
 		}
 
-		switch (request.network)
-		{
+		switch (request.network) {
 			case NetworkStatus.Pending:
 				return {
 					title: 'Clan search',
@@ -86,8 +79,7 @@ export const ClanSearch: React.FunctionComponent = observer(() =>
 		const clan = request.result;
 		const exists = clan.id + clan.size > 0;
 
-		if (!exists)
-		{
+		if (!exists) {
 			return doesNotExists;
 		}
 
@@ -97,19 +89,20 @@ export const ClanSearch: React.FunctionComponent = observer(() =>
 			link: clan.name,
 			disabled: false,
 		};
-
 	}, [clanName, request?.network]);
 
 	const toggleLink = state.disabled ? style.disabled : style.enabled;
-	const linkTo = useMemo(() =>
-	{
+	const linkTo = useMemo(() => {
 		return `/clan/${state.link}`;
 	}, [state.link]);
 
 	return (
 		<div className={style.root}>
 			<Link to={linkTo} className={toggleLink}>
-				<div className={style.img} style={{backgroundImage: `url("${logo}")`}}/>
+				<div
+					className={style.img}
+					style={{ backgroundImage: `url("${logo}")` }}
+				/>
 			</Link>
 			<Link to={linkTo} className={toggleLink}>
 				<Typography.Title
@@ -121,13 +114,10 @@ export const ClanSearch: React.FunctionComponent = observer(() =>
 				</Typography.Title>
 			</Link>
 			<Link to={linkTo} className={toggleLink}>
-				<Typography.Text
-					disabled={state.disabled}
-				>
+				<Typography.Text disabled={state.disabled}>
 					{state.text}
 				</Typography.Text>
 			</Link>
-
 		</div>
 	);
 });

@@ -1,14 +1,13 @@
-import {Typography} from 'antd';
+import { Typography } from 'antd';
 import React from 'react';
 import style from './header.module.sass';
 import logo from 'media/logo.png';
-import {Link, useLocation} from 'react-router-dom';
-import {SearchBar} from 'components/search/SearchBar';
-import {ContentSpacing} from 'components/layout/contentSpacing/ContentSpacing';
-import {SearchIcon} from 'components/search/SearchIcon';
+import { Link, useLocation } from 'react-router-dom';
+import { SearchBar } from 'components/search/SearchBar';
+import { ContentSpacing } from 'components/layout/contentSpacing/ContentSpacing';
+import { SearchIcon } from 'components/search/SearchIcon';
 
-export const Header: React.FunctionComponent = () =>
-{
+export const Header: React.FunctionComponent = () => {
 	const location = useLocation();
 	const reload = location.pathname === '' || location.pathname === '/';
 
@@ -16,21 +15,14 @@ export const Header: React.FunctionComponent = () =>
 		<div className={style.root}>
 			<ContentSpacing>
 				<div className={style.container}>
-					<Link
-						to={'/'}
-						reloadDocument={reload}
-					>
+					<Link to={'/'} reloadDocument={reload}>
 						<div className={style.branding}>
-
 							<img
 								className={style.logo}
 								src={logo}
 								alt={'Greev.eu'}
 							/>
-							<Typography.Title
-								level={4}
-								className={style.title}
-							>
+							<Typography.Title level={4} className={style.title}>
 								Greev.eu Stats
 							</Typography.Title>
 							<Typography.Title

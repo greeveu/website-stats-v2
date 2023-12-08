@@ -1,14 +1,12 @@
-import React, {useContext} from 'react';
-import {observer} from 'mobx-react-lite';
-import {SearchOutlined} from '@ant-design/icons';
-import {Button} from 'antd';
-import {globalContext} from 'components/context/ContextProvider';
+import React, { useContext } from 'react';
+import { observer } from 'mobx-react-lite';
+import { SearchOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { globalContext } from 'components/context/ContextProvider';
 
-export const SearchIcon: React.FunctionComponent = observer(() =>
-{
+export const SearchIcon: React.FunctionComponent = observer(() => {
 	const context = useContext(globalContext);
-	const openSearchBar = () =>
-	{
+	const openSearchBar = () => {
 		context.search.open = true;
 	};
 
@@ -16,7 +14,7 @@ export const SearchIcon: React.FunctionComponent = observer(() =>
 		<Button
 			icon={<SearchOutlined />}
 			onClick={openSearchBar}
-			style={{color: 'rgba(255, 255, 255, 0.45)'}}
+			style={{ color: 'rgba(255, 255, 255, 0.45)' }}
 		/>
 	);
 });

@@ -1,11 +1,10 @@
-import React, {useContext} from 'react';
-import {observer} from 'mobx-react-lite';
-import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
-import {Typography} from 'antd';
-import style from "./minigameTitle.module.sass"
+import React, { useContext } from 'react';
+import { observer } from 'mobx-react-lite';
+import { minigameContext } from 'components/minigame/context/MinigameContextProvider';
+import { Typography } from 'antd';
+import style from './minigameTitle.module.sass';
 
-export const MinigameTitle: React.FunctionComponent = observer((props) =>
-{
+export const MinigameTitle: React.FunctionComponent = observer((props) => {
 	const context = useContext(minigameContext);
 
 	return (

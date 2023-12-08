@@ -1,16 +1,15 @@
-import React, {useContext, useEffect} from 'react';
-import {observer} from 'mobx-react-lite';
-import {minigameContext} from 'components/minigame/context/MinigameContextProvider';
-import {useNavigate, useSearchParams} from 'react-router-dom';
-import {useSearch} from 'components/minigame/options/useSearch';
+import React, { useContext, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { minigameContext } from 'components/minigame/context/MinigameContextProvider';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearch } from 'components/minigame/options/useSearch';
 
 /**
  * Synchronises all options between the browser and the context state
  * @param props
  * @constructor
  */
-export const OptionSynchronizer: React.FunctionComponent = observer(() =>
-{
+export const OptionSynchronizer: React.FunctionComponent = observer(() => {
 	const context = useContext(minigameContext);
 	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
@@ -19,26 +18,20 @@ export const OptionSynchronizer: React.FunctionComponent = observer(() =>
 	/**
 	 * Update the state
 	 */
-	useEffect(() =>
-	{
-		if (!context.config.api.options)
-		{
+	useEffect(() => {
+		if (!context.config.api.options) {
 			return;
 		}
 
-		for (const [key, value] of Object.entries(context.config.api.options))
-		{
-
+		for (const [key, value] of Object.entries(context.config.api.options)) {
 			const param = searchParams.get(key);
-			if (!param)
-			{
+			if (!param) {
 				context.options[key] = value.default;
 				continue;
 			}
 
 			const options = Object.keys(value.options);
-			if (!options.includes(param))
-			{
+			if (!options.includes(param)) {
 				context.options[key] = value.default;
 				continue;
 			}
@@ -49,14 +42,12 @@ export const OptionSynchronizer: React.FunctionComponent = observer(() =>
 	/**
 	 * Update the browser
 	 */
-	useEffect(() =>
-	{
+	useEffect(() => {
 		// So we don't add a useless stack to the history
-		if (search === '' && searchParams.size === 0)
-		{
+		if (search === '' && searchParams.size === 0) {
 			return;
 		}
-		navigate({pathname: './', search});
+		navigate({ pathname: './', search });
 	}, [JSON.stringify(context.options)]);
 
 	return null;

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Group, SingleMinigame } from '../../../minigames';
 
 interface SingleGameCardProps {
-  minigame: SingleMinigame;
+	minigame: SingleMinigame;
 }
 
 /**
@@ -15,30 +15,32 @@ interface SingleGameCardProps {
  * @constructor
  */
 export const SingleGameCard: React.FunctionComponent<SingleGameCardProps> = (
-  props,
+	props,
 ) => {
-  const link = useMemo(() => {
-    if (props.minigame.group === Group.Misc) {
-      return `/misc/${props.minigame.link}/`;
-    }
+	const link = useMemo(() => {
+		if (props.minigame.group === Group.Misc) {
+			return `/misc/${props.minigame.link}/`;
+		}
 
-    return `/minigame/${props.minigame.link}/`;
-  }, [props.minigame.link, props.minigame.group]);
+		return `/minigame/${props.minigame.link}/`;
+	}, [props.minigame.link, props.minigame.group]);
 
-  return (
-    <Link to={link}>
-      <div className={style.root}>
-        <div
-          className={style.background}
-          style={{ backgroundImage: `url("${props.minigame.image}")` }}
-        />
-        <div className={sharedStyle.blur}>
-          <div className={sharedStyle.darken} />
-          <Typography.Title className={sharedStyle.title}>
-            {props.minigame.title}
-          </Typography.Title>
-        </div>
-      </div>
-    </Link>
-  );
+	return (
+		<Link to={link}>
+			<div className={style.root}>
+				<div
+					className={style.background}
+					style={{
+						backgroundImage: `url("${props.minigame.image}")`,
+					}}
+				/>
+				<div className={sharedStyle.blur}>
+					<div className={sharedStyle.darken} />
+					<Typography.Title className={sharedStyle.title}>
+						{props.minigame.title}
+					</Typography.Title>
+				</div>
+			</div>
+		</Link>
+	);
 };

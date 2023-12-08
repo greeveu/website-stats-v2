@@ -1,50 +1,42 @@
-import React, {ChangeEvent, useContext, useEffect, useRef} from 'react';
-import {Input, InputRef, Modal} from 'antd';
-import {observer} from 'mobx-react-lite';
-import {globalContext} from 'components/context/ContextProvider';
+import React, { ChangeEvent, useContext, useEffect, useRef } from 'react';
+import { Input, InputRef, Modal } from 'antd';
+import { observer } from 'mobx-react-lite';
+import { globalContext } from 'components/context/ContextProvider';
 import style from './searchOverlay.module.sass';
-import {PlayerSearch} from 'components/search/player/PlayerSearch';
-import {ClanSearch} from 'components/search/clan/ClanSearch';
-import {useLocation} from 'react-router-dom';
-import {MinigameSearch} from 'components/search/minigame/MinigameSearch';
+import { PlayerSearch } from 'components/search/player/PlayerSearch';
+import { ClanSearch } from 'components/search/clan/ClanSearch';
+import { useLocation } from 'react-router-dom';
+import { MinigameSearch } from 'components/search/minigame/MinigameSearch';
 
 /**
  * Portal to middle for the opening animation!
  */
-export const SearchOverlay: React.FunctionComponent = observer(() =>
-{
+export const SearchOverlay: React.FunctionComponent = observer(() => {
 	const location = useLocation();
 	const ref = useRef<null | InputRef>(null);
 	const context = useContext(globalContext);
 
-	const closeSearchBar = () =>
-	{
+	const closeSearchBar = () => {
 		context.search.open = false;
 		context.search.text = '';
 	};
 
-	const onChange = (event: ChangeEvent<HTMLInputElement>) =>
-	{
+	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 		context.search.text = event.target.value;
 	};
 
 	/**
 	 * Properly focus search on open
 	 */
-	useEffect(() =>
-	{
-		if (!context.search.open)
-		{
+	useEffect(() => {
+		if (!context.search.open) {
 			return;
 		}
-		if (!ref.current)
-		{
+		if (!ref.current) {
 			return;
 		}
-		window.setTimeout(() =>
-		{
-			if (!ref.current)
-			{
+		window.setTimeout(() => {
+			if (!ref.current) {
 				return;
 			}
 			ref.current.focus();
@@ -54,12 +46,9 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 	/**
 	 * Debounce user input and search for it
 	 */
-	useEffect(() =>
-	{
-		const debounce = setTimeout(() =>
-		{
-			if (context.search.text === '')
-			{
+	useEffect(() => {
+		const debounce = setTimeout(() => {
+			if (context.search.text === '') {
 				context.search.searchFor = null;
 				return;
 			}
@@ -73,8 +62,7 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 	/**
 	 * Close the search overlay after navigation
 	 */
-	useEffect(() =>
-	{
+	useEffect(() => {
 		context.search.open = false;
 	}, [location.pathname]);
 
@@ -105,7 +93,7 @@ export const SearchOverlay: React.FunctionComponent = observer(() =>
 					</div>
 				</div>
 				<div className={style.minigames}>
-					<MinigameSearch/>
+					<MinigameSearch />
 				</div>
 			</div>
 		</Modal>

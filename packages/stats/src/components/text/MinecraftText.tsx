@@ -1,8 +1,7 @@
 import React from 'react';
 import style from './minecraftText.module.sass';
 
-interface MinecraftTextProps
-{
+interface MinecraftTextProps {
 	text: string;
 }
 
@@ -39,15 +38,14 @@ const styles: Record<string, string> = {
  * @param props
  * @constructor
  */
-export const MinecraftText: React.FunctionComponent<MinecraftTextProps> = (props) =>
-{
-
+export const MinecraftText: React.FunctionComponent<MinecraftTextProps> = (
+	props,
+) => {
 	const result = Array.from(props.text.matchAll(/§./g));
 
 	console.log(!result[0]);
 
-	if (!result[0])
-	{
+	if (!result[0]) {
 		return <span className={style.root}>{props.text}</span>;
 	}
 
@@ -56,8 +54,7 @@ export const MinecraftText: React.FunctionComponent<MinecraftTextProps> = (props
 	const start = props.text.slice(0, index);
 	const end = props.text.slice(index + 2);
 
-	if (styles[key])
-	{
+	if (styles[key]) {
 		return (
 			<span className={style.root}>
 				{start}
@@ -70,7 +67,8 @@ export const MinecraftText: React.FunctionComponent<MinecraftTextProps> = (props
 
 	return (
 		<span className={style.root}>
-			{start}<MinecraftText text={end} />
+			{start}
+			<MinecraftText text={end} />
 		</span>
 	);
 };

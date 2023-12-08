@@ -1,35 +1,24 @@
 /**
  * Remove old items out of localstorage
  */
-export const clearCachedImages = () =>
-{
-	try
-	{
-		Object.entries(localStorage).forEach(([key, value]) =>
-		{
-			try
-			{
+export const clearCachedImages = () => {
+	try {
+		Object.entries(localStorage).forEach(([key, value]) => {
+			try {
 				const item = JSON.parse(value);
-				if (!item.ttl)
-				{
+				if (!item.ttl) {
 					return;
 				}
 
-				if (new Date(item.ttl) < new Date())
-				{
+				if (new Date(item.ttl) < new Date()) {
 					localStorage.removeItem(key);
 				}
-
-			}
-			catch (e)
-			{
+			} catch (e) {
 				console.log('LocalStorage: removing', key);
 				localStorage.removeItem(key);
 			}
 		});
-	}
-	catch (e)
-	{
+	} catch (e) {
 		console.error(e);
 	}
 };

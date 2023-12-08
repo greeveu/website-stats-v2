@@ -1,11 +1,13 @@
-import {Typography} from 'antd';
-import React, {useMemo} from 'react';
+import { Typography } from 'antd';
+import React, { useMemo } from 'react';
 import style from './display.module.sass';
-import {Link} from 'react-router-dom';
-import {PlayerSearchState, PlayerSearchStatus} from 'components/search/player/PlayerSearch';
+import { Link } from 'react-router-dom';
+import {
+	PlayerSearchState,
+	PlayerSearchStatus,
+} from 'components/search/player/PlayerSearch';
 
-interface PlayerDisplayProps
-{
+interface PlayerDisplayProps {
 	state: PlayerSearchState;
 }
 
@@ -14,18 +16,12 @@ interface PlayerDisplayProps
  * @param props
  * @constructor
  */
-export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
-{
-	const state = (() =>
-	{
-		switch (props.state.status)
-		{
+export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) => {
+	const state = (() => {
+		switch (props.state.status) {
 			case PlayerSearchStatus.Success:
-
-				const joined = (() =>
-				{
-					if (props.state.data.firstOnline === 0)
-					{
+				const joined = (() => {
+					if (props.state.data.firstOnline === 0) {
 						return 'Never joined';
 					}
 					const date = new Date();
@@ -75,48 +71,45 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) =>
 		}
 	})();
 
-	const toggleLink = props.state.status === PlayerSearchStatus.Success ? style.enabled : style.disabled;
-	const linkTo = useMemo(() =>
-	{
-		if (props.state.status === PlayerSearchStatus.Success)
-		{
+	const toggleLink =
+		props.state.status === PlayerSearchStatus.Success
+			? style.enabled
+			: style.disabled;
+	const linkTo = useMemo(() => {
+		if (props.state.status === PlayerSearchStatus.Success) {
 			return `/player/${props.state.data.uuid}`;
 		}
-		return "/";
+		return '/';
 	}, [props.state]);
 
 	return (
 		<div className={style.root}>
-
-			<Link
-				to={linkTo}
-				className={toggleLink}
-			>
+			<Link to={linkTo} className={toggleLink}>
 				<div
-					style={{backgroundImage: `url("https://minotar.net/bust/${state.skin}")`}}
+					style={{
+						backgroundImage: `url("https://minotar.net/bust/${state.skin}")`,
+					}}
 					className={style.img}
 				/>
 			</Link>
 
-			<Link
-				to={linkTo}
-				className={toggleLink}
-			>
+			<Link to={linkTo} className={toggleLink}>
 				<Typography.Title
 					level={4}
 					disabled={state.nameDisabled}
 					className={style.title}
-				>{state.name}</Typography.Title>
+				>
+					{state.name}
+				</Typography.Title>
 			</Link>
 
-			<Link
-				to={linkTo}
-				className={toggleLink}
-			>
+			<Link to={linkTo} className={toggleLink}>
 				<Typography.Text
 					disabled={state.joinedDisabled}
 					className={style.fixCursor}
-				>{state.joined}</Typography.Text>
+				>
+					{state.joined}
+				</Typography.Text>
 			</Link>
 
 			<div>
