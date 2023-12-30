@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { PlayerPage } from 'pages/player/PlayerPage';
 import { ClanPage } from 'pages/clan/ClanPage';
 import { HomePage } from 'pages/home/HomePage';
-import { Group, minigames, Type } from 'minigames';
+import { Group, minigames, Type } from 'resources/minigames';
 import { MinigamePage } from 'pages/minigame/MinigamePage';
 
 export const RootPage: React.FunctionComponent = () => {

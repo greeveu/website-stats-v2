@@ -6,12 +6,12 @@ import {
 	MultiMinigame,
 	SingleMinigame,
 	Type,
-} from 'minigames';
+} from 'resources/minigames';
 import knockpvp_lab from 'media/minigames/knockpvp_lab.jpg';
 import { Context, globalContext } from 'components/context/ContextProvider';
 import { makeAutoObservable, reaction } from 'mobx';
 import { NetworkRequest } from 'lib/NetworkRequest';
-import { config } from 'config';
+import { config } from 'resources/config';
 import { observer } from 'mobx-react-lite';
 import { MinigameNetworkRequest } from 'lib/MinigameNetworkRequest';
 

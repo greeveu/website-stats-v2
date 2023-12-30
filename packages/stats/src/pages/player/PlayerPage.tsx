@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { NetworkRequest, NetworkStatus } from '../../lib/NetworkRequest';
 import { observer } from 'mobx-react-lite';
 import { toJS } from 'mobx';
-import { config } from '../../config';
+import { config } from '../../resources/config';
 import { NetworkingLoading } from '../../components/networking/loading/NetworkingLoading';
 import { NetworkingError } from '../../components/networking/error/NetworkingError';
 import { NetworkingNotFound } from '../../components/networking/notFound/NetworkingNotFound';
@@ -12,6 +12,8 @@ import { Divider } from 'antd';
 import style from './playerPage.module.sass';
 import { Title } from './title/Title';
 import { StatsResponse } from './playerPage.types';
+import { Misc } from './misc/Misc';
+import { Minigames } from './minigames/Minigames';
 
 interface UuidResponse {
 	uuid: string;
@@ -75,36 +77,50 @@ export const PlayerPage: React.FunctionComponent = observer(() => {
 		setStatsRequest(
 			new NetworkRequest(`${config.endpoint}/player/stats/${uuid}`),
 		);
-	}, [params.identifier, uuidRequest?.network]);
+	}, [params.identifier, uuidRequest, uuidRequest?.network]);
 
 	console.log('stats', toJS(statsRequest?.result));
+	console.log('stats', toJS(statsRequest));
+	console.log('uuid', toJS(uuidRequest));
 
-	if (!statsRequest) {
-		return null;
+	if (uuidRequest && uuidRequest.network === NetworkStatus.NotFound) {
+		return <NetworkingNotFound />;
 	}
 
-	if (statsRequest.network === NetworkStatus.Pending) {
+	if (uuidRequest && uuidRequest.network === NetworkStatus.Error) {
+		return <NetworkingError />;
+	}
+
+	if (!statsRequest || statsRequest.network === NetworkStatus.Pending) {
 		return <NetworkingLoading />;
 	}
 
-	if (
-		(uuidRequest && uuidRequest.network === NetworkStatus.Error) ||
-		statsRequest.network === NetworkStatus.Error
-	) {
-		return <NetworkingError />;
-	}
 	if (statsRequest.network === NetworkStatus.NotFound) {
 		return <NetworkingNotFound />;
+	}
+
+	if (statsRequest.network === NetworkStatus.Error) {
+		return <NetworkingError />;
 	}
 
 	return (
 		<ContentSpacing>
 			<div>
-				<div className={style.heading}>
-					<Title result={statsRequest.result} />
-				</div>
+				<div>
+					<div className={style.heading}>
+						<Title result={statsRequest.result} />
+					</div>
 
-				<Divider />
+					<Divider />
+
+					<div className={style.misc}>
+						<Misc result={statsRequest.result} />
+					</div>
+
+					<Divider />
+
+					<Minigames result={statsRequest.result.stats} />
+				</div>
 			</div>
 		</ContentSpacing>
 	);

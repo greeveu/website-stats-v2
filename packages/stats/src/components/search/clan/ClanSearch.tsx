@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { globalContext } from 'components/context/ContextProvider';
 import { NetworkRequest, NetworkStatus } from 'lib/NetworkRequest';
-import { config } from 'config';
+import { config } from 'resources/config';
 import { Typography } from 'antd';
 import style from './clanSearch.module.sass';
 import logo from '../../../media/logo.png';

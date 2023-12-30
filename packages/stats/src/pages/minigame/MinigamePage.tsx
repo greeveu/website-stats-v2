@@ -1,5 +1,5 @@
 import React from 'react';
-import { MinigameGroup, MultiMinigame, SingleMinigame } from 'minigames';
+import { MinigameGroup, MultiMinigame, SingleMinigame } from 'resources/minigames';
 import { PaginationSynchronizer } from 'components/minigame/pagination/PaginationSynchronizer';
 import { ContentSpacing } from 'components/layout/contentSpacing/ContentSpacing';
 import { NetworkBarrier } from 'components/minigame/context/NetworkBarrier';

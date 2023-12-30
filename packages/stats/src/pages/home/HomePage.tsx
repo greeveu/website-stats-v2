@@ -1,6 +1,6 @@
 import React from 'react';
 import { ContentSpacing } from 'components/layout/contentSpacing/ContentSpacing';
-import { Group, minigames, Type } from 'minigames';
+import { Group, minigames, Type } from 'resources/minigames';
 import { SingleGameCard } from 'components/gameCard/single/SingleGameCard';
 import { MultiGameCard } from 'components/gameCard/multi/MultiGameCard';
 import { Divider, Typography } from 'antd';

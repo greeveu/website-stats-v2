@@ -2,7 +2,7 @@ import { Breadcrumb, Divider, Input, Table, Tag, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { NetworkRequest, NetworkStatus } from 'lib/NetworkRequest';
 import { Link, useParams } from 'react-router-dom';
-import { config } from 'config';
+import { config } from 'resources/config';
 import { observer } from 'mobx-react-lite';
 import { NetworkingLoading } from 'components/networking/loading/NetworkingLoading';
 import { NetworkingError } from 'components/networking/error/NetworkingError';
@@ -108,7 +108,6 @@ export const ClanPage: React.FunctionComponent = observer(() => {
 		if (clan.name === 'Einhörner') {
 			return (
 				<span className={style.party}>
-					{' '}
 					<MinecraftText text={`§l* ^o^`} />{' '}
 				</span>
 			);

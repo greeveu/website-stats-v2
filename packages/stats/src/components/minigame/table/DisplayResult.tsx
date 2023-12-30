@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { config } from 'config';
+import { config } from 'resources/config';
 import { Crown, Player } from 'components/player/Player';
 import style from './displayResult.module.sass';
 import { Table } from 'antd';
 import { observer } from 'mobx-react-lite';
-import { RenderMethod } from 'minigames';
+import { RenderMethod } from 'resources/minigames';
 import { Pagination } from 'components/minigame/pagination/Pagination';
 import { minigameContext } from 'components/minigame/context/MinigameContextProvider';
 import { Place } from 'components/minigame/table/display/Place';

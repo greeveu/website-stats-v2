@@ -37,22 +37,29 @@ export const Title: React.FunctionComponent<TitleProps> = (props) => {
 	const clan = useMemo(() => {
 		if (props.result.clan) {
 			return (
-				<Typography.Title level={4} className={style.clan}>
-					<div>{props.result.clan.role} of</div>
-					<Link to={`/clan/${props.result.clan.name}`}>
-						<MinecraftText text={props.result.clan.tag} />
-					</Link>
-				</Typography.Title>
+				<div className={style.rank}>
+					<Typography.Title level={4} className={style.clan}>
+						<div>{props.result.clan.role} of</div>
+						<Link to={`/clan/${props.result.clan.name}`}>
+							<MinecraftText
+								text={`§e${props.result.clan.tag}`}
+							/>
+						</Link>
+					</Typography.Title>
+				</div>
 			);
 		}
 		return null;
 	}, [props.result.clan]);
 
 	return (
-		<div>
+		<div className={style.root}>
+			<img
+				src={`https://minotar.net/bust/${props.result.name}/180.png`}
+				alt={props.result.name}
+			/>
 			<Typography.Title className={style.heading} level={1}>
-				<div className={style.rank}>{rank}</div>
-				{props.result.name}
+				{rank} {props.result.name}
 			</Typography.Title>
 			{clan}
 		</div>

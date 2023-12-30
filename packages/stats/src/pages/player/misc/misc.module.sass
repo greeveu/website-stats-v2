@@ -1,0 +1,18 @@
+@use "./src/shared" as shared
+
+.root
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  gap: 16px
+  justify-content: space-between
+
+  > div
+
+   @media (min-width: shared.$breakpoint-0) and (max-width: shared.$breakpoint-760)
+     width: 90%
+     margin: 0 5% 0 5%
+
+   @media (min-width: shared.$breakpoint-760)
+     width: calc(50% - 16px)
+

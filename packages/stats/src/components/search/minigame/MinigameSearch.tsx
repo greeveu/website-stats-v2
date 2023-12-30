@@ -2,10 +2,10 @@ import React, { useContext, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { globalContext } from 'components/context/ContextProvider';
 import { MultiGameCard } from 'components/gameCard/multi/MultiGameCard';
-import { MinigameGroup, minigames, SingleMinigame, Type } from 'minigames';
+import { MinigameGroup, minigames, SingleMinigame, Type } from 'resources/minigames';
 import { SingleGameCard } from 'components/gameCard/single/SingleGameCard';
 import style from './minigameSearch.module.sass';
-import { config } from 'config';
+import { config } from 'resources/config';
 import { Typography } from 'antd';
 
 /**

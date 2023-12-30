@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { Context } from 'components/context/ContextProvider';
-import { config } from 'config';
+import { config } from 'resources/config';
 import { NetworkStatus } from 'lib/NetworkRequest';
 
 interface Props {

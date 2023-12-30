@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './preloadImages.module.sass';
 import { observer } from 'mobx-react-lite';
-import { minigames, Type } from 'minigames';
+import { minigames, Type } from 'resources/minigames';
 
 /**
  * Constantly loads minigame and often used images

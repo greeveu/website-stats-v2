@@ -3,7 +3,7 @@ import style from './singleGameCard.module.sass';
 import sharedStyle from '../gameCard.module.sass';
 import { Typography } from 'antd';
 import { Link } from 'react-router-dom';
-import { Group, SingleMinigame } from '../../../minigames';
+import { Group, SingleMinigame } from '../../../resources/minigames';
 
 interface SingleGameCardProps {
 	minigame: SingleMinigame;
