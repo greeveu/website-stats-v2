@@ -72,7 +72,7 @@ export const SingleMinigame: React.FunctionComponent<SingleMinigameProps> =
 										})();
 
 										return (
-											<div>
+											<div key={`${schema.display}${value}`}>
 												<Typography.Title
 													level={5}
 													className={style.title}

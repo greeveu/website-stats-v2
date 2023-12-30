@@ -79,10 +79,6 @@ export const PlayerPage: React.FunctionComponent = observer(() => {
 		);
 	}, [params.identifier, uuidRequest, uuidRequest?.network]);
 
-	console.log('stats', toJS(statsRequest?.result));
-	console.log('stats', toJS(statsRequest));
-	console.log('uuid', toJS(uuidRequest));
-
 	if (uuidRequest && uuidRequest.network === NetworkStatus.NotFound) {
 		return <NetworkingNotFound />;
 	}

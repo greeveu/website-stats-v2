@@ -90,7 +90,7 @@ export const Minigames: React.FunctionComponent<MinigamesProps> = observer(
 				{minigames.map((item) => {
 					if (item.schema.type === Type.Single) {
 						return (
-							<div>
+							<div key={item.schema.title}>
 								<SingleMinigame
 									schema={item.schema}
 									data={item.stats as SingleStat}
@@ -100,7 +100,7 @@ export const Minigames: React.FunctionComponent<MinigamesProps> = observer(
 						);
 					}
 					return (
-						<div>
+						<div key={item.schema.title}>
 							<MultiMinigame
 								data={item.stats as MultiStat}
 								schema={item.schema}

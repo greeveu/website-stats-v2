@@ -43,8 +43,6 @@ export const MinecraftText: React.FunctionComponent<MinecraftTextProps> = (
 ) => {
 	const result = Array.from(props.text.matchAll(/§./g));
 
-	console.log(!result[0]);
-
 	if (!result[0]) {
 		return <span className={style.root}>{props.text}</span>;
 	}

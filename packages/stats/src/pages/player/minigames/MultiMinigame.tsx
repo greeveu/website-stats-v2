@@ -3,6 +3,7 @@ import { MultiStat } from '../playerPage.types';
 import { MinigameMulti, RenderMethod } from '../../../resources/player.schema';
 import { Collapse, Input, Typography } from 'antd';
 import style from './multiMinigame.module.sass';
+import { renderTime } from '../../../lib/renderTime';
 
 interface MultiMinigameProps {
 	data: MultiStat;
@@ -43,12 +44,14 @@ export const MultiMinigame: React.FunctionComponent<MultiMinigameProps> = (
 								const value: string | number = (() => {
 									switch (schema.renderMethod) {
 										case RenderMethod.TimeS:
-											return `${item[key]}s`;
+											return `${renderTime(
+												(item[key] as number) * 1000,
+											)}ms`;
 
 										case RenderMethod.TimeMs:
-											return `${
-												(item[key] as number) / 1000
-											}s`;
+											return `${renderTime(
+												item[key] as number,
+											)}ms`;
 
 										default:
 											return item[key];
@@ -56,7 +59,7 @@ export const MultiMinigame: React.FunctionComponent<MultiMinigameProps> = (
 								})();
 
 								return (
-									<div>
+									<div key={`${title}${value}`}>
 										<Typography.Title level={5}>
 											{title}
 										</Typography.Title>

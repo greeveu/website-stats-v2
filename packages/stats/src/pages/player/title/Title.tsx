@@ -55,8 +55,9 @@ export const Title: React.FunctionComponent<TitleProps> = (props) => {
 	return (
 		<div className={style.root}>
 			<img
-				src={`https://minotar.net/bust/${props.result.name}/180.png`}
+				src={`https://minotar.net/armor/bust/${props.result.name}/180.png`}
 				alt={props.result.name}
+				className={style.img}
 			/>
 			<Typography.Title className={style.heading} level={1}>
 				{rank} {props.result.name}

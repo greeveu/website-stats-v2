@@ -14,7 +14,6 @@ export const clearCachedImages = () => {
 					localStorage.removeItem(key);
 				}
 			} catch (e) {
-				console.log('LocalStorage: removing', key);
 				localStorage.removeItem(key);
 			}
 		});
