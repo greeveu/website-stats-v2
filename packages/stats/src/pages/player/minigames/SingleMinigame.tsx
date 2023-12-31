@@ -1,6 +1,6 @@
 import React from 'react';
 import { SingleStat } from '../playerPage.types';
-import { MinigameSingle } from '../../../resources/player.schema';
+import { PlayerStatSingle } from '../../../resources/playerStats.schema';
 import { observer } from 'mobx-react-lite';
 import { Collapse, Input, Typography } from 'antd';
 import style from './singleMinigame.module.sass';
@@ -8,7 +8,7 @@ import { StarFilled, StarOutlined } from '@ant-design/icons';
 
 interface SingleMinigameProps {
 	data: SingleStat;
-	schema: MinigameSingle;
+	schema: PlayerStatSingle;
 	relevance: number;
 }
 

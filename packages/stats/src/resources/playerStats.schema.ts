@@ -2,12 +2,12 @@
  * Definition file for the player page
  */
 
-export enum Type {
+export enum StatType {
 	Single = 'SINGLE',
 	Multi = 'MULTI',
 }
 
-export enum RenderMethod {
+export enum StatRender {
 	Raw,
 	TimeS,
 	TimeMs,
@@ -15,340 +15,339 @@ export enum RenderMethod {
 	DateTime,
 }
 
-/**
- * TODO Rename file to file.schema.ts
- */
-
-export interface MinigameSingle {
-	type: Type.Single;
+export interface PlayerStatSingle {
+	type: StatType.Single;
 	title: string;
 	stats: {
 		[stat: string]: {
 			display: string;
-			renderMethod: RenderMethod;
+			renderMethod: StatRender;
 		};
 	};
 }
 
-export interface MinigameMulti {
-	type: Type.Multi;
+export interface PlayerStatMulti {
+	type: StatType.Multi;
 	title: string;
 	keys: {
 		[key: string]: {
 			[value: string]: string;
 		};
 	};
+	/**
+	 * Currently a single stat is supported
+	 */
 	stats: {
 		[stat: string]: {
 			display: string;
-			renderMethod: RenderMethod;
+			renderMethod: StatRender;
 		};
 	};
 }
 
 interface Stats {
-	[minigame: string]: MinigameSingle | MinigameMulti;
+	[minigame: string]: PlayerStatSingle | PlayerStatMulti;
 }
 
-export const playerSchema: Stats = {
+export const playerStatsSchema: Stats = {
 	bedwars: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Bedwars',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			brokenBeds: {
 				display: 'Broken Beds',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	bowspleef: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Bowspleef',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	cores: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Cores',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	knockFfa: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Knock FFA',
 		stats: {
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	knockPvp: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Knock PvP',
 		stats: {
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	mlgrush: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'MLG Rush',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			brokenBeds: {
 				display: 'Broken Beds',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			lostBeds: {
 				display: 'Lost Beds',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	oneVsOne: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'One vs one',
 		stats: {
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	oneline: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Oneline',
 		stats: {
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	qsg: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'QSG',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	quake: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Quake',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	rush: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Rush',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			brokenBeds: {
 				display: 'Broken beds',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	skywars: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Skywars',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	snowballFight: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Snowball Fight',
 		stats: {
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	spleef: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Spleef',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	tntrun: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'Tnt run',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	uhc: {
-		type: Type.Single,
+		type: StatType.Single,
 		title: 'UHC',
 		stats: {
 			wins: {
 				display: 'Wins',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			loses: {
 				display: 'Loses',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			kills: {
 				display: 'Kills',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 			deaths: {
 				display: 'Deaths',
-				renderMethod: RenderMethod.Raw,
+				renderMethod: StatRender.Raw,
 			},
 		},
 	},
 	minesweeper: {
-		type: Type.Multi,
+		type: StatType.Multi,
 		title: 'Minesweeeper',
 		keys: {
 			generator: {
@@ -368,12 +367,12 @@ export const playerSchema: Stats = {
 		stats: {
 			time: {
 				display: 'Time',
-				renderMethod: RenderMethod.TimeMs,
+				renderMethod: StatRender.TimeMs,
 			},
 		},
 	},
 	fastbridge: {
-		type: Type.Multi,
+		type: StatType.Multi,
 		title: 'Fastbridge',
 		keys: {
 			mode: {
@@ -395,7 +394,7 @@ export const playerSchema: Stats = {
 		stats: {
 			time: {
 				display: 'Time',
-				renderMethod: RenderMethod.TimeS,
+				renderMethod: StatRender.TimeS,
 			},
 		},
 	},

@@ -34,6 +34,22 @@ export const Title: React.FunctionComponent<TitleProps> = (props) => {
 		return <MinecraftText text={ranks[props.result.rank.name]!} />;
 	}, [props.result.rank.name]);
 
+	const until = useMemo(() => {
+		if (props.result.rank.until === 0) {
+			return null;
+		}
+
+		const text = `${ranks[props.result.rank.name]!} until ${new Date(
+			props.result.rank.until * 1000,
+		).toLocaleDateString()} `;
+
+		return (
+			<Typography.Text>
+				<MinecraftText text={text} />
+			</Typography.Text>
+		);
+	}, [props.result.rank.until, props.result.rank.name]);
+
 	const clan = useMemo(() => {
 		if (props.result.clan) {
 			return (
@@ -62,6 +78,7 @@ export const Title: React.FunctionComponent<TitleProps> = (props) => {
 			<Typography.Title className={style.heading} level={1}>
 				{rank} {props.result.name}
 			</Typography.Title>
+			{until}
 			{clan}
 		</div>
 	);

@@ -5,13 +5,11 @@ import {
 	MinigameGroup,
 	MultiMinigame,
 	SingleMinigame,
-	Type,
-} from 'resources/minigames';
+	MinigameType,
+} from 'resources/minigames.schema';
 import knockpvp_lab from 'media/minigames/knockpvp_lab.jpg';
 import { Context, globalContext } from 'components/context/ContextProvider';
 import { makeAutoObservable, reaction } from 'mobx';
-import { NetworkRequest } from 'lib/NetworkRequest';
-import { config } from 'resources/config';
 import { observer } from 'mobx-react-lite';
 import { MinigameNetworkRequest } from 'lib/MinigameNetworkRequest';
 
@@ -97,7 +95,7 @@ export class MinigameContext {
 }
 
 const minigame: SingleMinigame = {
-	type: Type.Minigame,
+	type: MinigameType.Minigame,
 	link: 'lab',
 	title: 'KnockPvP Lab',
 	image: knockpvp_lab,
@@ -132,7 +130,7 @@ export const MinigameContextProvider: React.FunctionComponent<MinigameContextPro
 					context: global,
 				}),
 			);
-		}, [props.minigame]);
+		}, [props.minigame, global, props.group]);
 
 		if (context.dummy) {
 			return null;

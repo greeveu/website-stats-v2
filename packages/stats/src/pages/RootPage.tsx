@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { PlayerPage } from 'pages/player/PlayerPage';
 import { ClanPage } from 'pages/clan/ClanPage';
 import { HomePage } from 'pages/home/HomePage';
-import { Group, minigames, Type } from 'resources/minigames';
+import { Group, minigamesSchema, MinigameType } from 'resources/minigames.schema';
 import { MinigamePage } from 'pages/minigame/MinigamePage';
 
 export const RootPage: React.FunctionComponent = () => {
@@ -11,8 +11,8 @@ export const RootPage: React.FunctionComponent = () => {
 		<Routes>
 			<Route path={'/player/:identifier'} element={<PlayerPage />} />
 			<Route path={'/clan/:clan'} element={<ClanPage />} />
-			{minigames.map((item) => {
-				if (item.type === Type.Gamegroup) {
+			{minigamesSchema.map((item) => {
+				if (item.type === MinigameType.Gamegroup) {
 					return (
 						<React.Fragment>
 							{item.minigames.map((minigame) => {

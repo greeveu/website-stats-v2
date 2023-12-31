@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { globalContext } from 'components/context/ContextProvider';
 import { MultiGameCard } from 'components/gameCard/multi/MultiGameCard';
-import { MinigameGroup, minigames, SingleMinigame, Type } from 'resources/minigames';
+import { MinigameGroup, minigamesSchema, SingleMinigame, MinigameType } from 'resources/minigames.schema';
 import { SingleGameCard } from 'components/gameCard/single/SingleGameCard';
 import style from './minigameSearch.module.sass';
 import { config } from 'resources/config';
@@ -13,12 +13,12 @@ import { Typography } from 'antd';
  * @param regex
  */
 const searchMinigames = (regex: RegExp): (SingleMinigame | MinigameGroup)[] => {
-	return minigames.filter((item) => {
+	return minigamesSchema.filter((item) => {
 		// Matches main title
 		if (!!item.title.match(regex)) {
 			return true;
 		}
-		if (item.type === Type.Minigame) {
+		if (item.type === MinigameType.Minigame) {
 			return false;
 		}
 
@@ -73,7 +73,7 @@ export const MinigameSearch: React.FunctionComponent = observer(() => {
 		<React.Fragment>
 			{results.map((item) => {
 				const key = item.title + context.search.searchFor;
-				if (item.type === Type.Minigame) {
+				if (item.type === MinigameType.Minigame) {
 					return (
 						<div className={style.item} key={key}>
 							<SingleGameCard minigame={item} />

@@ -1,13 +1,13 @@
 import React from 'react';
 import { ContentSpacing } from 'components/layout/contentSpacing/ContentSpacing';
-import { Group, minigames, Type } from 'resources/minigames';
+import { Group, minigamesSchema, MinigameType } from 'resources/minigames.schema';
 import { SingleGameCard } from 'components/gameCard/single/SingleGameCard';
 import { MultiGameCard } from 'components/gameCard/multi/MultiGameCard';
 import { Divider, Typography } from 'antd';
 import style from './homePage.module.sass';
 
 const renderMinigames = (group: Group) => {
-	const filtered = minigames.filter((item) => {
+	const filtered = minigamesSchema.filter((item) => {
 		return item.group === group;
 	});
 
@@ -17,7 +17,7 @@ const renderMinigames = (group: Group) => {
 				? style.oddMinigame
 				: style.minigame;
 
-		if (item.type === Type.Minigame) {
+		if (item.type === MinigameType.Minigame) {
 			return (
 				<div className={className} key={item.title}>
 					<SingleGameCard minigame={item} />

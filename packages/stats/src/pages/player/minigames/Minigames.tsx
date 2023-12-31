@@ -1,6 +1,6 @@
 import React from 'react';
 import { MultiStat, SingleStat, Stats } from '../playerPage.types';
-import { playerSchema, Type } from '../../../resources/player.schema';
+import { playerStatsSchema, StatType } from '../../../resources/playerStats.schema';
 import { SingleMinigame } from './SingleMinigame';
 import style from './minigames.module.sass';
 import { observer } from 'mobx-react-lite';
@@ -23,7 +23,7 @@ export const Minigames: React.FunctionComponent<MinigamesProps> = observer(
 				 */
 				return {
 					key,
-					schema: playerSchema[key],
+					schema: playerStatsSchema[key],
 					stats: value,
 				};
 			})
@@ -88,7 +88,7 @@ export const Minigames: React.FunctionComponent<MinigamesProps> = observer(
 		return (
 			<div className={style.root}>
 				{minigames.map((item) => {
-					if (item.schema.type === Type.Single) {
+					if (item.schema.type === StatType.Single) {
 						return (
 							<div key={item.schema.title}>
 								<SingleMinigame

@@ -40,7 +40,7 @@ import uhc from 'media/minigames/uhc.jpg';
 /**
  * Discriminate between a single minigame and a game group containing single minigames
  */
-export enum Type {
+export enum MinigameType {
 	Minigame,
 	Gamegroup,
 }
@@ -85,7 +85,7 @@ export interface SelectOption {
 
 export type Option = SelectOption;
 
-export enum RenderMethod {
+export enum MinigameRender {
 	Raw,
 	Clan,
 	Player,
@@ -95,7 +95,7 @@ export enum RenderMethod {
 
 export interface Data {
 	display: string;
-	renderMethod: RenderMethod;
+	renderMethod: MinigameRender;
 }
 
 export interface Api {
@@ -116,20 +116,20 @@ export interface BaseMinigame {
 }
 
 export interface SingleMinigame extends BaseMinigame {
-	type: Type.Minigame;
+	type: MinigameType.Minigame;
 	group: Group;
 }
 
 export interface MultiMinigame extends BaseMinigame {
-	type: Type.Minigame;
+	type: MinigameType.Minigame;
 	/**
-	 * Subbtitle on multi cards
+	 * Subtitle on multi cards
 	 */
 	subtitle: string;
 }
 
 export interface MinigameGroup {
-	type: Type.Gamegroup;
+	type: MinigameType.Gamegroup;
 	link: string;
 	title: string;
 	subTitle: string;
@@ -137,16 +137,16 @@ export interface MinigameGroup {
 	group: Group;
 }
 
-export const minigames: (SingleMinigame | MinigameGroup)[] = [
+export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 	{
-		type: Type.Gamegroup,
+		type: MinigameType.Gamegroup,
 		link: 'fastbridge',
 		title: 'Fastbridge',
 		subTitle: '6 Modes',
 		group: Group.Featured,
 		minigames: [
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'normal',
 				title: 'Fastbridge',
 				subtitle: 'Normal',
@@ -157,18 +157,18 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						time: {
 							display: 'Time',
-							renderMethod: RenderMethod.TimeS,
+							renderMethod: MinigameRender.TimeS,
 						},
 					},
 					options: undefined,
 				},
 			},
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'island',
 				title: 'Fastbridge Islands',
 				subtitle: 'Islands',
@@ -179,11 +179,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						time: {
 							display: 'Time',
-							renderMethod: RenderMethod.TimeS,
+							renderMethod: MinigameRender.TimeS,
 						},
 					},
 					options: {
@@ -203,7 +203,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 				},
 			},
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'inclined',
 				title: 'Fastbridge Inclined',
 				subtitle: 'Inclined',
@@ -214,18 +214,18 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						time: {
 							display: 'Time',
-							renderMethod: RenderMethod.TimeS,
+							renderMethod: MinigameRender.TimeS,
 						},
 					},
 					options: undefined,
 				},
 			},
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'staircase',
 				title: 'Fastbridge Staircase',
 				subtitle: 'Staircase',
@@ -236,18 +236,18 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						time: {
 							display: 'Time',
-							renderMethod: RenderMethod.TimeS,
+							renderMethod: MinigameRender.TimeS,
 						},
 					},
 					options: undefined,
 				},
 			},
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'short',
 				title: 'Fastbridge Short',
 				subtitle: 'Short',
@@ -258,18 +258,18 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						time: {
 							display: 'Time',
-							renderMethod: RenderMethod.TimeS,
+							renderMethod: MinigameRender.TimeS,
 						},
 					},
 					options: undefined,
 				},
 			},
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'inclined_short',
 				title: 'Fastbridge Inclined Short',
 				subtitle: 'Inclined Short',
@@ -280,11 +280,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						time: {
 							display: 'Time',
-							renderMethod: RenderMethod.TimeS,
+							renderMethod: MinigameRender.TimeS,
 						},
 					},
 					options: undefined,
@@ -293,14 +293,14 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		],
 	},
 	{
-		type: Type.Gamegroup,
+		type: MinigameType.Gamegroup,
 		link: 'knockpvp',
 		title: 'KnockPVP',
 		subTitle: '3 Modes',
 		group: Group.Featured,
 		minigames: [
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'normal',
 				title: 'KnockPvP',
 				subtitle: 'Normal',
@@ -311,22 +311,22 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						kills: {
 							display: 'Kills',
-							renderMethod: RenderMethod.Raw,
+							renderMethod: MinigameRender.Raw,
 						},
 						deaths: {
 							display: 'Deaths',
-							renderMethod: RenderMethod.Raw,
+							renderMethod: MinigameRender.Raw,
 						},
 					},
 					options: undefined,
 				},
 			},
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'ffa',
 				title: 'KnockFFA',
 				subtitle: 'FFA',
@@ -337,22 +337,22 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						kills: {
 							display: 'Kills',
-							renderMethod: RenderMethod.Raw,
+							renderMethod: MinigameRender.Raw,
 						},
 						deaths: {
 							display: 'Deaths',
-							renderMethod: RenderMethod.Raw,
+							renderMethod: MinigameRender.Raw,
 						},
 					},
 					options: undefined,
 				},
 			},
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'lab',
 				title: 'KnockPvP Lab',
 				subtitle: 'LAB',
@@ -363,15 +363,15 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						kills: {
 							display: 'Kills',
-							renderMethod: RenderMethod.Raw,
+							renderMethod: MinigameRender.Raw,
 						},
 						deaths: {
 							display: 'Deaths',
-							renderMethod: RenderMethod.Raw,
+							renderMethod: MinigameRender.Raw,
 						},
 					},
 					options: {
@@ -395,7 +395,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		],
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'minesweeper',
 		title: 'Minesweeper',
 		image: minesweeper,
@@ -406,11 +406,11 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				time: {
 					display: 'Time',
-					renderMethod: RenderMethod.TimeMs,
+					renderMethod: MinigameRender.TimeMs,
 				},
 			},
 			options: {
@@ -441,7 +441,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'mlgrush',
 		title: 'MLG Rush',
 		image: mlgrush,
@@ -451,30 +451,30 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				wins: {
 					display: 'Wins',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				loses: {
 					display: 'Loses',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				brokenBeds: {
 					display: 'Broken Beds',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				lostBeds: {
 					display: 'Lost Beds',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/mlgrush/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'bedwars',
 		title: 'Bedwars',
 		image: bedwars,
@@ -484,30 +484,30 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				wins: {
 					display: 'Wins',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				loses: {
 					display: 'Loses',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				brokenBeds: {
 					display: 'Broken Beds',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/bedwars/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'rush',
 		title: 'Rush',
 		image: rush,
@@ -517,34 +517,34 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				wins: {
 					display: 'Wins',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				loses: {
 					display: 'Loses',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				deaths: {
 					display: 'Deaths',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				brokenBeds: {
 					display: 'Broken Beds',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/rush/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'skywars',
 		title: 'Skywars',
 		image: skywars,
@@ -554,30 +554,30 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				wins: {
 					display: 'Wins',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				loses: {
 					display: 'Loses',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				deaths: {
 					display: 'Deaths',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/skywars/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'tntrun',
 		title: 'TnT Run',
 		image: tntrun,
@@ -587,22 +587,22 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				wins: {
 					display: 'Wins',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				loses: {
 					display: 'Loses',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/tntrun/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'cores',
 		title: 'Cores',
 		image: cores,
@@ -612,34 +612,34 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				wins: {
 					display: 'Wins',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				loses: {
 					display: 'Loses',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				deaths: {
 					display: 'Deaths',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				brokenCores: {
 					display: 'Broken Cores',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/cores/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'qsg',
 		title: 'QSG',
 		image: qsg,
@@ -649,30 +649,30 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				wins: {
 					display: 'Wins',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				loses: {
 					display: 'Loses',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				deaths: {
 					display: 'Deaths',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/qsg/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'quake',
 		title: 'Quake',
 		image: quake,
@@ -682,30 +682,30 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				wins: {
 					display: 'Wins',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				loses: {
 					display: 'Loses',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				deaths: {
 					display: 'Deaths',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/quake/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'snowballfight',
 		title: 'Snowballfight',
 		image: snowballfight,
@@ -715,22 +715,22 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				deaths: {
 					display: 'Deaths',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/snowballfight/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: '1vs1',
 		title: '1vs1',
 		image: onevs1,
@@ -740,22 +740,22 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				deaths: {
 					display: 'Deaths',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/1vs1/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'oneline',
 		title: 'OneLine',
 		image: oneline,
@@ -765,22 +765,22 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				deaths: {
 					display: 'Deaths',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/oneline/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'sumo',
 		title: 'Sumo',
 		image: sumo,
@@ -790,15 +790,15 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				deaths: {
 					display: 'Deaths',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 
@@ -806,14 +806,14 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		},
 	},
 	{
-		type: Type.Gamegroup,
+		type: MinigameType.Gamegroup,
 		link: 'spleef',
 		title: 'Spleef',
 		subTitle: '2 Modes',
 		group: Group.Minigames,
 		minigames: [
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'normal',
 				title: 'Spleef',
 				subtitle: 'Normal',
@@ -824,21 +824,21 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						wins: {
 							display: 'Wins',
-							renderMethod: RenderMethod.Raw,
+							renderMethod: MinigameRender.Raw,
 						},
 						loses: {
 							display: 'Loses',
-							renderMethod: RenderMethod.Raw,
+							renderMethod: MinigameRender.Raw,
 						},
 					},
 				},
 			},
 			{
-				type: Type.Minigame,
+				type: MinigameType.Minigame,
 				link: 'bow',
 				title: 'Bow Spleef',
 				subtitle: 'Bow Spleef',
@@ -849,15 +849,15 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 					data: {
 						name: {
 							display: 'Player',
-							renderMethod: RenderMethod.Player,
+							renderMethod: MinigameRender.Player,
 						},
 						wins: {
 							display: 'Wins',
-							renderMethod: RenderMethod.Raw,
+							renderMethod: MinigameRender.Raw,
 						},
 						loses: {
 							display: 'Loses',
-							renderMethod: RenderMethod.Raw,
+							renderMethod: MinigameRender.Raw,
 						},
 					},
 				},
@@ -865,7 +865,7 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 		],
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'uhc',
 		title: 'UHC',
 		image: uhc,
@@ -875,30 +875,30 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				wins: {
 					display: 'Wins',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				loses: {
 					display: 'Loses',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				kills: {
 					display: 'Kills',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				deaths: {
 					display: 'Deaths',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 			endpoint: '/stats/uhc/top',
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'clans',
 		title: 'Clans',
 		image: clans,
@@ -909,21 +909,21 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Name',
-					renderMethod: RenderMethod.Clan,
+					renderMethod: MinigameRender.Clan,
 				},
 				size: {
 					display: 'Size',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				playerperformance: {
 					display: 'Combined PP',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'performance',
 		title: 'Performance',
 		image: performance,
@@ -934,17 +934,17 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				playerperformance: {
 					display: 'Performance',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'tokens',
 		title: 'Tokens',
 		image: tokens,
@@ -955,17 +955,17 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				tokens: {
 					display: 'Amount',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 		},
 	},
 	{
-		type: Type.Minigame,
+		type: MinigameType.Minigame,
 		link: 'loginstreak',
 		title: 'Loginstreak',
 		image: loginstreak,
@@ -976,15 +976,15 @@ export const minigames: (SingleMinigame | MinigameGroup)[] = [
 			data: {
 				name: {
 					display: 'Player',
-					renderMethod: RenderMethod.Player,
+					renderMethod: MinigameRender.Player,
 				},
 				currentstreak: {
 					display: 'Current streak',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 				maxstreak: {
 					display: 'Highest streak',
-					renderMethod: RenderMethod.Raw,
+					renderMethod: MinigameRender.Raw,
 				},
 			},
 		},

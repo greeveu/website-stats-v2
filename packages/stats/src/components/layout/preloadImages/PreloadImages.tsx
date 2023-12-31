@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './preloadImages.module.sass';
 import { observer } from 'mobx-react-lite';
-import { minigames, Type } from 'resources/minigames';
+import { minigamesSchema, MinigameType } from 'resources/minigames.schema';
 
 /**
  * Constantly loads minigame and often used images
@@ -11,8 +11,8 @@ export const PreloadImages: React.FunctionComponent = observer(() => {
 
 	return (
 		<div className={style.root}>
-			{minigames.map((item) => {
-				if (item.type === Type.Minigame) {
+			{minigamesSchema.map((item) => {
+				if (item.type === MinigameType.Minigame) {
 					return <img src={item.image} alt={alt} key={item.image} />;
 				}
 				return (
