@@ -3,6 +3,7 @@ import clans from 'media/minigames/clans.jpg';
 import performance from 'media/minigames/performance.jpg';
 import tokens from 'media/minigames/tokens.jpg';
 import loginstreak from 'media/minigames/loginstreak.jpg';
+import advent from 'media/minigames/advent.jpg';
 
 // Knockpvp images
 import knockpvp_normal from 'media/minigames/knockpvp_normal.jpg';
@@ -138,6 +139,80 @@ export interface MinigameGroup {
 }
 
 export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
+	{
+		type: MinigameType.Minigame,
+		link: 'advent',
+		title: 'Advent Calendar',
+		image: advent,
+		group: Group.Featured,
+		api: {
+			endpoint: '/stats/advent/top/:year/:door',
+			type: ApiType.Normal,
+			data: {
+				name: {
+					display: 'Player',
+					renderMethod: MinigameRender.Player,
+				},
+				time: {
+					display: 'Time',
+					renderMethod: MinigameRender.TimeMs,
+				},
+				fails: {
+					display: 'Fails',
+					renderMethod: MinigameRender.Raw,
+				},
+				checkpoints: {
+					display: 'Checkpoints',
+					renderMethod: MinigameRender.Raw,
+				},
+			},
+			options: {
+				year: {
+					display: 'Year',
+					type: OptionType.Select,
+					options: {
+						'2019': '2019',
+						'2020': '2020',
+						'2021': '2021',
+						'2022': '2022',
+						'2023': '2023',
+					},
+					default: '2023',
+				},
+				door: {
+					display: 'Door',
+					type: OptionType.Select,
+					options: {
+						'1': '1',
+						'2': '2',
+						'3': '3',
+						'4': '4',
+						'5': '5',
+						'6': '6',
+						'7': '7',
+						'8': '8',
+						'9': '9',
+						'10': '10',
+						'11': '11',
+						'12': '12',
+						'13': '13',
+						'14': '14',
+						'15': '15',
+						'16': '16',
+						'17': '17',
+						'18': '18',
+						'19': '19',
+						'20': '20',
+						'21': '21',
+						'22': '22',
+						'23': '23',
+						'24': '24',
+					},
+					default: '1',
+				},
+			},
+		},
+	},
 	{
 		type: MinigameType.Gamegroup,
 		link: 'fastbridge',
