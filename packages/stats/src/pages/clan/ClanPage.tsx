@@ -150,7 +150,7 @@ export const ClanPage: React.FunctionComponent = observer(() => {
 						<Input disabled={true} value={clan.size} />
 
 						<Typography.Title level={5}>
-							Average player performance
+							Combined Player Performance
 						</Typography.Title>
 						<Input disabled={true} value={clan.playerperformance} />
 					</div>

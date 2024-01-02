@@ -132,7 +132,7 @@ export const PlayerSearch: React.FunctionComponent = observer(() => {
 				setState({ status: PlayerSearchStatus.Error });
 			}
 		})();
-	}, [context.search.searchFor]);
+	}, [context.search.searchFor, context.search]);
 
 	return <Display state={state} />;
 });

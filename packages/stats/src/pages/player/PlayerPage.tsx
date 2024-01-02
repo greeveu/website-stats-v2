@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { NetworkRequest, NetworkStatus } from '../../lib/NetworkRequest';
 import { observer } from 'mobx-react-lite';
-import { toJS } from 'mobx';
 import { config } from '../../resources/config';
 import { NetworkingLoading } from '../../components/networking/loading/NetworkingLoading';
 import { NetworkingError } from '../../components/networking/error/NetworkingError';

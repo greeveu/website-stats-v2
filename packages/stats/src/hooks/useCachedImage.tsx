@@ -48,7 +48,7 @@ export const useCachedImage = (url: string): string => {
 			console.error(e);
 			setState(url);
 		}
-	}, [url]);
+	}, [url, id]);
 
 	return (
 		state ||
