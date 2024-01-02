@@ -18,7 +18,7 @@ interface PlayerProps {
 
 export const Player: React.FunctionComponent<PlayerProps> = (props) => {
 	const image = useCachedImage(
-		`https://minotar.net/avatar/${props.name}/25.png`,
+		`https://minotar.net/helm/${props.name}/25.png`,
 	);
 	const crown = useMemo(() => {
 		if (props.crown === Crown.Gold) {
