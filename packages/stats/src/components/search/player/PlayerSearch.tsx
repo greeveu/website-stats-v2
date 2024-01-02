@@ -123,7 +123,7 @@ export const PlayerSearch: React.FunctionComponent = observer(() => {
 				})();
 
 				// Preload image and set state after that
-				await fetch(`https://minotar.net/bust/${uuid}`);
+				await fetch(`https://minotar.net/armor/bust/${uuid}`);
 				setState({
 					status: PlayerSearchStatus.Success,
 					data: { ...playerData, name: name },

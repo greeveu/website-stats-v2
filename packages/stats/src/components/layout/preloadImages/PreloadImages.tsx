@@ -29,8 +29,8 @@ export const PreloadImages: React.FunctionComponent = observer(() => {
 					</>
 				);
 			})}
-			<img src={'https://minotar.net/bust/MrKavatch'} alt={alt} />
-			<img src={'https://minotar.net/bust/MHF_Enderman'} alt={alt} />
+			<img src={'https://minotar.net/armor/bust/MrKavatch'} alt={alt} />
+			<img src={'https://minotar.net/armor/bust/MHF_Enderman'} alt={alt} />
 		</div>
 	);
 });

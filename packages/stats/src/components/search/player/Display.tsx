@@ -87,7 +87,7 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) => {
 			<Link to={linkTo} className={toggleLink}>
 				<div
 					style={{
-						backgroundImage: `url("https://minotar.net/bust/${state.skin}")`,
+						backgroundImage: `url("https://minotar.net/armor/bust/${state.skin}")`,
 					}}
 					className={style.img}
 				/>
@@ -115,13 +115,13 @@ export const Display: React.FunctionComponent<PlayerDisplayProps> = (props) => {
 			<div>
 				<img
 					className={style.preload}
-					src={'https://minotar.net/bust/MHF_Enderman'}
-					alt={'Preloaded image'}
+					src={'https://minotar.net/armor/bust/MHF_Enderman'}
+					alt={'Preloaded'}
 				/>
 				<img
 					className={style.preload}
-					src={'https://minotar.net/bust/MrKavatch'}
-					alt={'Preloaded image'}
+					src={'https://minotar.net/armor/bust/MrKavatch'}
+					alt={'Preloaded'}
 				/>
 			</div>
 		</div>
