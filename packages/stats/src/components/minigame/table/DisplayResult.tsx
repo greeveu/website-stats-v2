@@ -93,6 +93,59 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 				};
 			}
 
+			if (value.renderMethod === MinigameRender.KillsDeaths) {
+				return {
+					title: value.display,
+					dataIndex: key,
+					render: (
+						value: any,
+						row: { kills: number; deaths: number },
+					) => {
+						if (row.kills === 0 || row.deaths === 0) {
+							return <div> - </div>;
+						}
+
+						const kd = (
+							Math.floor((row.kills / row.deaths) * 100) / 100
+						)
+							.toString()
+							.split('.');
+
+						return (
+							<div>
+								{kd[0]}.{(kd[1] || "").padEnd(2, '0')}
+							</div>
+						);
+					},
+				};
+			}
+
+			if (value.renderMethod === MinigameRender.WinsLoses) {
+				return {
+					title: value.display,
+					dataIndex: key,
+					render: (
+						value: any,
+						row: { wins: number; loses: number },
+					) => {
+						if (row.wins === 0 || row.loses === 0) {
+							return <div> - </div>;
+						}
+						const wl = (
+							Math.floor((row.wins / row.loses) * 100) / 100
+						)
+							.toString()
+							.split('.');
+
+						return (
+							<div>
+								{wl[0]}.{(wl[1] || "").padEnd(2, '0')}
+							</div>
+						);
+					},
+				};
+			}
+
 			return {
 				title: value.display,
 				dataIndex: key,

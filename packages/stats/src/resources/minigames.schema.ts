@@ -92,6 +92,8 @@ export enum MinigameRender {
 	Player,
 	TimeS,
 	TimeMs,
+	KillsDeaths,
+	WinsLoses,
 }
 
 export interface Data {
@@ -396,6 +398,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 							display: 'Deaths',
 							renderMethod: MinigameRender.Raw,
 						},
+						kd: {
+							display: 'K/D',
+							renderMethod: MinigameRender.KillsDeaths,
+						},
 					},
 					options: undefined,
 				},
@@ -422,6 +428,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 							display: 'Deaths',
 							renderMethod: MinigameRender.Raw,
 						},
+						kd: {
+							display: 'K/D',
+							renderMethod: MinigameRender.KillsDeaths,
+						},
 					},
 					options: undefined,
 				},
@@ -447,6 +457,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 						deaths: {
 							display: 'Deaths',
 							renderMethod: MinigameRender.Raw,
+						},
+						kd: {
+							display: 'K/D',
+							renderMethod: MinigameRender.KillsDeaths,
 						},
 					},
 					options: {
@@ -536,6 +550,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					display: 'Loses',
 					renderMethod: MinigameRender.Raw,
 				},
+				wl: {
+					display: 'W/L',
+					renderMethod: MinigameRender.WinsLoses,
+				},
 				brokenBeds: {
 					display: 'Broken Beds',
 					renderMethod: MinigameRender.Raw,
@@ -568,6 +586,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				loses: {
 					display: 'Loses',
 					renderMethod: MinigameRender.Raw,
+				},
+				wl: {
+					display: 'W/L',
+					renderMethod: MinigameRender.WinsLoses,
 				},
 				kills: {
 					display: 'Kills',
@@ -602,6 +624,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					display: 'Loses',
 					renderMethod: MinigameRender.Raw,
 				},
+				wl: {
+					display: 'W/L',
+					renderMethod: MinigameRender.WinsLoses,
+				},
 				kills: {
 					display: 'Kills',
 					renderMethod: MinigameRender.Raw,
@@ -609,6 +635,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				deaths: {
 					display: 'Deaths',
 					renderMethod: MinigameRender.Raw,
+				},
+				kd: {
+					display: 'K/D',
+					renderMethod: MinigameRender.KillsDeaths,
 				},
 				brokenBeds: {
 					display: 'Broken Beds',
@@ -639,6 +669,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					display: 'Loses',
 					renderMethod: MinigameRender.Raw,
 				},
+				wl: {
+					display: 'W/L',
+					renderMethod: MinigameRender.WinsLoses,
+				},
 				kills: {
 					display: 'Kills',
 					renderMethod: MinigameRender.Raw,
@@ -646,6 +680,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				deaths: {
 					display: 'Deaths',
 					renderMethod: MinigameRender.Raw,
+				},
+				kd: {
+					display: 'K/D',
+					renderMethod: MinigameRender.KillsDeaths,
 				},
 			},
 			endpoint: '/stats/skywars/top',
@@ -672,6 +710,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					display: 'Loses',
 					renderMethod: MinigameRender.Raw,
 				},
+				wl: {
+					display: 'W/L',
+					renderMethod: MinigameRender.WinsLoses,
+				},
 			},
 			endpoint: '/stats/tntrun/top',
 		},
@@ -697,6 +739,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					display: 'Loses',
 					renderMethod: MinigameRender.Raw,
 				},
+				wl: {
+					display: 'W/L',
+					renderMethod: MinigameRender.WinsLoses,
+				},
 				kills: {
 					display: 'Kills',
 					renderMethod: MinigameRender.Raw,
@@ -704,6 +750,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				deaths: {
 					display: 'Deaths',
 					renderMethod: MinigameRender.Raw,
+				},
+				kd: {
+					display: 'K/D',
+					renderMethod: MinigameRender.KillsDeaths,
 				},
 				brokenCores: {
 					display: 'Broken Cores',
@@ -734,6 +784,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					display: 'Loses',
 					renderMethod: MinigameRender.Raw,
 				},
+				wl: {
+					display: 'W/L',
+					renderMethod: MinigameRender.WinsLoses,
+				},
 				kills: {
 					display: 'Kills',
 					renderMethod: MinigameRender.Raw,
@@ -741,6 +795,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				deaths: {
 					display: 'Deaths',
 					renderMethod: MinigameRender.Raw,
+				},
+				kd: {
+					display: 'K/D',
+					renderMethod: MinigameRender.KillsDeaths,
 				},
 			},
 			endpoint: '/stats/qsg/top',
@@ -767,6 +825,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					display: 'Loses',
 					renderMethod: MinigameRender.Raw,
 				},
+				wl: {
+					display: 'W/L',
+					renderMethod: MinigameRender.WinsLoses,
+				},
 				kills: {
 					display: 'Kills',
 					renderMethod: MinigameRender.Raw,
@@ -774,6 +836,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				deaths: {
 					display: 'Deaths',
 					renderMethod: MinigameRender.Raw,
+				},
+				kd: {
+					display: 'K/D',
+					renderMethod: MinigameRender.KillsDeaths,
 				},
 			},
 			endpoint: '/stats/quake/top',
@@ -800,6 +866,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					display: 'Deaths',
 					renderMethod: MinigameRender.Raw,
 				},
+				kd: {
+					display: 'K/D',
+					renderMethod: MinigameRender.KillsDeaths,
+				},
 			},
 			endpoint: '/stats/snowballfight/top',
 		},
@@ -824,6 +894,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				deaths: {
 					display: 'Deaths',
 					renderMethod: MinigameRender.Raw,
+				},
+				kd: {
+					display: 'K/D',
+					renderMethod: MinigameRender.KillsDeaths,
 				},
 			},
 			endpoint: '/stats/1vs1/top',
@@ -850,6 +924,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					display: 'Deaths',
 					renderMethod: MinigameRender.Raw,
 				},
+				kd: {
+					display: 'K/D',
+					renderMethod: MinigameRender.KillsDeaths,
+				},
 			},
 			endpoint: '/stats/oneline/top',
 		},
@@ -874,6 +952,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				deaths: {
 					display: 'Deaths',
 					renderMethod: MinigameRender.Raw,
+				},
+				kd: {
+					display: 'K/D',
+					renderMethod: MinigameRender.KillsDeaths,
 				},
 			},
 
@@ -909,6 +991,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 							display: 'Loses',
 							renderMethod: MinigameRender.Raw,
 						},
+						wl: {
+							display: 'W/L',
+							renderMethod: MinigameRender.WinsLoses,
+						},
 					},
 				},
 			},
@@ -933,6 +1019,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 						loses: {
 							display: 'Loses',
 							renderMethod: MinigameRender.Raw,
+						},
+						wl: {
+							display: 'W/L',
+							renderMethod: MinigameRender.WinsLoses,
 						},
 					},
 				},
@@ -960,6 +1050,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					display: 'Loses',
 					renderMethod: MinigameRender.Raw,
 				},
+				wl: {
+					display: 'W/L',
+					renderMethod: MinigameRender.WinsLoses,
+				},
 				kills: {
 					display: 'Kills',
 					renderMethod: MinigameRender.Raw,
@@ -967,6 +1061,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				deaths: {
 					display: 'Deaths',
 					renderMethod: MinigameRender.Raw,
+				},
+				kd: {
+					display: 'K/D',
+					renderMethod: MinigameRender.KillsDeaths,
 				},
 			},
 			endpoint: '/stats/uhc/top',
