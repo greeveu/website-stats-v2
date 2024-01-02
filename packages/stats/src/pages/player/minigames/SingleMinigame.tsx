@@ -1,6 +1,9 @@
 import React from 'react';
 import { SingleStat } from '../playerPage.types';
-import { PlayerStatSingle } from '../../../resources/playerStats.schema';
+import {
+	PlayerStatSingle,
+	StatRender,
+} from '../../../resources/playerStats.schema';
 import { observer } from 'mobx-react-lite';
 import { Collapse, Input, Typography } from 'antd';
 import style from './singleMinigame.module.sass';
@@ -64,15 +67,174 @@ export const SingleMinigame: React.FunctionComponent<SingleMinigameProps> =
 							<div className={style.content}>
 								{Object.entries(props.schema.stats).map(
 									([key, schema]) => {
-										const value: string | number = (() => {
-											switch (schema.renderMethod) {
-												default:
-													return props.data[key];
-											}
-										})();
+										if (
+											schema.renderMethod ===
+											StatRender.WinsLosesRow
+										) {
+											const wins = (props.data.wins ||
+												0) as number;
+											const loses = (props.data.loses ||
+												0) as number;
+
+											const ratio = (() => {
+												if (wins === 0 || loses === 0) {
+													return '-';
+												}
+
+												const ratio = (
+													Math.floor(
+														(wins / loses) * 100,
+													) / 100
+												)
+													.toString()
+													.split('.');
+
+												return `${ratio[0]}.${(
+													ratio[1] || ''
+												).padEnd(2, '0')}`;
+											})();
+
+											return (
+												<div
+													key={`${schema.display}`}
+													className={
+														style.rowCalculated
+													}
+												>
+													<div>
+														<Typography.Title
+															level={5}
+															className={
+																style.title
+															}
+														>
+															Wins
+														</Typography.Title>
+														<Input
+															disabled={true}
+															value={wins}
+														/>
+													</div>
+													<div>
+														<Typography.Title
+															level={5}
+															className={
+																style.title
+															}
+														>
+															Loses
+														</Typography.Title>
+														<Input
+															disabled={true}
+															value={loses}
+														/>
+													</div>
+													<div>
+														<Typography.Title
+															level={5}
+															className={
+																style.title
+															}
+														>
+															W/L
+														</Typography.Title>
+														<Input
+															disabled={true}
+															value={ratio}
+														/>
+													</div>
+												</div>
+											);
+										}
+
+										if (
+											schema.renderMethod ===
+											StatRender.KillsDeathsRow
+										) {
+											const kills = (props.data.kills ||
+												0) as number;
+											const deaths = (props.data.deaths ||
+												0) as number;
+
+											const ratio = (() => {
+												if (
+													kills === 0 ||
+													deaths === 0
+												) {
+													return '-';
+												}
+
+												const ratio = (
+													Math.floor(
+														(kills / deaths) * 100,
+													) / 100
+												)
+													.toString()
+													.split('.');
+
+												return `${ratio[0]}.${(
+													ratio[1] || ''
+												).padEnd(2, '0')}`;
+											})();
+
+											return (
+												<div
+													key={`${schema.display}-${kills}-${deaths}`}
+													className={
+														style.rowCalculated
+													}
+												>
+													<div>
+														<Typography.Title
+															level={5}
+															className={
+																style.title
+															}
+														>
+															Kills
+														</Typography.Title>
+														<Input
+															disabled={true}
+															value={kills}
+														/>
+													</div>
+													<div>
+														<Typography.Title
+															level={5}
+															className={
+																style.title
+															}
+														>
+															Deaths
+														</Typography.Title>
+														<Input
+															disabled={true}
+															value={deaths}
+														/>
+													</div>
+													<div>
+														<Typography.Title
+															level={5}
+															className={
+																style.title
+															}
+														>
+															K/D
+														</Typography.Title>
+														<Input
+															disabled={true}
+															value={ratio}
+														/>
+													</div>
+												</div>
+											);
+										}
 
 										return (
-											<div key={`${schema.display}${value}`}>
+											<div
+												key={`${schema.display}${props.data[key]}`}
+												className={style.rowFullSize}
+											>
 												<Typography.Title
 													level={5}
 													className={style.title}
@@ -81,7 +243,7 @@ export const SingleMinigame: React.FunctionComponent<SingleMinigameProps> =
 												</Typography.Title>
 												<Input
 													disabled={true}
-													value={value}
+													value={props.data[key]}
 												/>
 											</div>
 										);

@@ -13,6 +13,8 @@ export enum StatRender {
 	TimeMs,
 	Date,
 	DateTime,
+	KillsDeathsRow,
+	WinsLosesRow,
 }
 
 export interface PlayerStatSingle {
@@ -54,21 +56,13 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Bedwars',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
-			},
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 			brokenBeds: {
 				display: 'Broken Beds',
@@ -80,13 +74,9 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Bowspleef',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
-			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
 		},
 	},
@@ -94,21 +84,13 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Cores',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
-			},
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 		},
 	},
@@ -116,13 +98,9 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Knock FFA',
 		stats: {
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 		},
 	},
@@ -130,13 +108,9 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Knock PvP',
 		stats: {
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 		},
 	},
@@ -144,13 +118,9 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'MLG Rush',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
-			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
 			brokenBeds: {
 				display: 'Broken Beds',
@@ -166,13 +136,9 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'One vs one',
 		stats: {
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 		},
 	},
@@ -180,13 +146,9 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Oneline',
 		stats: {
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 		},
 	},
@@ -194,21 +156,13 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'QSG',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
-			},
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 		},
 	},
@@ -216,21 +170,13 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Quake',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
-			},
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 		},
 	},
@@ -238,21 +184,13 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Rush',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
-			},
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 			brokenBeds: {
 				display: 'Broken beds',
@@ -264,21 +202,13 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Skywars',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
-			},
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 		},
 	},
@@ -286,13 +216,9 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Snowball Fight',
 		stats: {
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 		},
 	},
@@ -300,13 +226,9 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Spleef',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
-			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
 		},
 	},
@@ -314,13 +236,9 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'Tnt run',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
-			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
 		},
 	},
@@ -328,21 +246,13 @@ export const playerStatsSchema: Stats = {
 		type: StatType.Single,
 		title: 'UHC',
 		stats: {
-			wins: {
-				display: 'Wins',
-				renderMethod: StatRender.Raw,
+			wl: {
+				display: '',
+				renderMethod: StatRender.WinsLosesRow,
 			},
-			loses: {
-				display: 'Loses',
-				renderMethod: StatRender.Raw,
-			},
-			kills: {
-				display: 'Kills',
-				renderMethod: StatRender.Raw,
-			},
-			deaths: {
-				display: 'Deaths',
-				renderMethod: StatRender.Raw,
+			kd: {
+				display: '',
+				renderMethod: StatRender.KillsDeathsRow,
 			},
 		},
 	},
