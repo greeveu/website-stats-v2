@@ -16,7 +16,7 @@ const ranks: Record<Rank, string | null> = {
 	[Rank.Default]: null,
 	[Rank.Developer]: '§bDeveloper',
 	[Rank.HeadBuilder]: '§3Head-Builder',
-	[Rank.LeadDeveloper]: '§bLead-Developer',
+	[Rank.LeadDeveloper]: '§bDeveloper',
 	[Rank.Moderator]: '§2Moderator',
 	[Rank.Owner]: '§4Owner',
 	[Rank.PremiumPlus]: '§ePremium-Plus',
