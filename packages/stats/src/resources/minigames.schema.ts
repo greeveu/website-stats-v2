@@ -470,6 +470,7 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 							default: 'KNOCKFFA',
 							options: {
 								DOUBLEJUMP: 'Double Jump',
+								TNTJUMP: 'TNT',
 								FIREBALL: 'Fireballs',
 								GRAPPLING_HOOK: 'Grappling Hook',
 								SWITCHBALLS: 'Switcher',
