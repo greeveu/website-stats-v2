@@ -262,6 +262,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 							display: 'Time',
 							renderMethod: MinigameRender.TimeS,
 						},
+						replayId: {
+							display: 'Replay ID',
+							renderMethod: MinigameRender.Raw,
+						},
 					},
 					options: {
 						map: {
@@ -297,6 +301,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 							display: 'Time',
 							renderMethod: MinigameRender.TimeS,
 						},
+						replayId: {
+							display: 'Replay ID',
+							renderMethod: MinigameRender.Raw,
+						},
 					},
 					options: undefined,
 				},
@@ -318,6 +326,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 						time: {
 							display: 'Time',
 							renderMethod: MinigameRender.TimeS,
+						},
+						replayId: {
+							display: 'Replay ID',
+							renderMethod: MinigameRender.Raw,
 						},
 					},
 					options: undefined,
@@ -341,6 +353,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 							display: 'Time',
 							renderMethod: MinigameRender.TimeS,
 						},
+						replayId: {
+							display: 'Replay ID',
+							renderMethod: MinigameRender.Raw,
+						},
 					},
 					options: undefined,
 				},
@@ -362,6 +378,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 						time: {
 							display: 'Time',
 							renderMethod: MinigameRender.TimeS,
+						},
+						replayId: {
+							display: 'Replay ID',
+							renderMethod: MinigameRender.Raw,
 						},
 					},
 					options: undefined,
