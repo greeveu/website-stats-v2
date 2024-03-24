@@ -2,11 +2,13 @@ import { makeAutoObservable } from 'mobx';
 import { Context } from 'components/context/ContextProvider';
 import { config } from 'resources/config';
 import { NetworkStatus } from 'lib/NetworkRequest';
+import { ApiType } from '../resources/minigames.schema';
 
 interface Props {
 	url: string;
 	offset: number;
 	context: Context;
+	type: ApiType;
 }
 
 /**
@@ -28,7 +30,7 @@ export class MinigameNetworkRequest {
 		(async () => {
 			try {
 				const result = await fetch(
-					`${config.endpoint}${props.url}?offset=${
+					`${config.endpoint}${props.url}${props.type === ApiType.WithParams ? '&' : '?'}offset=${
 						props.offset * config.defaultLimit
 					}&amount=${config.defaultLimit + 1}`,
 				);

@@ -90,6 +90,7 @@ export class MinigameContext {
 			url: url,
 			context: this.context,
 			offset: this.offset,
+			type: this.config.api.type,
 		});
 	}
 }
