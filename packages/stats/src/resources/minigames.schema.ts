@@ -10,6 +10,10 @@ import knockpvp_normal from 'media/minigames/knockpvp_normal.jpg';
 import knockpvp_ffa from 'media/minigames/knockpvp_ffa.jpg';
 import knockpvp_lab from 'media/minigames/knockpvp_lab.jpg';
 
+// Event images
+import knockpvp_event from 'media/minigames/knockpvp_normal.jpg';
+import minesweeper_event from 'media/minigames/minesweeper.jpg';
+
 // Fastbridge images
 import fastbridge_normal from 'media/minigames/fastbridge_normal.jpg';
 import fastbridge_islands from 'media/minigames/fastbridge_islands.jpg';
@@ -53,6 +57,7 @@ export enum ApiType {
 	 * amount + offset parameter
 	 */
 	Normal,
+	WithParams,
 }
 
 /**
@@ -239,6 +244,10 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 						time: {
 							display: 'Time',
 							renderMethod: MinigameRender.TimeS,
+						},
+						replayId: {
+							display: 'Replay ID',
+							renderMethod: MinigameRender.Raw,
 						},
 					},
 					options: undefined,
@@ -521,7 +530,7 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 					type: OptionType.Select,
 					options: {
 						OG: 'Microsoft',
-						GREEV: 'Greev.eu',
+						GREEV: 'Greev',
 						NO_GUESSING: 'No Guessing',
 						SPEEDRUN: 'Speedrun',
 					},
@@ -529,6 +538,67 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				},
 			},
 		},
+	},
+	{
+		type: MinigameType.Gamegroup,
+		link: 'events',
+		title: 'Events',
+		subTitle: '2 Events',
+		group: Group.Misc,
+		minigames: [
+			{
+				type: MinigameType.Minigame,
+				link: 'knockpvp_2023',
+				title: 'KnockPvP Event',
+				subtitle: 'KnockPVP 2023',
+				image: knockpvp_event,
+				api: {
+					type: ApiType.WithParams,
+					endpoint: '/stats/knockpvp/rollingTop?startTimestamp=1684108800&endTimestamp=1684713600',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: MinigameRender.Player,
+						},
+						kills: {
+							display: 'Kills',
+							renderMethod: MinigameRender.Raw,
+						},
+						deaths: {
+							display: 'Deaths',
+							renderMethod: MinigameRender.Raw,
+						},
+						kd: {
+							display: 'K/D',
+							renderMethod: MinigameRender.KillsDeaths,
+						},
+					},
+					options: undefined,
+				},
+			},
+			{
+				type: MinigameType.Minigame,
+				link: 'minesweeper_2024',
+				title: 'Minesweeper Event',
+				subtitle: 'Minesweeper 2024',
+				image: minesweeper_event,
+				api: {
+					type: ApiType.WithParams,
+					endpoint: '/stats/minesweeper/top/MEDIUM/GREEV?mode=DEFAULT&rankingCriteria=MASTERY&start=1711321200&end=1712527199',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: MinigameRender.Player,
+						},
+						mastery: {
+							display: 'Mastery',
+							renderMethod: MinigameRender.Raw,
+						},
+					},
+					options: undefined,
+				},
+			},
+		],
 	},
 	{
 		type: MinigameType.Minigame,
