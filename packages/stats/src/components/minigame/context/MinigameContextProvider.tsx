@@ -73,7 +73,7 @@ export class MinigameContext {
 
 		this.debounce = setTimeout(() => {
 			this.fetch();
-		}, 50);
+		}, 50) as unknown as number;
 	}
 
 	private fetch(): void {
