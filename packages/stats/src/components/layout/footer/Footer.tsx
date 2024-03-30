@@ -45,6 +45,11 @@ export const Footer: React.FunctionComponent = observer(() => {
 									Privacy
 								</a>
 							</Typography.Text>
+							<Typography.Text>
+								NOT AN OFFICIAL MINECRAFT SERVICE <br />
+								NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR
+								MICROSOFT
+							</Typography.Text>
 						</div>
 					</div>
 				</ContentSpacing>

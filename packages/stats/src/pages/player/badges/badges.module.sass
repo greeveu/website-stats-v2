@@ -1,0 +1,83 @@
+.root
+  display: flex
+  flex-direction: row
+
+  align-items: center
+  justify-content: center
+
+.container
+  max-width: 500px
+
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  gap: 8px
+  align-items: center
+  justify-content: center
+
+  > div
+    cursor: pointer
+
+.badge
+  width: 32px
+  height: 32px
+  background-repeat: no-repeat
+  background-size: cover
+  image-rendering: pixelated
+
+.content
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  max-width: 200px
+  text-align: center
+
+.glowWhite
+  filter: drop-shadow(0px 0px 8px #ffffff)
+
+.glowGold
+  filter: drop-shadow(0px 0px 8px rgba(255, 215, 0, 0.8))
+
+.glowRed
+  filter: drop-shadow(0px 0px 8px #ff0000)
+
+.glowBlue
+  filter: drop-shadow(0px 0px 8px #10b3f1)
+
+.glowPurple
+  filter: drop-shadow(0px 0px 8px #ff00fa)
+
+.glowBrown
+  filter: drop-shadow(0px 0px 8px #b0550a)
+
+.glowRainbow
+  animation: rainbow 5000ms linear infinite
+
+@keyframes rainbow
+  0%
+    filter: drop-shadow(0px 0px 8px #cd6bf6)
+
+  12.5%
+    filter: drop-shadow(0px 0px 8px #bd71fa)
+
+  25%
+    filter: drop-shadow(0px 0px 8px #a7a7ff)
+
+  37.5%
+    filter: drop-shadow(0px 0px 8px #00FF00)
+
+  50%
+    filter: drop-shadow(0px 0px 8px #FFFF00)
+
+  62.5%
+    filter: drop-shadow(0px 0px 8px #ffab5b)
+
+  75%
+    filter: drop-shadow(0px 0px 8px #ff7a7a)
+
+  87.5%
+    filter: drop-shadow(0px 0px 8px #9d9dff)
+
+  100%
+    filter: drop-shadow(0px 0px 8px #cd6bf6)

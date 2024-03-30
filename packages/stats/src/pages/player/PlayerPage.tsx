@@ -13,6 +13,7 @@ import { Title } from './title/Title';
 import { StatsResponse } from './playerPage.types';
 import { Misc } from './misc/Misc';
 import { Minigames } from './minigames/Minigames';
+import { Badges } from "./badges/Badges.tsx";
 
 interface UuidResponse {
 	uuid: string;
@@ -105,6 +106,8 @@ export const PlayerPage: React.FunctionComponent = observer(() => {
 					<div className={style.heading}>
 						<Title result={statsRequest.result} />
 					</div>
+
+					<Badges result={statsRequest.result} />
 
 					<Divider />
 
