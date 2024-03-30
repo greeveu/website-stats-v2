@@ -1,3 +1,11 @@
+export interface Badge {
+	id: number;
+	timestamp: string;
+	name: string;
+	description: string;
+	item: string;
+}
+
 export enum Rank {
 	Admin = 'admin',
 	Bot = 'bot',
@@ -25,7 +33,7 @@ export type MultiStat = {
 
 export type Stats = {
 	[minigame: string]: SingleStat | MultiStat;
-};
+} & { badges: Badge[] };
 
 export interface StatsResponse {
 	uuid: string;
