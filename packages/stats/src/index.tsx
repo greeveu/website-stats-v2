@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ConfigProvider, theme } from 'antd';
 import './index.sass';
@@ -21,7 +20,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-	<BrowserRouter basename={"/stats"}>
+	<BrowserRouter basename={'/stats'}>
 		<ConfigProvider
 			theme={{
 				algorithm: theme.darkAlgorithm,

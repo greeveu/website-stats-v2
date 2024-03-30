@@ -33,7 +33,7 @@ export class MinigameContext {
 	public offset: number = 0;
 	public options: Record<string, string> = {};
 
-	private debounce: NodeJS.Timeout | null = null;
+	private debounce: number | null = null;
 
 	constructor(props: {
 		config: SingleMinigame | MultiMinigame;

@@ -22,7 +22,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 		{
 			title: 'Place',
 			dataIndex: 'name',
-			render: (value: any, record: any, index: number) => {
+			render: (_value: any, _record: any, index: number) => {
 				const place = config.defaultLimit * context.offset + index + 1;
 				return <Place place={place} />;
 			},
@@ -36,7 +36,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 				return {
 					title: value.display,
 					dataIndex: key,
-					render: (value: any, record: any, index: number) => {
+					render: (value: any, _record: any, index: number) => {
 						const place =
 							config.defaultLimit * context.offset + index + 1;
 						if (place === 1) {
@@ -59,7 +59,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 					title: value.display,
 					dataIndex: key,
 					render: (
-						value: any,
+						_value: any,
 						row: { name: string; tag: string },
 					) => {
 						return (
@@ -98,7 +98,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 					title: value.display,
 					dataIndex: key,
 					render: (
-						value: any,
+						_value: any,
 						row: { kills: number; deaths: number },
 					) => {
 						if (row.kills === 0 || row.deaths === 0) {
@@ -113,7 +113,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 
 						return (
 							<div>
-								{kd[0]}.{(kd[1] || "").padEnd(2, '0')}
+								{kd[0]}.{(kd[1] || '').padEnd(2, '0')}
 							</div>
 						);
 					},
@@ -125,7 +125,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 					title: value.display,
 					dataIndex: key,
 					render: (
-						value: any,
+						_value: any,
 						row: { wins: number; loses: number },
 					) => {
 						if (row.wins === 0 || row.loses === 0) {
@@ -139,7 +139,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 
 						return (
 							<div>
-								{wl[0]}.{(wl[1] || "").padEnd(2, '0')}
+								{wl[0]}.{(wl[1] || '').padEnd(2, '0')}
 							</div>
 						);
 					},

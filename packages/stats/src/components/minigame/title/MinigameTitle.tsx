@@ -4,7 +4,7 @@ import { minigameContext } from 'components/minigame/context/MinigameContextProv
 import { Typography } from 'antd';
 import style from './minigameTitle.module.sass';
 
-export const MinigameTitle: React.FunctionComponent = observer((props) => {
+export const MinigameTitle: React.FunctionComponent = observer(() => {
 	const context = useContext(minigameContext);
 
 	return (

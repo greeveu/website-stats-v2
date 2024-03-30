@@ -6,12 +6,6 @@ interface SearchContextProps {
 	children?: ReactNode;
 }
 
-enum NetworkEffect {
-	Default,
-	Loading,
-	Error,
-}
-
 export interface Context {
 	search: {
 		/**
