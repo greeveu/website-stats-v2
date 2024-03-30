@@ -14,7 +14,7 @@ const pufferfishBadge: Badge = {
 	name: 'I snuck this badge in',
 	description: 'Look at this stupid fishy being waterboarded :D',
 	item: Item.PUFFERFISH_BUCKET,
-	timestamp: '2022-02-22T22:22:22Z',
+	timestamp: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString(),
 };
 
 const axolotlBadge: Badge = {
@@ -22,7 +22,7 @@ const axolotlBadge: Badge = {
 	name: 'Cutey ;)',
 	description: 'A real cutie. Quite a catch TBH',
 	item: Item.AXOLOTL_BUCKET,
-	timestamp: '2022-02-22T22:22:22Z',
+	timestamp: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString(),
 };
 
 interface BadgesProps {
