@@ -66,6 +66,9 @@ export const Badges: React.FunctionComponent<BadgesProps> = observer(
 			if (props.result.uuid === '4aab40c1-453b-49ff-9e18-927548ccb343') {
 				return [...props.result.stats.badges, axolotlBadge];
 			}
+			if (props.result.uuid === 'f972a608-b028-4a71-9dd9-096cf9c08271') {
+				return [...props.result.stats.badges, axolotlBadge];
+			}
 			return props.result.stats.badges;
 		}, [props.result.stats.badges, props.result.uuid]);
 
