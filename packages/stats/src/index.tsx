@@ -20,7 +20,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-	<BrowserRouter basename={'/stats'}>
+	<BrowserRouter>
 		<ConfigProvider
 			theme={{
 				algorithm: theme.darkAlgorithm,
