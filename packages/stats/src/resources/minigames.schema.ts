@@ -496,7 +496,7 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 						experiment: {
 							display: 'Experiment',
 							type: OptionType.Select,
-							default: 'KNOCKFFA',
+							default: 'BOW',
 							options: {
 								DOUBLEJUMP: 'Double Jump',
 								TNTJUMP: 'TNT',
@@ -506,6 +506,7 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 								SUMO: 'Sumo',
 								KNOCKSTICK: 'Knock Stick',
 								KNOCKFFA: 'Knock FFA',
+								BOW: 'Bows',
 							},
 						},
 					},
