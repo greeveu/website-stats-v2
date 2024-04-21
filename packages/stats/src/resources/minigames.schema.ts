@@ -224,7 +224,7 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 		type: MinigameType.Gamegroup,
 		link: 'fastbridge',
 		title: 'Fastbridge',
-		subTitle: '6 Modes',
+		subTitle: '7 Modes',
 		group: Group.Featured,
 		minigames: [
 			{
@@ -353,6 +353,32 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				api: {
 					type: ApiType.Normal,
 					endpoint: '/stats/fastbridge_short/top',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: MinigameRender.Player,
+						},
+						time: {
+							display: 'Time',
+							renderMethod: MinigameRender.TimeS,
+						},
+						replayId: {
+							display: 'Replay ID',
+							renderMethod: MinigameRender.Raw,
+						},
+					},
+					options: undefined,
+				},
+			},
+			{
+				type: MinigameType.Minigame,
+				link: 'extra_short',
+				title: 'Fastbridge Extra Short',
+				subtitle: 'Extra Short',
+				image: fastbridge_short,
+				api: {
+					type: ApiType.Normal,
+					endpoint: '/stats/fastbridge_extra_short/top',
 					data: {
 						name: {
 							display: 'Player',
