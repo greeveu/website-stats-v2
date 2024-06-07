@@ -147,80 +147,6 @@ export interface MinigameGroup {
 
 export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 	{
-		type: MinigameType.Minigame,
-		link: 'advent',
-		title: 'Advent Calendar',
-		image: advent,
-		group: Group.Featured,
-		api: {
-			endpoint: '/stats/advent/top/:year/:door',
-			type: ApiType.Normal,
-			data: {
-				name: {
-					display: 'Player',
-					renderMethod: MinigameRender.Player,
-				},
-				time: {
-					display: 'Time',
-					renderMethod: MinigameRender.TimeMs,
-				},
-				fails: {
-					display: 'Fails',
-					renderMethod: MinigameRender.Raw,
-				},
-				checkpoints: {
-					display: 'Checkpoints',
-					renderMethod: MinigameRender.Raw,
-				},
-			},
-			options: {
-				year: {
-					display: 'Year',
-					type: OptionType.Select,
-					options: {
-						'2019': '2019',
-						'2020': '2020',
-						'2021': '2021',
-						'2022': '2022',
-						'2023': '2023',
-					},
-					default: '2023',
-				},
-				door: {
-					display: 'Door',
-					type: OptionType.Select,
-					options: {
-						'1': '1',
-						'2': '2',
-						'3': '3',
-						'4': '4',
-						'5': '5',
-						'6': '6',
-						'7': '7',
-						'8': '8',
-						'9': '9',
-						'10': '10',
-						'11': '11',
-						'12': '12',
-						'13': '13',
-						'14': '14',
-						'15': '15',
-						'16': '16',
-						'17': '17',
-						'18': '18',
-						'19': '19',
-						'20': '20',
-						'21': '21',
-						'22': '22',
-						'23': '23',
-						'24': '24',
-					},
-					default: '1',
-				},
-			},
-		},
-	},
-	{
 		type: MinigameType.Gamegroup,
 		link: 'fastbridge',
 		title: 'Fastbridge',
@@ -585,67 +511,6 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				},
 			},
 		},
-	},
-	{
-		type: MinigameType.Gamegroup,
-		link: 'events',
-		title: 'Events',
-		subTitle: '2 Events',
-		group: Group.Misc,
-		minigames: [
-			{
-				type: MinigameType.Minigame,
-				link: 'knockpvp_2023',
-				title: 'KnockPvP Event',
-				subtitle: 'KnockPVP 2023',
-				image: knockpvp_event,
-				api: {
-					type: ApiType.WithParams,
-					endpoint: '/stats/knockpvp/rollingTop?startTimestamp=1684108800&endTimestamp=1684713600',
-					data: {
-						name: {
-							display: 'Player',
-							renderMethod: MinigameRender.Player,
-						},
-						kills: {
-							display: 'Kills',
-							renderMethod: MinigameRender.Raw,
-						},
-						deaths: {
-							display: 'Deaths',
-							renderMethod: MinigameRender.Raw,
-						},
-						kd: {
-							display: 'K/D',
-							renderMethod: MinigameRender.KillsDeaths,
-						},
-					},
-					options: undefined,
-				},
-			},
-			{
-				type: MinigameType.Minigame,
-				link: 'minesweeper_2024',
-				title: 'Minesweeper Event',
-				subtitle: 'Minesweeper 2024',
-				image: minesweeper_event,
-				api: {
-					type: ApiType.WithParams,
-					endpoint: '/stats/minesweeper/top/MEDIUM/GREEV?mode=DEFAULT&rankingCriteria=MASTERY&start=1711321200&end=1712527199',
-					data: {
-						name: {
-							display: 'Player',
-							renderMethod: MinigameRender.Player,
-						},
-						mastery: {
-							display: 'Mastery',
-							renderMethod: MinigameRender.Raw,
-						},
-					},
-					options: undefined,
-				},
-			},
-		],
 	},
 	{
 		type: MinigameType.Minigame,
@@ -1276,6 +1141,141 @@ export const minigamesSchema: (SingleMinigame | MinigameGroup)[] = [
 				maxstreak: {
 					display: 'Highest streak',
 					renderMethod: MinigameRender.Raw,
+				},
+			},
+		},
+	},
+	{
+		type: MinigameType.Gamegroup,
+		link: 'events',
+		title: 'Events',
+		subTitle: '2 Events',
+		group: Group.Misc,
+		minigames: [
+			{
+				type: MinigameType.Minigame,
+				link: 'knockpvp_2023',
+				title: 'KnockPvP Event',
+				subtitle: 'KnockPVP 2023',
+				image: knockpvp_event,
+				api: {
+					type: ApiType.WithParams,
+					endpoint: '/stats/knockpvp/rollingTop?startTimestamp=1684108800&endTimestamp=1684713600',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: MinigameRender.Player,
+						},
+						kills: {
+							display: 'Kills',
+							renderMethod: MinigameRender.Raw,
+						},
+						deaths: {
+							display: 'Deaths',
+							renderMethod: MinigameRender.Raw,
+						},
+						kd: {
+							display: 'K/D',
+							renderMethod: MinigameRender.KillsDeaths,
+						},
+					},
+					options: undefined,
+				},
+			},
+			{
+				type: MinigameType.Minigame,
+				link: 'minesweeper_2024',
+				title: 'Minesweeper Event',
+				subtitle: 'Minesweeper 2024',
+				image: minesweeper_event,
+				api: {
+					type: ApiType.WithParams,
+					endpoint: '/stats/minesweeper/top/MEDIUM/GREEV?mode=DEFAULT&rankingCriteria=MASTERY&start=1711321200&end=1712527199',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: MinigameRender.Player,
+						},
+						mastery: {
+							display: 'Mastery',
+							renderMethod: MinigameRender.Raw,
+						},
+					},
+					options: undefined,
+				},
+			},
+		],
+	},
+	{
+		type: MinigameType.Minigame,
+		link: 'advent',
+		title: 'Advent Calendar',
+		image: advent,
+		group: Group.Misc,
+		api: {
+			endpoint: '/stats/advent/top/:year/:door',
+			type: ApiType.Normal,
+			data: {
+				name: {
+					display: 'Player',
+					renderMethod: MinigameRender.Player,
+				},
+				time: {
+					display: 'Time',
+					renderMethod: MinigameRender.TimeMs,
+				},
+				fails: {
+					display: 'Fails',
+					renderMethod: MinigameRender.Raw,
+				},
+				checkpoints: {
+					display: 'Checkpoints',
+					renderMethod: MinigameRender.Raw,
+				},
+			},
+			options: {
+				year: {
+					display: 'Year',
+					type: OptionType.Select,
+					options: {
+						'2019': '2019',
+						'2020': '2020',
+						'2021': '2021',
+						'2022': '2022',
+						'2023': '2023',
+					},
+					default: '2023',
+				},
+				door: {
+					display: 'Door',
+					type: OptionType.Select,
+					options: {
+						'1': '1',
+						'2': '2',
+						'3': '3',
+						'4': '4',
+						'5': '5',
+						'6': '6',
+						'7': '7',
+						'8': '8',
+						'9': '9',
+						'10': '10',
+						'11': '11',
+						'12': '12',
+						'13': '13',
+						'14': '14',
+						'15': '15',
+						'16': '16',
+						'17': '17',
+						'18': '18',
+						'19': '19',
+						'20': '20',
+						'21': '21',
+						'22': '22',
+						'23': '23',
+						'24': '24',
+					},
+					default: '1',
 				},
 			},
 		},
