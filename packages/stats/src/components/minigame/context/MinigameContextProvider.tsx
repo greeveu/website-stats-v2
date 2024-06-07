@@ -1,17 +1,16 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react';
-import {
-	ApiType,
-	Group,
-	MinigameGroup,
-	MultiMinigame,
-	SingleMinigame,
-	MinigameType,
-} from 'resources/minigames.schema';
-import knockpvp_lab from 'media/minigames/knockpvp_lab.jpg';
+import knockpvp_lab from 'resources/minigames/featured/media/knockpvp_lab.jpg';
 import { Context, globalContext } from 'components/context/ContextProvider';
 import { makeAutoObservable, reaction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { MinigameNetworkRequest } from 'lib/MinigameNetworkRequest';
+import {
+	ApiType,
+	MinigameGroup,
+	MinigameType,
+	SingleMinigame,
+	MultiMinigame,
+} from 'resources/minigames/minigames.types.ts';
 
 interface MinigameContextProps {
 	minigame: SingleMinigame | MultiMinigame;
@@ -100,7 +99,6 @@ const minigame: SingleMinigame = {
 	link: 'lab',
 	title: 'KnockPvP Lab',
 	image: knockpvp_lab,
-	group: Group.Minigames,
 	api: {
 		type: ApiType.Normal,
 		data: {},

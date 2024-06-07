@@ -1,19 +1,22 @@
 import React from 'react';
 import { ContentSpacing } from 'components/layout/contentSpacing/ContentSpacing';
-import { Group, minigamesSchema, MinigameType } from 'resources/minigames.schema';
 import { SingleGameCard } from 'components/gameCard/single/SingleGameCard';
 import { MultiGameCard } from 'components/gameCard/multi/MultiGameCard';
 import { Divider, Typography } from 'antd';
 import style from './homePage.module.sass';
+import {
+	MinigameSchema,
+	MinigameType,
+} from 'resources/minigames/minigames.types.ts';
+import { featuredSchema } from 'resources/minigames/featured/featured.schema.ts';
+import { miscSchema } from 'resources/minigames/misc/misc.schema.ts';
+import { defaultSchema } from 'resources/minigames/default/default.schema.ts';
+import { observer } from 'mobx-react-lite';
 
-const renderMinigames = (group: Group) => {
-	const filtered = minigamesSchema.filter((item) => {
-		return item.group === group;
-	});
-
-	return filtered.map((item, key) => {
+const renderMinigames = (schema: MinigameSchema) => {
+	return schema.map((item, key) => {
 		const className =
-			filtered.length % 2 === 1 && key === 0
+			schema.length % 2 === 1 && key === 0
 				? style.oddMinigame
 				: style.minigame;
 
@@ -44,7 +47,7 @@ const renderMinigames = (group: Group) => {
 	});
 };
 
-export const HomePage: React.FunctionComponent = () => {
+export const HomePage: React.FunctionComponent = observer(() => {
 	return (
 		<div>
 			<ContentSpacing>
@@ -53,14 +56,14 @@ export const HomePage: React.FunctionComponent = () => {
 						<Typography.Title level={2}>Featured</Typography.Title>
 						<Divider />
 						<div className={style.container}>
-							{renderMinigames(Group.Featured)}
+							{renderMinigames(featuredSchema)}
 						</div>
 					</div>
 					<div className={style.group}>
 						<Typography.Title level={2}>Minigames</Typography.Title>
 						<Divider />
 						<div className={style.container}>
-							{renderMinigames(Group.Minigames)}
+							{renderMinigames(defaultSchema)}
 						</div>
 					</div>
 
@@ -68,11 +71,11 @@ export const HomePage: React.FunctionComponent = () => {
 						<Typography.Title level={2}>Misc</Typography.Title>
 						<Divider />
 						<div className={style.container}>
-							{renderMinigames(Group.Misc)}
+							{renderMinigames(miscSchema)}
 						</div>
 					</div>
 				</div>
 			</ContentSpacing>
 		</div>
 	);
-};
+});

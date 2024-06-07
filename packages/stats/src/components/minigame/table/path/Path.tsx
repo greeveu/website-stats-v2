@@ -3,8 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { Breadcrumb } from 'antd';
 import { minigameContext } from 'components/minigame/context/MinigameContextProvider';
 import { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
-import { MultiMinigame } from 'resources/minigames.schema';
 import { useNavigate } from 'react-router-dom';
+import { MultiMinigame } from "resources/minigames/minigames.types.ts";
 
 export const Path: React.FunctionComponent = observer(() => {
 	const context = useContext(minigameContext);

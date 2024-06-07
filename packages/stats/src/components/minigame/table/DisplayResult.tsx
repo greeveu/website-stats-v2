@@ -4,12 +4,12 @@ import { Crown, Player } from 'components/player/Player';
 import style from './displayResult.module.sass';
 import { Table } from 'antd';
 import { observer } from 'mobx-react-lite';
-import { MinigameRender } from 'resources/minigames.schema';
 import { Pagination } from 'components/minigame/pagination/Pagination';
 import { minigameContext } from 'components/minigame/context/MinigameContextProvider';
 import { Place } from 'components/minigame/table/display/Place';
 import { Time } from 'components/minigame/table/display/Time';
 import { Clan } from 'components/clan/Clan';
+import { RenderMethod } from 'resources/minigames/minigames.types.ts';
 
 export const DisplayResult: React.FunctionComponent = observer(() => {
 	const context = useContext(minigameContext);
@@ -32,7 +32,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 
 	const dataColumns = Object.entries(context.config.api!.data).map(
 		([key, value]) => {
-			if (value.renderMethod === MinigameRender.Player) {
+			if (value.renderMethod === RenderMethod.Player) {
 				return {
 					title: value.display,
 					dataIndex: key,
@@ -54,7 +54,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 				};
 			}
 
-			if (value.renderMethod === MinigameRender.Clan) {
+			if (value.renderMethod === RenderMethod.Clan) {
 				return {
 					title: value.display,
 					dataIndex: key,
@@ -72,7 +72,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 				};
 			}
 
-			if (value.renderMethod === MinigameRender.TimeMs) {
+			if (value.renderMethod === RenderMethod.TimeMs) {
 				return {
 					title: value.display,
 					dataIndex: key,
@@ -82,7 +82,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 				};
 			}
 
-			if (value.renderMethod === MinigameRender.TimeS) {
+			if (value.renderMethod === RenderMethod.TimeS) {
 				return {
 					title: value.display,
 					dataIndex: key,
@@ -93,7 +93,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 				};
 			}
 
-			if (value.renderMethod === MinigameRender.KillsDeaths) {
+			if (value.renderMethod === RenderMethod.KillsDeaths) {
 				return {
 					title: value.display,
 					dataIndex: key,
@@ -120,7 +120,7 @@ export const DisplayResult: React.FunctionComponent = observer(() => {
 				};
 			}
 
-			if (value.renderMethod === MinigameRender.WinsLoses) {
+			if (value.renderMethod === RenderMethod.WinsLoses) {
 				return {
 					title: value.display,
 					dataIndex: key,
