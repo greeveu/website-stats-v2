@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { NetworkRequest, NetworkStatus } from '../../lib/NetworkRequest';
+import { NetworkRequest, NetworkStatus } from "lib/NetworkRequest.ts";
 import { observer } from 'mobx-react-lite';
-import { config } from '../../resources/config';
-import { NetworkingLoading } from '../../components/networking/loading/NetworkingLoading';
-import { NetworkingError } from '../../components/networking/error/NetworkingError';
-import { NetworkingNotFound } from '../../components/networking/notFound/NetworkingNotFound';
-import { ContentSpacing } from '../../components/layout/contentSpacing/ContentSpacing';
+import { config } from "resources/config.ts";
+import { NetworkingLoading } from "components/networking/loading/NetworkingLoading.tsx";
+import { NetworkingError } from "components/networking/error/NetworkingError.tsx";
+import { NetworkingNotFound } from "components/networking/notFound/NetworkingNotFound.tsx";
+import { ContentSpacing } from "components/layout/contentSpacing/ContentSpacing.tsx";
 import { Divider } from 'antd';
 import style from './playerPage.module.sass';
 import { Title } from './title/Title';
 import { StatsResponse } from './playerPage.types';
 import { Misc } from './misc/Misc';
 import { Minigames } from './minigames/Minigames';
-import { Badges } from "./badges/Badges.tsx";
+import { Badges } from './badges/Badges.tsx';
 
 interface UuidResponse {
 	uuid: string;
