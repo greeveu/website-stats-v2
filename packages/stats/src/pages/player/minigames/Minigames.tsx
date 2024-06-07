@@ -1,10 +1,11 @@
 import React from 'react';
 import { MultiStat, SingleStat, Stats } from '../playerPage.types';
-import { playerStatsSchema, StatType } from '../../../resources/playerStats.schema';
+import { playersSchema } from 'resources/players/players.schema.ts';
 import { SingleMinigame } from './SingleMinigame';
 import style from './minigames.module.sass';
 import { observer } from 'mobx-react-lite';
 import { MultiMinigame } from './MultiMinigame';
+import { StatType } from 'resources/players/players.types.ts';
 
 interface MinigamesProps {
 	result: Stats;
@@ -23,7 +24,7 @@ export const Minigames: React.FunctionComponent<MinigamesProps> = observer(
 				 */
 				return {
 					key,
-					schema: playerStatsSchema[key],
+					schema: playersSchema[key],
 					stats: value,
 				};
 			})

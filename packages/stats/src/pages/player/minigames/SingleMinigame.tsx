@@ -1,13 +1,13 @@
 import React from 'react';
 import { SingleStat } from '../playerPage.types';
-import {
-	PlayerStatSingle,
-	StatRender,
-} from '../../../resources/playerStats.schema';
 import { observer } from 'mobx-react-lite';
 import { Collapse, Input, Typography } from 'antd';
 import style from './singleMinigame.module.sass';
 import { StarFilled, StarOutlined } from '@ant-design/icons';
+import {
+	PlayerStatSingle,
+	RenderMethod,
+} from 'resources/players/players.types.ts';
 
 interface SingleMinigameProps {
 	data: SingleStat;
@@ -69,7 +69,7 @@ export const SingleMinigame: React.FunctionComponent<SingleMinigameProps> =
 									([key, schema]) => {
 										if (
 											schema.renderMethod ===
-											StatRender.WinsLosesRow
+											RenderMethod.WinsLosesRow
 										) {
 											const wins = (props.data.wins ||
 												0) as number;
@@ -149,7 +149,7 @@ export const SingleMinigame: React.FunctionComponent<SingleMinigameProps> =
 
 										if (
 											schema.renderMethod ===
-											StatRender.KillsDeathsRow
+											RenderMethod.KillsDeathsRow
 										) {
 											const kills = (props.data.kills ||
 												0) as number;

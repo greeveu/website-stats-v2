@@ -1,72 +1,21 @@
-/**
- * Definition file for the player page
- */
+import { PlayersSchema, RenderMethod, StatType } from "resources/players/players.types.ts";
 
-export enum StatType {
-	Single = 'SINGLE',
-	Multi = 'MULTI',
-}
-
-export enum StatRender {
-	Raw,
-	TimeS,
-	TimeMs,
-	Date,
-	DateTime,
-	KillsDeathsRow,
-	WinsLosesRow,
-}
-
-export interface PlayerStatSingle {
-	type: StatType.Single;
-	title: string;
-	stats: {
-		[stat: string]: {
-			display: string;
-			renderMethod: StatRender;
-		};
-	};
-}
-
-export interface PlayerStatMulti {
-	type: StatType.Multi;
-	title: string;
-	keys: {
-		[key: string]: {
-			[value: string]: string;
-		};
-	};
-	/**
-	 * Currently a single stat is supported
-	 */
-	stats: {
-		[stat: string]: {
-			display: string;
-			renderMethod: StatRender;
-		};
-	};
-}
-
-interface Stats {
-	[minigame: string]: PlayerStatSingle | PlayerStatMulti;
-}
-
-export const playerStatsSchema: Stats = {
+export const playersSchema: PlayersSchema = {
 	bedwars: {
 		type: StatType.Single,
 		title: 'Bedwars',
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 			brokenBeds: {
 				display: 'Broken Beds',
-				renderMethod: StatRender.Raw,
+				renderMethod: RenderMethod.Raw,
 			},
 		},
 	},
@@ -76,7 +25,7 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 		},
 	},
@@ -86,11 +35,11 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 		},
 	},
@@ -100,7 +49,7 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 		},
 	},
@@ -110,7 +59,7 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 		},
 	},
@@ -120,15 +69,15 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 			brokenBeds: {
 				display: 'Broken Beds',
-				renderMethod: StatRender.Raw,
+				renderMethod: RenderMethod.Raw,
 			},
 			lostBeds: {
 				display: 'Lost Beds',
-				renderMethod: StatRender.Raw,
+				renderMethod: RenderMethod.Raw,
 			},
 		},
 	},
@@ -138,7 +87,7 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 		},
 	},
@@ -148,7 +97,7 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 		},
 	},
@@ -158,11 +107,11 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 		},
 	},
@@ -172,11 +121,11 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 		},
 	},
@@ -186,15 +135,15 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 			brokenBeds: {
 				display: 'Broken beds',
-				renderMethod: StatRender.Raw,
+				renderMethod: RenderMethod.Raw,
 			},
 		},
 	},
@@ -204,11 +153,11 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 		},
 	},
@@ -218,7 +167,7 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 		},
 	},
@@ -228,7 +177,7 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 		},
 	},
@@ -238,7 +187,7 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 		},
 	},
@@ -248,11 +197,11 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			wl: {
 				display: '',
-				renderMethod: StatRender.WinsLosesRow,
+				renderMethod: RenderMethod.WinsLosesRow,
 			},
 			kd: {
 				display: '',
-				renderMethod: StatRender.KillsDeathsRow,
+				renderMethod: RenderMethod.KillsDeathsRow,
 			},
 		},
 	},
@@ -277,7 +226,7 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			time: {
 				display: 'Time',
-				renderMethod: StatRender.TimeMs,
+				renderMethod: RenderMethod.TimeMs,
 			},
 		},
 	},
@@ -304,7 +253,7 @@ export const playerStatsSchema: Stats = {
 		stats: {
 			time: {
 				display: 'Time',
-				renderMethod: StatRender.TimeS,
+				renderMethod: RenderMethod.TimeS,
 			},
 		},
 	},
