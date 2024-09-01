@@ -239,6 +239,7 @@ export const playersSchema: PlayersSchema = {
 				ISLANDS: 'Islands',
 				INCLINED: 'Inclined',
 				INCLINED_SHORT: 'Inclined Short',
+				EXTRA_SHORT: 'Extra Short',
 				SHORT: 'Short',
 				STAIRCASE: 'Staircase',
 			},

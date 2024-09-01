@@ -329,6 +329,7 @@ export const featuredSchema: MinigameSchema = [
 								KNOCKSTICK: 'Knock Stick',
 								KNOCKFFA: 'Knock FFA',
 								BOW: 'Bows',
+								POTIONS: 'Potions',
 							},
 						},
 					},
