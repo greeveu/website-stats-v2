@@ -10,6 +10,7 @@ import performance from 'resources/minigames/misc/media/performance.jpg';
 import tokens from 'resources/minigames/misc/media/tokens.jpg';
 import loginstreak from 'resources/minigames/misc/media/loginstreak.jpg';
 import knockpvp_event from 'resources/minigames/featured/media/knockpvp_normal.jpg';
+import knockpvp_event_2 from 'resources/minigames/featured/media/knockpvp_lab.jpg';
 import minesweeper_event from 'resources/minigames/featured/media/minesweeper.jpg';
 import advent from 'resources/minigames/misc/media/advent.jpg';
 
@@ -157,6 +158,37 @@ export const miscSchema: MinigameSchema = [
 						mastery: {
 							display: 'Mastery',
 							renderMethod: RenderMethod.Raw,
+						},
+					},
+					options: undefined,
+				},
+			},
+			{
+				type: MinigameType.Minigame,
+				link: 'knockpvp_2024',
+				title: 'KnockPvP Event',
+				subtitle: 'KnockPVP 2024',
+				image: knockpvp_event_2,
+				api: {
+					type: ApiType.WithParams,
+					endpoint:
+						'/stats/knockpvp/rollingTop?startTimestamp=1731279600&endTimestamp=1731884400',
+					data: {
+						name: {
+							display: 'Player',
+							renderMethod: RenderMethod.Player,
+						},
+						kills: {
+							display: 'Kills',
+							renderMethod: RenderMethod.Raw,
+						},
+						deaths: {
+							display: 'Deaths',
+							renderMethod: RenderMethod.Raw,
+						},
+						kd: {
+							display: 'K/D',
+							renderMethod: RenderMethod.KillsDeaths,
 						},
 					},
 					options: undefined,
