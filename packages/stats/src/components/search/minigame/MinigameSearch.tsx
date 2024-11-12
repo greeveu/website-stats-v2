@@ -2,38 +2,47 @@ import React, { useContext, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { globalContext } from 'components/context/ContextProvider';
 import { MultiGameCard } from 'components/gameCard/multi/MultiGameCard';
-import { MinigameGroup, minigamesSchema, SingleMinigame, MinigameType } from 'resources/minigames.schema';
 import { SingleGameCard } from 'components/gameCard/single/SingleGameCard';
 import style from './minigameSearch.module.sass';
 import { config } from 'resources/config';
 import { Typography } from 'antd';
+import {
+	MinigameGroup,
+	MinigameType,
+	SingleMinigame,
+} from 'resources/minigames/minigames.types.ts';
+import { featuredSchema } from 'resources/minigames/featured/featured.schema.ts';
+import { defaultSchema } from 'resources/minigames/default/default.schema.ts';
+import { miscSchema } from 'resources/minigames/misc/misc.schema.ts';
 
 /**
  * Filters minigames and minigame groups for a specific regex
  * @param regex
  */
 const searchMinigames = (regex: RegExp): (SingleMinigame | MinigameGroup)[] => {
-	return minigamesSchema.filter((item) => {
-		// Matches main title
-		if (!!item.title.match(regex)) {
-			return true;
-		}
-		if (item.type === MinigameType.Minigame) {
-			return false;
-		}
-
-		return !!item.minigames.find((item) => {
-			// Matches subtitle of sub minigame
-			if (!!item.subtitle.match(regex)) {
-				return true;
-			}
-			// Matches title of sub minigame
+	return [...featuredSchema, ...defaultSchema, ...miscSchema].filter(
+		(item) => {
+			// Matches main title
 			if (!!item.title.match(regex)) {
 				return true;
 			}
-			return false;
-		});
-	});
+			if (item.type === MinigameType.Minigame) {
+				return false;
+			}
+
+			return !!item.minigames.find((item) => {
+				// Matches subtitle of sub minigame
+				if (!!item.subtitle.match(regex)) {
+					return true;
+				}
+				// Matches title of sub minigame
+				if (!!item.title.match(regex)) {
+					return true;
+				}
+				return false;
+			});
+		},
+	);
 };
 
 export const MinigameSearch: React.FunctionComponent = observer(() => {

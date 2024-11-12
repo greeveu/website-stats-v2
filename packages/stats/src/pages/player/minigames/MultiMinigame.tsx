@@ -1,12 +1,12 @@
 import React from 'react';
 import { MultiStat } from '../playerPage.types';
-import {
-	PlayerStatMulti,
-	StatRender,
-} from '../../../resources/playerStats.schema';
 import { Collapse, Input, Typography } from 'antd';
 import style from './multiMinigame.module.sass';
-import { renderTime } from '../../../lib/renderTime';
+import { renderTime } from 'lib/renderTime.ts';
+import {
+	PlayerStatMulti,
+	RenderMethod,
+} from 'resources/players/players.types.ts';
 
 interface MultiMinigameProps {
 	data: MultiStat;
@@ -46,12 +46,12 @@ export const MultiMinigame: React.FunctionComponent<MultiMinigameProps> = (
 							([key, schema]) => {
 								const value: string | number = (() => {
 									switch (schema.renderMethod) {
-										case StatRender.TimeS:
+										case RenderMethod.TimeS:
 											return `${renderTime(
 												(item[key] as number) * 1000,
 											)}`;
 
-										case StatRender.TimeMs:
+										case RenderMethod.TimeMs:
 											return `${renderTime(
 												item[key] as number,
 											)}`;

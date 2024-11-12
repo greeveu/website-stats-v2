@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { minigameContext } from 'components/minigame/context/MinigameContextProvider';
 import { Divider, Form, Select } from 'antd';
 import { observer } from 'mobx-react-lite';
-import { Option, OptionType } from 'resources/minigames.schema';
 import style from './options.module.sass';
+import { Option, OptionType } from 'resources/minigames/minigames.types.ts';
 
 export const Options: React.FunctionComponent = observer(() => {
 	const context = useContext(minigameContext);

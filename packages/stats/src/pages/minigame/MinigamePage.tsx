@@ -1,5 +1,4 @@
 import React from 'react';
-import { MinigameGroup, MultiMinigame, SingleMinigame } from 'resources/minigames.schema';
 import { PaginationSynchronizer } from 'components/minigame/pagination/PaginationSynchronizer';
 import { ContentSpacing } from 'components/layout/contentSpacing/ContentSpacing';
 import { NetworkBarrier } from 'components/minigame/context/NetworkBarrier';
@@ -11,6 +10,11 @@ import style from './minigamePage.module.sass';
 import { MinigameTitle } from 'components/minigame/title/MinigameTitle';
 import { Path } from 'components/minigame/table/path/Path';
 import { Divider } from 'antd';
+import {
+	MinigameGroup,
+	MultiMinigame,
+	SingleMinigame,
+} from 'resources/minigames/minigames.types.ts';
 
 interface MinigamePageProps {
 	minigame: SingleMinigame | MultiMinigame;
