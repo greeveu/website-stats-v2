@@ -11,7 +11,9 @@ import {
 import { featuredSchema } from 'resources/minigames/featured/featured.schema.ts';
 import { miscSchema } from 'resources/minigames/misc/misc.schema.ts';
 import { defaultSchema } from 'resources/minigames/default/default.schema.ts';
+import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import badgesImage from 'resources/minigames/misc/media/badges.jpg';
 
 const renderMinigames = (schema: MinigameSchema) => {
 	return schema.map((item, key) => {
@@ -72,6 +74,22 @@ export const HomePage: React.FunctionComponent = observer(() => {
 						<Divider />
 						<div className={style.container}>
 							{renderMinigames(miscSchema)}
+							<div className={style.minigame}>
+								<Link to="/badges">
+									<div className={style.badgeCard}>
+										<div
+											className={style.badgeBackground}
+											style={{ backgroundImage: `url("${badgesImage}")` }}
+										/>
+										<div className={style.badgeBlur}>
+											<div className={style.badgeDarken} />
+											<Typography.Title className={style.badgeTitle}>
+												Badges
+											</Typography.Title>
+										</div>
+									</div>
+								</Link>
+							</div>
 						</div>
 					</div>
 				</div>
