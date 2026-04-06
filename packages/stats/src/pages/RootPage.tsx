@@ -9,10 +9,12 @@ import { observer } from 'mobx-react-lite';
 import { featuredSchema } from 'resources/minigames/featured/featured.schema.ts';
 import { miscSchema } from 'resources/minigames/misc/misc.schema.ts';
 import { defaultSchema } from 'resources/minigames/default/default.schema.ts';
+import { BadgesPage } from 'pages/badges/BadgesPage';
 
 export const RootPage: React.FunctionComponent = observer(() => {
 	return (
 		<Routes>
+			<Route path={'/badges'} element={<BadgesPage />} />
 			<Route path={'/player/:identifier'} element={<PlayerPage />} />
 			<Route path={'/clan/:clan'} element={<ClanPage />} />
 			{[...featuredSchema, ...defaultSchema, ...miscSchema].map(

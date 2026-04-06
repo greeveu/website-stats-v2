@@ -232,8 +232,10 @@ export const miscSchema: MinigameSchema = [
 						'2021': '2021',
 						'2022': '2022',
 						'2023': '2023',
+						'2024': '2024',
+						'2025': '2025',
 					},
-					default: '2023',
+					default: '2025',
 				},
 				door: {
 					display: 'Door',
